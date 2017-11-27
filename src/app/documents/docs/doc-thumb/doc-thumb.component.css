@@ -1,0 +1,66 @@
+@import '../docs.component.css';
+/* ******* normal item ******* */
+
+.error-count {
+  display: inline-block;
+  position: relative;
+  line-height: 35px;
+  /* font-size: 18px; */
+  font-size: 13px;
+  font-weight: 700;
+  pointer-events: auto;
+  min-width: 32px;
+}
+
+.error-countText {
+  color: #e2534f;
+  text-decoration: none;
+}
+
+.item-delete,
+.item-download,
+.item-downloadProofread {
+  /* background: transparent no-repeat 50%; */
+  background-position: center center;
+  background-repeat: no-repeat;
+  /* background-image: none; */
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  opacity: .8;
+  pointer-events: auto;
+  position: relative;
+}
+
+.item-deleteWrapper {
+  position: relative;
+  left: 7px;
+}
+
+.item-delete {
+  background-image: url('https://denali-static.grammarly.com/files/10535db91580a26119f13c4a3edf186a/dialog_delete.png');
+  background-position: 50%;
+}
+
+.item-download {
+  background-image: url('https://denali-static.grammarly.com/files/a4dda36bb51ad04c9edf5d172b62e798/dialog_download.png');
+  /* background-image: url('../img/icons/archive.png'); */
+  /* background-image: url('../img/icons/dialog_download.png'); */
+  /* background-size: 20px; */
+  z-index: 10;
+  margin-top: 1px;
+  left: 10px;
+}
+
+.item-itemWrapper:not(:hover) .item-delete,
+.item-itemWrapper:not(:hover) .item-download,
+.item-itemWrapper:not(:hover) .item-downloadProofread {
+  opacity: 0;
+}
+
+
+.itemWrapper:hover .item-actions {
+  display: flex !important;
+  flex-direction: inherit;
+}

@@ -1,0 +1,158 @@
+.-inside-1280 {
+  margin: 0 auto;
+  max-width: 1280px;
+  /*background-color: aqua;*/
+  height: calc(200vh + 64px);
+}
+
+.-padding-16 {
+  padding: 16px;
+}
+
+.docs-header {
+  width: 100%;
+  height: 100px;
+  padding-top: 15px;
+  /*background-color: brown;*/
+}
+
+.docs-list {
+  width: 100%;
+  /*height: 500px;*/
+  height: auto;
+  /*background-color: cornflowerblue;*/
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  /*flex-flow: wrap;*/
+  justify-content: flex-start;
+}
+
+/*.docs-list .inner {*/
+  /*width: 100%;*/
+  /*justify-content: flex-start;*/
+/*}*/
+
+
+.docs-search {
+  position: relative;
+}
+
+.docs-search-input {
+  background: transparent;
+  height: 30px;
+  width: 98%;
+  padding: 3px 1%;
+  border: none;
+  /*padding-left: 10px;*/
+  font-size: 15px;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  border: 1px solid #ececec;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, .05);
+  outline: none 0;
+}
+
+.docs-search-btn {
+  position: absolute;
+  right: 10px;
+  top: 12px;
+  cursor: pointer;
+  width: 15px;
+  height: 15px;
+  background-size: 15px 15px;
+  background-image: url(https://denali-static.grammarly.com/files/83092625060062eb4e0cf1c077758f77/search.png);
+}
+
+/************* Item general ***************/
+.itemWrapper {
+  position: relative;
+  /*float: left;*/
+  width: 140px;
+  height: 172px;
+  box-shadow: 0 1px 4px rgba(1, 1, 1, .15);
+  margin: 0 21px 60px 21px;
+  background-color: orange;
+}
+
+.itemWrapper:hover {
+  box-shadow: 0 1px 5px rgba(1, 1, 1, .3);
+}
+
+.item {
+  position: relative;
+  background: #fff;
+  /* display: inline-block; */
+  display: block;
+  /* padding: 12px 15px 0; */
+  width: inherit;
+  height: inherit;
+  color: #373737;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.item::before {
+  cursor: default;
+  pointer-events: none;
+  content: "";
+  display: block;
+  position: absolute;
+  top: -32px;
+  left: 0;
+  font-size: 14px;
+  color: #b2b2b2;
+}
+
+.item-content {
+  overflow: hidden;
+  height: 141px;
+  font-size: 11px;
+  line-height: 15px;
+  padding: 12px 15px 0;
+}
+
+.item-title {
+  line-height: 17px;
+  margin-bottom: 3px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.item-actions {
+  cursor: default;
+  bottom: 0;
+  position: absolute;
+  left: 0;
+  border-top: 1px solid #e8e8e8;
+  width: 100%;
+  padding: 6px 14px;
+  height: 47px;
+  background: #fff;
+  display: none;
+  justify-content: space-between;
+  pointer-events: none;
+  box-sizing: border-box;
+}
+
+.item-content,
+.item-actions {
+  display: flex;
+  flex-direction: column;
+}
+
+.itemWrapper:not(:hover) .item-actions.item-errors {
+  display: flex;
+}
+
+.item-actions > div {
+  overflow: hidden;
+  position: relative;
+  color: #373737;
+  font-size: 14px;
+}
+
+.item-actions > div:hover {
+
+  color: #e2534f;
+}

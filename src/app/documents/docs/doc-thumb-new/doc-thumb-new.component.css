@@ -1,0 +1,65 @@
+@import '../docs.component.css';
+
+
+.new-doc-btn {
+  height: inherit;
+  /* height: 86px; */
+  background: transparent no-repeat 50% 23px;
+  background-image: none;
+  background-image: url('https://denali-static.grammarly.com/files/36092b58458e115eb6710abf37214633/document_add.png');
+  text-align: center;
+  color: #373737;
+  font-size: 22px;
+  font-weight: 500;
+  padding-top: 71px;
+  display: inline-block;
+  width: auto;
+  height: auto;
+  cursor: pointer;
+  opacity: .8;
+  display: block;
+}
+
+.new-doc-btn:hover {
+  color: #e2534f;
+}
+
+
+.upload-btn {
+  overflow: hidden;
+  padding-left: 41px;
+  line-height: 34px;
+}
+
+.upload-btn::before {
+  content: "";
+  display: block;
+  left: 7px;
+  top: 0;
+  position: absolute;
+  background: transparent no-repeat 50%;
+  background-image: none;
+  display: inline-block;
+  width: 35px;
+  height: 100%;
+  cursor: pointer;
+  opacity: .8;
+  background-image: url(https://denali-static.grammarly.com/files/1c0c1f1001b7ec3bf6f2f6455fe1a067/dialog_upload.png);
+}
+
+.upload-btn span {
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.upload-btn input {
+  pointer-events: auto;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  font-size: 0;
+  cursor: pointer;
+  height: 100%;
+  width: 100%;
+}

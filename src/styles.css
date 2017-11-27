@@ -1,0 +1,21 @@
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+
+body {
+  margin: 0;
+  font-family: Lato, sans-serif;
+  font-weight: 300;
+  overflow: hidden;
+}
+
+.page-scroll-wrapper {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  height: calc(100vh - 64px);
+}
+
+.wrapper{
+  width: 100%;
+  height: 100vh;
+  margin: 0 auto;
+  background-color: #f6f6f6;
+}
