@@ -13,9 +13,9 @@ export class NewDocDialogService {
 
     let dialogRef: MatDialogRef<NewDocModalComponent>;
 
-    dialogRef = this.dialog.open(NewDocModalComponent);
-    dialogRef.componentInstance.title = title;
-    dialogRef.componentInstance.message = message;
+    dialogRef = this.dialog.open(NewDocModalComponent, {
+      width: '1580px'
+    });
 
     return dialogRef.afterClosed();
   }

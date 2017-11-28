@@ -1,9 +1,15 @@
 .navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 999;
+  /*position: fixed;*/
+  /*top: 0;*/
+  /*left: 0;*/
+  /*right: 0;*/
+  /*z-index: 999;*/
+
+  /*position: absolute;*/
+  /*bottom: 0px;*/
+  /*height: 35px;*/
+  /*line-height: 25px;*/
+  width: 100%;
 }
 
 .header-navigation {
@@ -15,6 +21,7 @@
 .logo-button {
   width: 64px;
   height: 100%;
+  /*background-color: #3498DB;*/
 }
 
 .logo-button:hover {

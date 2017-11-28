@@ -9,9 +9,15 @@ import {DocThumbComponent} from './docs/doc-thumb/doc-thumb.component';
 import {DocThumbNewComponent} from './docs/doc-thumb-new/doc-thumb-new.component';
 import {NewDocModalComponent} from './docs/new-doc-dialog/new-doc-dialog.component';
 
-import {MatDialogModule, MatButtonModule, MatSlideToggleModule, MatInputModule} from '@angular/material';
+import {
+  MatDialogModule, MatButtonModule, MatSlideToggleModule, MatInputModule, MatIconModule,
+  MAT_PLACEHOLDER_GLOBAL_OPTIONS
+} from '@angular/material';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {NewDocDialogService} from './docs/new-doc-dialog/new-doc-dialog.service';
+import { MainTranscriptComponent } from './doc/main-transcript/main-transcript.component';
+import { SubTranscriptComponent } from './doc/sub-transcript/sub-transcript.component';
+import { SentenceComponent } from './doc/sentence/sentence.component';
 
 
 @NgModule({
@@ -23,14 +29,18 @@ import {NewDocDialogService} from './docs/new-doc-dialog/new-doc-dialog.service'
     MatDialogModule,
     MatButtonModule,
     MatSlideToggleModule,
-    MatInputModule
+    MatInputModule,
+    MatIconModule
   ],
   declarations: [
     DocComponent,
     DocsComponent,
     DocThumbComponent,
     DocThumbNewComponent,
-    NewDocModalComponent
+    NewDocModalComponent,
+    MainTranscriptComponent,
+    SubTranscriptComponent,
+    SentenceComponent
   ],
   providers: [
     NewDocDialogService

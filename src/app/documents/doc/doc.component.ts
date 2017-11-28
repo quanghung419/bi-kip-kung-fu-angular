@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-doc',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DocComponent implements OnInit {
 
-  constructor() { }
+  private docId: string;
+
+  constructor(private route: ActivatedRoute) {
+    route.params.subscribe(params => {
+      this.docId = params['docId'];
+    });
+  }
 
   ngOnInit() {
+    console.log(this.docId);
   }
 
 }

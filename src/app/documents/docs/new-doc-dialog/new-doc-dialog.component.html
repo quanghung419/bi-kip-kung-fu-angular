@@ -1,55 +1,37 @@
-<!--<p>{{ title }}</p>-->
-<!--<p>{{ message }}</p>-->
-<!--<button type="button" mat-raised-button-->
-        <!--(click)="dialogRef.close(true)">OK</button>-->
-<!--<button type="button" mat-button-->
-        <!--(click)="dialogRef.close()">Cancel</button>-->
-<!--<div id="dialogWrapper">-->
-  <!--<div id="dialogNewDocWrapper" class="dialogNewDocWrapper hidden">-->
-    <div class="dialogNewDoc">
-      <!--<button type="button" class="btn-cancel"></button>-->
-      <div class="page-titleWrap">
-        <!--<input class="editor-page-title" placeholder="Type your title" maxlength="50" value="" type="text"/>-->
-        <mat-form-field>
-          <input matInput placeholder="Type your title">
-        </mat-form-field>
+<div class="title-zone">
+  <input class="editor-page-title" placeholder="Type your title" maxlength="60" value="" type="text"/>
+  <!--<mat-form-field class="title">-->
+  <!--<input matInput placeholder="Type your title">-->
+  <!--</mat-form-field>-->
+</div>
+<div class="new-doc-zone">
+  <div class="data-left">
+    <div class="choose-lang">
+      <div class="slide-wrapper">
+        <mat-slide-toggle class="lang-left" [checked]="langLeft == 'Vietnamese'" (change)="onChangeLang($event)">
+          {{ langLeft }}
+        </mat-slide-toggle>
       </div>
-      <div class="new-doc-zone">
-        <div class="data-input data-left">
-          <mat-slide-toggle (aria-label)="SlideMe"></mat-slide-toggle>
-          <!-- End .language-drp -->
-          <div class="txt-input-wrapper">
-            <!--<textarea id="txt-left" class="txt-input" spellcheck="false" maxlength="100000" placeholder="Type or paste (Ctrl+V) your text here."></textarea>-->
-            <textarea matTextareaAutosize></textarea>
-          </div>
-          <!-- End .txt-input -->
-        </div>
-        <!-- End .data-input -->
-        <div class="data-input data-right">
-          <mat-slide-toggle (ariaLabelledby)="SlideMe!"></mat-slide-toggle>
-          <div class="txt-input-wrapper">
-            <!--<textarea id="txt-right" class="txt-input" spellcheck="false" maxlength="100000" placeholder="Type or paste (Ctrl+V) your text here."></textarea>-->
-            <textarea matTextareaAutosize></textarea>
-          </div>
-          <!-- End .txt-input -->
-        </div>
-        <!-- End .data-input -->
-      </div>
-      <!-- End .new-doc-zone -->
-      <div class="button-set">
-        <button id="btnCreateNewDoc" type="button" class="btn-create">Create</button>
-      </div>
-      <!-- End .button-set -->
     </div>
-    <!-- End .dialogNewDoc -->
-    <!--<div class="hidden">-->
-      <!--<form id="formNewDoc" action="document/new" method="POST" accept-charset="utf-8" autocomplete="off">-->
-        <!--<input type="text" name="thumbContent" id="formVal-thumb"/>-->
-        <!--<input type="text" name="documentTitle" id="formVal-documentTitle"/>-->
-        <!--<textarea name="enContent" id="formVal-docEn"></textarea>-->
-        <!--<textarea name="vnContent" id="formVal-docVn"></textarea>-->
-      <!--</form>-->
-    <!--</div>&lt;!&ndash; End .hidden &ndash;&gt;-->
-  <!--</div>-->
-  <!-- End .dialogNewDocWrapper -->
-<!--</div>-->
+    <div class="txt-input-wrapper">
+      <textarea matTextareaAutosize></textarea>
+    </div>
+  </div>
+  <div class="data-right">
+    <div class="choose-lang">
+      <div class="slide-wrapper">
+        <mat-slide-toggle class="lang-right" color="warn" [checked]="langRight == 'Vietnamese'"
+                          (change)="onChangeLang($event)">{{ langRight }}
+        </mat-slide-toggle>
+      </div>
+    </div>
+    <div class="txt-input-wrapper">
+      <textarea matTextareaAutosize></textarea>
+    </div>
+  </div>
+</div>
+<div class="button-zone">
+  <button type="button" mat-raised-button (click)="redirect()">Create</button>
+  <!--<a class="nav-link" routerLink="/pronunciation" routerLinkActive="link-active">New Page</a>-->
+</div>
+
