@@ -119,7 +119,7 @@
   /* max-width: 950px; */
   width: 57%;
   height: 100vh;
-   background-color: pink;
+   /*background-color: pink;*/
   /* width: 700px; */
   will-change: transform;
   position: relative;
@@ -135,7 +135,7 @@
   /* max-width: 440px; */
   width: 3%;
   font-size: 14px;
-  background-color: palegreen;
+  /*background-color: palegreen;*/
   height: 100vh;
   /* height: 100vh; */
 }
@@ -150,7 +150,7 @@
   /* max-width: 440px; */
   width: 40%;
   font-size: 14px;
-   background-color: #33485F;
+   /*background-color: #33485F;*/
   /* height: 100%; */
   height: 100vh;
 }

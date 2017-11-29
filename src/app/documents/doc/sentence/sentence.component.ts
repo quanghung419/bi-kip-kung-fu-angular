@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {SentenceModel} from './sentence.model';
 
 @Component({
   selector: 'g',
@@ -7,9 +8,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SentenceComponent implements OnInit {
 
-  constructor() { }
+
+  @Input() sentence: SentenceModel;
+  color = 'red';
+  // selected = '';
+
+  constructor() {
+  }
 
   ngOnInit() {
+    // console.log('sentence: ', this.sentence);
   }
+
+  changeStyle($event): void {
+    this.color = $event.type === 'mouseover' ? 'hover' : '';
+  }
+
+  // markSelected($event): void {
+  //   this.selected = 'selected';
+  // }
 
 }

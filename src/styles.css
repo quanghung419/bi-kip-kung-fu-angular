@@ -61,3 +61,8 @@ body {
   /*display: none;*/
 /*}*/
 
+/*.mat-input-container.app-input-no-underline .mat-input-underline*/
+
+.editor-wrapper .mat-input-underline.mat-form-field-underline{
+  display: none;
+}

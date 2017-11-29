@@ -27,13 +27,13 @@
           </div>
           <div class="page-editor-layout">
             <div class="editor-wrapper">
-              <app-main-transcript></app-main-transcript>
+              <app-main-transcript *ngIf="enTranscript" [transcript]="enTranscript"></app-main-transcript>
             </div>
             <div class="editor-toobar">
 
             </div>
             <div class="editor-cards">
-
+              <app-sub-transcript></app-sub-transcript>
             </div>
           </div>
         </div>

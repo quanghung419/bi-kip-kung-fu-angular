@@ -1,74 +1,18 @@
+<!--{{transcript.lstPhragraph}}-->
+
 <div class="main-transcript-wrapper">
   <div class="ghost-content identical"></div>
   <div class="editable-content identical trans-show">
+    <!--trans-show-->
     <span class="clone-val">
-      <p index="0" class="">
-        <span>
-          <g index="0">Frenhofer was the best artist in the world. </g>
-          <g index="1">Everyone loved him. </g>
-          <g index="2" class="">The quality of his paintings was very high. </g>
-          <g index="3">He always used the best materials. </g><g index="4">He made a big profit from his paintings. </g>
-          <g index="5">He had delicious meals with his rich neighbors. </g>
-          <g index="6">He taught art classes. </g>
-          <g index="7">Life was good.</g>
-        </span>
-      </p>
-      <br>
-      <p index="1" class="">
-        <span>
-          <g index="0">Then his attitude changed. </g>
-          <g index="1" class="">He stopped selling paintings and teaching. </g>
-          <g index="2" class="">He tried a new method of painting. </g>
-          <g index="3" class="">He stayed alone in his apartment all day. </g>
-          <g index="4" class="">He worked all day and all night, rarely eating. </g>
-          <g index="5" class="">Soon Frenhofer became very thin. </g>
-          <g index="6" class="">But he kept working on the same painting for many years. </g>
-          <g index="7" class="">He worked as hard as he could.</g>
-        </span>
-      </p>
-      <br>
-      <p index="2" class="" style="background-color: transparent;">
-        <span>
-          <g index="0" class="">Finally, he finished the painting. </g>
-          <g index="1" class="">He was very happy and invited other artists to see it. </g>
-          <g index="2" class="">“ I want your professional opinion,” he said. </g>
-          <g index="3" class="">He wanted them to judge it and compare it to other paintings. </g>
-          <g index="4" class="">Everyone was very excited as they went up the stairs to his apartment. </g>
-          <g index="5" class="">Frenhofer was excited to show his painting, and the artists were excited to see it. </g>
-          <g index="6" class="">“They’ll love it,” he thought. </g>
-          <g index="7" class="">But they did not. </g>
-        </span>
-      </p>
-      <br>
-      <p index="3" class="noteSelected" style="background-color: transparent;">
-        <span>
-          <g index="0" class="">They were surprised by his painting. </g>
-          <g index="1" class="">There was no white anywhere. </g>
-          <g index="2" class="">Frenhofer filled the whole painting with lines and colors. </g>
-          <g index="3">There was no space for a normal picture. </g>
-          <g index="4" class="">It was full of strange shapes. </g>
-          <g index="5" class="">It looked bad to the other artists. </g>
-          <g index="6">He used symbols, and they didn’t understand them. </g>
-          <g index="7" class="">They thought it was terrible. </g>
-          <g index="8">“Why did you paint this strange picture?</g>
-          <g index="9">” someone asked. </g>
-          <g index="10" class="">They didn’t understand its beauty.</g>
-        </span>
-      </p>
-      <br>
-      <p index="4" class="">
-        <span>
-          <g index="0">But after some time, many people began to like his painting. </g>
-          <g index="1">People wrote articles about it in magazines. </g>
-          <g index="2">They said it was his best work. </g>
-          <g index="3">They loved his strange symbols. </g>
-          <g index="4">They loved his strange colors. </g>
-          <g index="5">Frenhofer’s painting reminded everyone that just because something was new didn’t mean that it was bad. </g>
-          <g index="6">He also helped them to realize that sometimes it takes people a little time to understand great things.</g>
-        </span>
-      </p>
-      <br>
+      <app-paragraph *ngFor="let paragraph of transcript.lstPhragraph" [paragraph]="paragraph">
+      </app-paragraph>
     </span>
   </div>
-  <textarea class="editable-content identical trans-hidden" spellcheck="false"></textarea>
+  <mat-form-field style="width: 100%">
+    <!--trans-hidden-->
+  <textarea class="editable-content identical trans-hidden" matInput matTextareaAutosize value="{{transcript.rawTranscript}}"></textarea>
+    <!--<textarea class="editable-content identical trans-hidden" matInput matTextareaAutosize>{{transcript.rawTranscript}}</textarea>-->
+  </mat-form-field>
+
 </div>

@@ -11,13 +11,16 @@ import {NewDocModalComponent} from './docs/new-doc-dialog/new-doc-dialog.compone
 
 import {
   MatDialogModule, MatButtonModule, MatSlideToggleModule, MatInputModule, MatIconModule,
-  MAT_PLACEHOLDER_GLOBAL_OPTIONS
 } from '@angular/material';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {NewDocDialogService} from './docs/new-doc-dialog/new-doc-dialog.service';
 import { MainTranscriptComponent } from './doc/main-transcript/main-transcript.component';
 import { SubTranscriptComponent } from './doc/sub-transcript/sub-transcript.component';
 import { SentenceComponent } from './doc/sentence/sentence.component';
+import { ParagraphComponent } from './doc/paragraph/paragraph.component';
+import { TranscriptService } from './doc/transcript.service';
+import {SentenceService} from './doc/sentence.service';
+import { CardComponent } from './doc/card/card.component';
 
 
 @NgModule({
@@ -40,10 +43,14 @@ import { SentenceComponent } from './doc/sentence/sentence.component';
     NewDocModalComponent,
     MainTranscriptComponent,
     SubTranscriptComponent,
-    SentenceComponent
+    SentenceComponent,
+    ParagraphComponent,
+    CardComponent
   ],
   providers: [
-    NewDocDialogService
+    NewDocDialogService,
+    TranscriptService,
+    SentenceService
   ],
   entryComponents: [
     NewDocModalComponent

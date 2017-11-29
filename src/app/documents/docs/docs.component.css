@@ -79,7 +79,7 @@
   height: 172px;
   box-shadow: 0 1px 4px rgba(1, 1, 1, .15);
   margin: 0 21px 60px 21px;
-  background-color: orange;
+  /*background-color: orange;*/
 }
 
 .itemWrapper:hover {
