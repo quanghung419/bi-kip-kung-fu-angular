@@ -1,35 +1,35 @@
-import {Component, ElementRef, Input, OnInit} from '@angular/core';
+import {
+  Component, ElementRef, Input, OnChanges, SimpleChange,
+  SimpleChanges
+} from '@angular/core';
 import {ParagraphModel} from '../paragraph/paragraph.model';
-import {ParagraphService} from "../paragraph/paragraph.service";
+import {CardService} from './card.service';
+import {CardModel} from './card.model';
 
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.css']
 })
-export class CardComponent implements OnInit {
+export class CardComponent implements OnChanges {
 
   @Input() paragraph: ParagraphModel;
 
   @Input() isSelectedCard: boolean;
 
-  positionOfMainParagraph: number;
+  @Input() cardModel: CardModel;
 
-  constructor(private elRef: ElementRef, private paragraphService: ParagraphService) {
+  constructor(private elRef: ElementRef, private cardService: CardService) {
   }
 
-  ngOnInit() {
-    // console.log('Card onInit: ', this.paragraphService.listMainPragraphElement);
-    for (const mainPraEle of this.paragraphService.listMainPragraphElement) {
-      if (this.paragraph.order === mainPraEle.order) {
-        this.positionOfMainParagraph = mainPraEle.offSetTop;
-        console.log('Card' + this.paragraph.order + ' onInit: ', this.positionOfMainParagraph);
-      }
+  ngOnChanges(changes: SimpleChanges) {
+    const flagIsSelectedCard: SimpleChange = changes.isSelectedCard;
+    if (flagIsSelectedCard.currentValue) {
+      const self = this;
+      setTimeout(function () {
+        self.cardService.expandedSelectedCard(self.paragraph.order, self.elRef.nativeElement.children[0].clientHeight);
+      }, 1);
     }
-  }
-
-  clicked() {
-    console.log('card ' + this.paragraph.order, this.elRef.nativeElement.offsetTop);
   }
 
 }

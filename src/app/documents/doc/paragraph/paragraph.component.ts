@@ -6,8 +6,8 @@ import {
 import {ParagraphModel} from './paragraph.model';
 import {SentenceModel} from '../sentence/sentence.model';
 import {SentenceService} from '../sentence/sentence.service';
-import {ParagraphService} from "./paragraph.service";
-import {MainPragraphElementModel} from "./main-pragraph-element.model";
+import {ParagraphService} from './paragraph.service';
+import {MainPragraphElementModel} from './main-pragraph-element.model';
 
 @Component({
   selector: 'app-paragraph',
@@ -54,46 +54,47 @@ export class ParagraphComponent implements OnInit, AfterContentInit, AfterConten
   }
 
   ngAfterContentInit(): void {
-    if (this.isMultipleParagraph) {
-      // console.log('Paragraph: ' + this.paragraph.order, this.elRef.nativeElement.offsetTop);
-      console.log('ngAfterContentInit ', this.paragraph.order);
-    }
+    // if (this.isMultipleParagraph) {
+    //   // console.log('Paragraph: ' + this.paragraph.order, this.elRef.nativeElement.offsetTop);
+    //   console.log('ngAfterContentInit ', this.paragraph.order);
+    // }
     // this.paragraph.positionOfElement = this.elRef.nativeElement.offsetTop;
   }
 
   ngAfterContentChecked(): void {
-    if (this.isMultipleParagraph) {
-      // console.log('Paragraph: ' + this.paragraph.order, this.elRef.nativeElement.offsetTop);
-      console.log('ngAfterContentChecked ', this.paragraph.order);
-    }
+    // if (this.isMultipleParagraph) {
+    //   // console.log('Paragraph: ' + this.paragraph.order, this.elRef.nativeElement.offsetTop);
+    //   console.log('ngAfterContentChecked ', this.paragraph.order);
+    // }
   }
 
   ngAfterViewChecked(): void {
-    if (this.isMultipleParagraph) {
-      // console.log('Paragraph: ' + this.paragraph.order, this.elRef.nativeElement.offsetTop);
-      console.log('ngAfterViewChecked ', this.paragraph.order);
-    }
+    // if (this.isMultipleParagraph) {
+    //   // console.log('Paragraph: ' + this.paragraph.order, this.elRef.nativeElement.offsetTop);
+    //   console.log('ngAfterViewChecked ', this.paragraph.order);
+    // }
   }
 
   ngAfterViewInit(): void {
-    if (this.isMultipleParagraph) {
-      // console.log('Paragraph: ' + this.paragraph.order, this.elRef.nativeElement.offsetTop);
-      console.log('ngAfterViewInit ', this.paragraph.order);
-    }
+    // if (this.isMultipleParagraph) {
+    //   // console.log('Paragraph: ' + this.paragraph.order, this.elRef.nativeElement.offsetTop);
+    //   console.log('ngAfterViewInit ', this.paragraph.order);
+    // }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (this.isMultipleParagraph) {
-      // console.log('Paragraph: ' + this.paragraph.order, this.elRef.nativeElement.offsetTop);
-      console.log('changes ', this.paragraph.order);
-      for (const propName in changes) {
-        console.log(propName);
-        // let chng = changes[propName];
-        // let cur  = JSON.stringify(chng.currentValue);
-        // let prev = JSON.stringify(chng.previousValue);
-        // this.changeLog.push(`${propName}: currentValue = ${cur}, previousValue = ${prev}`);
-      }
-    }
+    // if (this.isMultipleParagraph) {
+    //   // console.log('Paragraph: ' + this.paragraph.order, this.elRef.nativeElement.offsetTop);
+    //   console.log('changes ', this.paragraph.order);
+    //   for (const propName in changes) {
+    //     console.log(propName);
+    //     // let chng = changes[propName];
+    //     // let cur  = JSON.stringify(chng.currentValue);
+    //     // let prev = JSON.stringify(chng.previousValue);
+    //     // this.changeLog.push(`${propName}: currentValue = ${cur}, previousValue = ${prev}`);
+    //   }
+    // }
+    // console.log('On change pragraph');
   }
 
   // ngAfterViewChecked(): void {
@@ -102,10 +103,9 @@ export class ParagraphComponent implements OnInit, AfterContentInit, AfterConten
   // }
 
   clicked(sentence: SentenceModel): void {
-    // this.currentSentence = sentence;
+    this.currentSentence = sentence;
     // this.onSentenceSelected.emit(sentence);
     this.sentenceService.changeSentence(this.paragraph.order, sentence.order);
-    // this.paragraph.order += 1;
   }
 
   isSelected(sentence: SentenceModel): boolean {

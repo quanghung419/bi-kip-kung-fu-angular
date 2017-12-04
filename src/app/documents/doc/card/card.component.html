@@ -1,11 +1,8 @@
-<div class="card" [class.card-expanded]="isSelectedCard" (click)="clicked()" [style.transform]="'translateY('+positionOfMainParagraph+'px)'">
+<div class="card" [class.card-expanded]="isSelectedCard" (click)="clicked()" [style.transform]="'translateY('+cardModel.position+'px)'">
   <div class="card-inner">
     <div class="card-header" fxLayout="row">
       <div class="card-title">
-        <p class="truncate">Frenhofer là một họa sỹ giỏi nhất thế giới. Tất cả mọi người đều yêu quý anh ta. Chất lượng của những
-          bức tranh của anh rất cao. Anh luôn dùng những chất liệu tốt nhất. Anh đã kiếm được rất nhiều lợi nhuận từ những
-          bức vẽ của mình. Anh có những bữa ăn ngon với những người hàng xóm giàu có. Anh dạy những lớp học vẽ. Cuộc sống
-          của anh rất tốt đẹp.</p>
+        <p class="truncate">{{ paragraph.rawParagraph }}</p>
       </div>
       <div class="card-actions" fxLayout="row" fxLayoutAlign="end center">
         <button matTooltip="Edit card content" matTooltipPosition="above"

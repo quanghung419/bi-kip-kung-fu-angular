@@ -1,12 +1,9 @@
-/*@import "../main-transcript/main-transcript.component.css";*/
-
-
 .card {
   width: 100%;
-  /*box-shadow: 0 3px 1px -2px rgba(0,0,0,.3), 0 2px 2px 0 rgba(0,0,0,.24), 0 1px 5px 0 rgba(0,0,0,.22);*/
+  box-shadow: 0 3px 1px -2px rgba(0,0,0,.3), 0 2px 2px 0 rgba(0,0,0,.24), 0 1px 5px 0 rgba(0,0,0,.22);
   /*height: 300px;*/
   height: auto;
-  box-shadow: 0 0 8px rgba(0, 0, 0, .25);
+  /*box-shadow: 0 0 8px rgba(0, 0, 0, .25);*/
 
   /*color: #333;*/
   /*width: 100%;*/
@@ -522,7 +519,7 @@
   background-color: #FFFFFF;
   line-height: 20px;
   /*border-bottom: none;*/
-  box-shadow: 0 0 8px rgba(0, 0, 0, .25);
+  /*box-shadow: 0 0 8px rgba(0, 0, 0, .25);*/
   /*background-color: #fff;*/
   /* margin-left: -35px; */
   /* width: calc(100% + 35px); */

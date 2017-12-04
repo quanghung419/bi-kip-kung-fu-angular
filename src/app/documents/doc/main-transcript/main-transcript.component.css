@@ -34,32 +34,57 @@
   /*height: 0 !important;*/
   /* height: 100vh; */
   /* background-color: orange; */
-  position: absolute;
-  top: 0;
-  left: 0;
+  /*position: absolute;*/
+  /*top: 0;*/
+  /*left: 0;*/
+  /*margin-bottom: 300px;*/
 }
 
-.editable-content{
+/*.editable-content{*/
+  /*background-color: transparent;*/
+  /*overflow: hidden;*/
+  /*!* min-height: 400px; *!*/
+  /*!* max-height: 900px; *!*/
+  /*!* min-height: 400px; *!*/
+  /*min-height: 400px;*/
+  /*!*position: absolute;*!*/
+  /*!*top: 0;*!*/
+  /*!*left: 0;*!*/
+  /*resize: none;*/
+  /*!*margin-bottom: 300px;*!*/
+/*}*/
+
+.editable-content textarea {
+  resize: none;
+  min-height: 400px;
   background-color: transparent;
   overflow: hidden;
   /* min-height: 400px; */
   /* max-height: 900px; */
   /* min-height: 400px; */
   min-height: 400px;
-  position: absolute;
-  top: 0;
-  left: 0;
+  /*position: absolute;*/
+  /*top: 0;*/
+  /*left: 0;*/
   resize: none;
+}
+
+.main-transcript-wrapper .ghost-content,
+.main-transcript-wrapper .editable-content {
+  /*margin-bottom: 300px;*/
 }
 
 .trans-show {
   z-index: 20;
-  visibility: visible;
+  /*visibility: visible;*/
+  display: block;
 }
 .trans-hidden {
   z-index: 10;
-  visibility: hidden;
+  /*visibility: hidden;*/
+  display: none;
 }
+
 
 g {
   white-space: normal;
