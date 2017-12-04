@@ -1,14 +1,16 @@
-<p [attr.index]="paragraph.order">
-  <!--<span>-->
-  <g *ngFor="let sentence of paragraph.lstSentences" [sentence]="sentence" [attr.index]="sentence.order"
-     (click)='clicked(sentence)'
-     [class.selected]="isSelected(sentence)"></g>
-  <!--paragraph-->
+<div>
+  <p [attr.index]="paragraph.order">
+    <!--<span>-->
+    <g *ngFor="let sentence of paragraph.lstSentences" [sentence]="sentence" [attr.index]="sentence.order"
+       (click)='clicked(sentence)'
+       [class.selected]="isSelected(sentence)"></g>
+    <!--paragraph-->
 
-  <!--</span>-->
-  <!--It's worked {{paragraph.order}}-->
-</p>
-<br/>
+    <!--</span>-->
+    <!--It's worked {{paragraph.order}}-->
+  </p>
+  <br *ngIf="isMultipleParagraph"/>
+</div>
 <!--<p index="0" >-->
 <!--<span>-->
 <!--<g index="0">Frenhofer was the best artist in the world. </g>-->
@@ -20,4 +22,3 @@
 <!--<g index="7">Life was good.</g>-->
 <!--</span>-->
 <!--</p>-->
-

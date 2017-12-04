@@ -1,0 +1,3 @@
+<app-card *ngFor="let paragraph of transcript.lstPhragraph" [paragraph]="paragraph"
+          (click)='clicked(paragraph)'
+          [isSelectedCard]="isSelectedCard(paragraph)"></app-card>

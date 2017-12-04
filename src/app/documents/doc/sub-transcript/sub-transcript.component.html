@@ -1,1 +1,18 @@
-<app-card></app-card>
+<div class="transcript-wrapper">
+  <div class="ghost-content identical"></div>
+  <div class="editable-content identical trans-show">
+    <!--trans-show-->
+    <span class="clone-val">
+      <!--<app-paragraph *ngFor="let paragraph of transcript.lstPhragraph" [paragraph]="paragraph">-->
+      <!--</app-paragraph>-->
+      <app-paragraph [paragraph]="paragraph">
+      </app-paragraph>
+    </span>
+  </div>
+  <mat-form-field style="width: 100%" class="trans-none">
+    <!--trans-hidden-->
+    <textarea class="editable-content identical trans-hidden" matInput matTextareaAutosize ></textarea>
+    <!--value="{{transcript.rawTranscript}}"-->
+    <!--<textarea class="editable-content identical trans-hidden" matInput matTextareaAutosize>{{transcript.rawTranscript}}</textarea>-->
+  </mat-form-field>
+</div>

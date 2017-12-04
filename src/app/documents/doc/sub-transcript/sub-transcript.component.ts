@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {ParagraphModel} from '../paragraph/paragraph.model';
 
 @Component({
   selector: 'app-sub-transcript',
@@ -7,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SubTranscriptComponent implements OnInit {
 
-  constructor() { }
+  @Input() paragraph: ParagraphModel;
+
+  constructor() {
+  }
 
   ngOnInit() {
   }

@@ -35,10 +35,10 @@ export class DocComponent implements OnInit {
         this.enTranscript = transcript;
       }
     );
-    // this.transcriptService.getVnTranscript().then(transcript => {
-    //     this.vnTranscript = transcript;
-    //   }
-    // );
+    this.transcriptService.getVnTranscript().then(transcript => {
+        this.vnTranscript = transcript;
+      }
+    );
   }
 
 }

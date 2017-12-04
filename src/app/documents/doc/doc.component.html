@@ -33,7 +33,7 @@
 
             </div>
             <div class="editor-cards">
-              <app-sub-transcript></app-sub-transcript>
+              <app-list-cards *ngIf="vnTranscript" [transcript]="vnTranscript"></app-list-cards>
             </div>
           </div>
         </div>

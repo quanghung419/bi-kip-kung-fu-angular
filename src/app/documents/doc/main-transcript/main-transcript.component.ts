@@ -49,9 +49,9 @@ export class MainTranscriptComponent implements OnInit {
   //   return sentence.value === this.currentSentence.value;
   // }
 
-  sentenceWasSelected(sentence: SentenceModel): void {
-    console.log('Sentence clicked: ', SentenceModel);
-  }
+  // sentenceWasSelected(sentence: SentenceModel): void {
+  //   console.log('Sentence clicked: ', SentenceModel);
+  // }
 
 
 }

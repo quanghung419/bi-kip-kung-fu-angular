@@ -1,59 +1,98 @@
-<div class="card">
-  <div class="card-header">
-
-  </div>
-  <div class="card-body">
-    <div class="card-content">
-
+<div class="card" [class.card-expanded]="isSelectedCard" (click)="clicked()" [style.transform]="'translateY('+positionOfMainParagraph+'px)'">
+  <div class="card-inner">
+    <div class="card-header" fxLayout="row">
+      <div class="card-title">
+        <p class="truncate">Frenhofer là một họa sỹ giỏi nhất thế giới. Tất cả mọi người đều yêu quý anh ta. Chất lượng của những
+          bức tranh của anh rất cao. Anh luôn dùng những chất liệu tốt nhất. Anh đã kiếm được rất nhiều lợi nhuận từ những
+          bức vẽ của mình. Anh có những bữa ăn ngon với những người hàng xóm giàu có. Anh dạy những lớp học vẽ. Cuộc sống
+          của anh rất tốt đẹp.</p>
+      </div>
+      <div class="card-actions" fxLayout="row" fxLayoutAlign="end center">
+        <button matTooltip="Edit card content" matTooltipPosition="above"
+                mat-icon-button class="card-header-button">
+          <fa name="pencil-square-o" size="1x"></fa>
+        </button>
+        <button matTooltip="Expand this card" matTooltipPosition="above"
+                mat-icon-button class="card-header-button">
+          <fa name="expand" size="1x"></fa>
+        </button>
+        <button matTooltip="Show/hiden this card" matTooltipPosition="above"
+                mat-icon-button class="card-header-button">
+          <fa name="chevron-up" size="1x"></fa>
+        </button>
+        <button matTooltip="Delete this card" matTooltipPosition="above"
+                mat-icon-button class="card-header-button">
+          <fa name="times" size="1x"></fa>
+        </button>
+      </div>
     </div>
-    <div class="card-footer">
+    <div class="card-body">
+      <div class="card-content">
+        <app-sub-transcript [paragraph]="paragraph"></app-sub-transcript>
+      </div>
+      <div class="card-footer" fxLayout="row">
+        <div class="card-content-actions" fxLayout="row" fxLayoutAlign="start center">
+          <span class="btn-content-action" role="button">Add</span>
+          <span class="btn-content-action" role="button">Save</span>
+          <span class="seperate-dot">&nbsp;•&nbsp;</span>
+          <span class="btn-content-action btn-latest" role="button">Cacel</span>
+        </div>
+        <div class="card-position-actions" fxLayout="row" fxLayoutAlign="end center">
+          <button mat-button matTooltip="Move up this card" matTooltipPosition="below"
+                  fxLayout="row" fxLayoutAlign="center center">
+            <fa name="level-up"></fa>
+          </button>
+          <button mat-button matTooltip="Insert card below" matTooltipPosition="below"
+                  mat-button fxLayout="row" fxLayoutAlign="center center">
+            <fa name="plus-square-o"></fa>
+          </button>
 
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
 
-
-
-  <!--<div>-->
-    <!--<div>-->
-      <!--<div class="cardHeader">-->
-        <!--<div class="cardHeaderButton">-->
-          <!--<div class="buttonWrapper headerButton btnEditCard" role="button"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></div>-->
-          <!--<div class="buttonWrapper headerButton btnShowCard" role="button"><i class="fa fa-expand" aria-hidden="true"></i></div>-->
-          <!--&lt;!&ndash;<span class="buttonWrapper headerButton btnDict" role="button"></span>&ndash;&gt;-->
-          <!--<span class="buttonWrapper headerButton btnExpand" role="button"></span>-->
-          <!--<span class="buttonWrapper headerButton btnIgnore" role="button"></span>-->
-        <!--</div>-->
-        <!--<div class="cardHeaderTitle">-->
-          <!--<p>Louis Pasteur là một trong những nhà khoa học vĩ đại nhất mọi thời đại. Pasteur đã có những phát hiện rất quan trọng về sinh học và hóa học, và những kỹ thuật mà ông đã triển khai đã góp phần rất lớn để phát triển nền y học, nông nghiệp và ngành công nghiệp thực phẩm.</p>-->
-        <!--</div>-->
-      <!--</div>-->
-      <!--<div class="cardBody" style="display: none;">-->
-        <!--<div class="cardContent">-->
-          <!--<div class="editorWrapper">-->
-            <!--<div class="trans-ghost trans-show trans-pharagraph trans-sub" tabindex="-1">-->
-              <!--<span class="clone-val"><p class="sub-paragraph"><g index="0" class="">Louis Pasteur là một trong những nhà khoa học vĩ đại nhất mọi thời đại. </g><g index="1" class="selected">Pasteur đã có những phát hiện rất quan trọng về sinh học và hóa học, và những kỹ thuật mà ông đã triển khai đã góp phần rất lớn để phát triển nền y học, nông nghiệp và ngành công nghiệp thực phẩm.</g></p></span>-->
-            <!--</div>-->
-            <!--&lt;!&ndash; End .trans-ghost &ndash;&gt;-->
-            <!--<textarea class="trans-txa trans-hidden trans-sub trans-sub" spellcheck="false" maxlength="100000" style="overflow-x: hidden; word-wrap: break-word; overflow-y: visible;">Louis Pasteur là một trong những nhà khoa học vĩ đại nhất mọi thời đại. Pasteur đã có những phát hiện rất quan trọng về sinh học và hóa học, và những kỹ thuật mà ông đã triển khai đã góp phần rất lớn để phát triển nền y học, nông nghiệp và ngành công nghiệp thực phẩm.</textarea>-->
-          <!--</div>-->
-          <!--&lt;!&ndash; End .editorWrapper &ndash;&gt;-->
-        <!--</div>-->
-        <!--<div class="cardFooter">-->
-          <!--<div class="bts-left">-->
-            <!--<span class="btnTransData btnSaveTran hidden" role="button">Save</span>-->
-            <!--<span class="btnTransData btnPostTran hidden" role="button">Post</span>-->
-            <!--<span class="btnTransData btnAfter btnCancelTran hidden" role="button">Cancel</span>-->
-          <!--</div>&lt;!&ndash; End .bts2 &ndash;&gt;-->
-          <!--<div class="bts-right">-->
-            <!--&lt;!&ndash;<span class="footerButton btnDictFooter" role="button">Add to dictionary</span>&ndash;&gt;-->
-            <!--&lt;!&ndash;<span class="footerButton btnIgnoreFooter" role="button">Ignore</span>&ndash;&gt;-->
-            <!--<div class="footerButton btnInsertCard" role="button"><i class="fa fa-plus-square-o" aria-hidden="true"></i><span>Insert card below</span></div>-->
-            <!--<div class="footerButton btnMoveUpCard" role="button"><i class="fa fa-level-up" aria-hidden="true"></i><span>Move up this card</span></div>-->
-          <!--</div>&lt;!&ndash; End .bts1 &ndash;&gt;-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
+<!--<div>-->
+<!--<div>-->
+<!--<div class="cardHeader">-->
+<!--<div class="cardHeaderButton">-->
+<!--<div class="buttonWrapper headerButton btnEditCard" role="button"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></div>-->
+<!--<div class="buttonWrapper headerButton btnShowCard" role="button"><i class="fa fa-expand" aria-hidden="true"></i></div>-->
+<!--&lt;!&ndash;<span class="buttonWrapper headerButton btnDict" role="button"></span>&ndash;&gt;-->
+<!--<span class="buttonWrapper headerButton btnExpand" role="button"></span>-->
+<!--<span class="buttonWrapper headerButton btnIgnore" role="button"></span>-->
+<!--</div>-->
+<!--<div class="cardHeaderTitle">-->
+<!--<p>Louis Pasteur là một trong những nhà khoa học vĩ đại nhất mọi thời đại. Pasteur đã có những phát hiện rất quan trọng về sinh học và hóa học, và những kỹ thuật mà ông đã triển khai đã góp phần rất lớn để phát triển nền y học, nông nghiệp và ngành công nghiệp thực phẩm.</p>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="cardBody" style="display: none;">-->
+<!--<div class="cardContent">-->
+<!--<div class="editorWrapper">-->
+<!--<div class="trans-ghost trans-show trans-pharagraph trans-sub" tabindex="-1">-->
+<!--<span class="clone-val"><p class="sub-paragraph"><g index="0" class="">Louis Pasteur là một trong những nhà khoa học vĩ đại nhất mọi thời đại. </g><g index="1" class="selected">Pasteur đã có những phát hiện rất quan trọng về sinh học và hóa học, và những kỹ thuật mà ông đã triển khai đã góp phần rất lớn để phát triển nền y học, nông nghiệp và ngành công nghiệp thực phẩm.</g></p></span>-->
+<!--</div>-->
+<!--&lt;!&ndash; End .trans-ghost &ndash;&gt;-->
+<!--<textarea class="trans-txa trans-hidden trans-sub trans-sub" spellcheck="false" maxlength="100000" style="overflow-x: hidden; word-wrap: break-word; overflow-y: visible;">Louis Pasteur là một trong những nhà khoa học vĩ đại nhất mọi thời đại. Pasteur đã có những phát hiện rất quan trọng về sinh học và hóa học, và những kỹ thuật mà ông đã triển khai đã góp phần rất lớn để phát triển nền y học, nông nghiệp và ngành công nghiệp thực phẩm.</textarea>-->
+<!--</div>-->
+<!--&lt;!&ndash; End .editorWrapper &ndash;&gt;-->
+<!--</div>-->
+<!--<div class="cardFooter">-->
+<!--<div class="bts-left">-->
+<!--<span class="btnTransData btnSaveTran hidden" role="button">Save</span>-->
+<!--<span class="btnTransData btnPostTran hidden" role="button">Post</span>-->
+<!--<span class="btnTransData btnAfter btnCancelTran hidden" role="button">Cancel</span>-->
+<!--</div>&lt;!&ndash; End .bts2 &ndash;&gt;-->
+<!--<div class="bts-right">-->
+<!--&lt;!&ndash;<span class="footerButton btnDictFooter" role="button">Add to dictionary</span>&ndash;&gt;-->
+<!--&lt;!&ndash;<span class="footerButton btnIgnoreFooter" role="button">Ignore</span>&ndash;&gt;-->
+<!--<div class="footerButton btnInsertCard" role="button"><i class="fa fa-plus-square-o" aria-hidden="true"></i><span>Insert card below</span></div>-->
+<!--<div class="footerButton btnMoveUpCard" role="button"><i class="fa fa-level-up" aria-hidden="true"></i><span>Move up this card</span></div>-->
+<!--</div>&lt;!&ndash; End .bts1 &ndash;&gt;-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
 <!--</div>-->

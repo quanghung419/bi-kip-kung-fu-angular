@@ -22,47 +22,77 @@ body {
 }
 
 .lang-left .mat-slide-toggle-bar,
-.lang-right .mat-slide-toggle-bar{
+.lang-right .mat-slide-toggle-bar {
   background-color: rgba(233, 30, 99, .5);
 }
 
 .lang-left .mat-slide-toggle-thumb,
-.lang-right .mat-slide-toggle-thumb{
+.lang-right .mat-slide-toggle-thumb {
   background-color: #e91e63;
 }
 
 .lang-left.mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar,
-.lang-right.mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar{
+.lang-right.mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
   background-color: rgba(165, 214, 167, 0.5);
 }
 
 .lang-left.mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb,
-.lang-right.mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb{
+.lang-right.mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
   background-color: #a5d6a7;
 }
 
 /*.lang-right .mat-slide-toggle-bar {*/
-  /*background-color: rgba(165, 214, 167, 0.5);*/
+/*background-color: rgba(165, 214, 167, 0.5);*/
 /*}*/
 
 /*.lang-right .mat-slide-toggle-thumb {*/
-  /*background-color: #a5d6a7;*/
+/*background-color: #a5d6a7;*/
 /*}*/
 
 /*.lang-right.mat-slide-toggle.mat-checked .mat-slide-toggle-bar {*/
-  /*background-color: rgba(233, 30, 99, .5);*/
+/*background-color: rgba(233, 30, 99, .5);*/
 /*}*/
 
 /*.lang-right.mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {*/
-  /*background-color: #e91e63;*/
+/*background-color: #e91e63;*/
 /*}*/
 
 /*.txt-title:focus .mat-form-field-can-float.mat-form-field-should-float .mat-form-field-placeholder, .mat-form-field-empty.mat-form-field-placeholder {*/
-  /*display: none;*/
+/*display: none;*/
 /*}*/
 
 /*.mat-input-container.app-input-no-underline .mat-input-underline*/
 
-.editor-wrapper .mat-input-underline.mat-form-field-underline{
+.editor-wrapper .mat-input-underline.mat-form-field-underline,
+.transcript-wrapper .mat-input-underline.mat-form-field-underline {
   display: none;
 }
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-header-button.mat-icon-button {
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+}
+
+.card-position-actions fa i {
+  font-size: 20px;
+}
+
+.editor-wrapper .selected {
+  /*background-color: #3498DB;*/
+  background-image: linear-gradient(to bottom, rgba(125, 255, 179, 0.8), rgba(125, 255, 179, 0.8));
+}
+
+.editor-cards .selected {
+  background-image: linear-gradient(to bottom, rgba(146, 233, 255, 0.8), rgba(146, 233, 255, 0.8));
+}
+
+/*.card-expanded .card {*/
+  /*background-color: #FFFFFF;*/
+/*}*/
