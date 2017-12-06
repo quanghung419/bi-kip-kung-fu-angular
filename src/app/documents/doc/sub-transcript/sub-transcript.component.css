@@ -22,7 +22,7 @@
   /* outline: none; */
   /* resize: none; */
   /* z-index: 0; */
-  /* font-family: Diaria Light Pro, sans-serif; */
+   font-family: Diaria Light Pro, sans-serif;
   width: 100%;
   /*height: 100%;*/
   height: auto;
@@ -53,15 +53,35 @@
   resize: none;
 }
 
+.editable-content textarea {
+  resize: none;
+  /*min-height: 400px;*/
+  /*background-color: transparent;*/
+  overflow: hidden;
+  /* min-height: 400px; */
+  /* max-height: 900px; */
+  /* min-height: 400px; */
+  /*min-height: 400px;*/
+  /*position: absolute;*/
+  /*top: 0;*/
+  /*left: 0;*/
+  /*font-size: 16px;*/
+  /*font-weight: 300;*/
+  resize: none;
+  background-color: rgba(255, 248, 218, 1);
+  /*#fbde5a;*/
+}
+
 .trans-show {
   z-index: 20;
-  visibility: visible;
+  /*visibility: visible;*/
+  display: block;
 }
 .trans-hidden {
   z-index: 10;
-  visibility: hidden;
+  /*visibility: hidden;*/
+  display: none;
 }
-
 g {
   white-space: normal;
 }

@@ -1,18 +1,20 @@
 <div class="transcript-wrapper">
-  <div class="ghost-content identical"></div>
-  <div class="editable-content identical trans-show">
+  <!--<div class="ghost-content identical"></div>-->
+  <div class="ghost-content identical" [class.trans-show]="!isEditingMode" [class.trans-hidden]="isEditingMode">
     <!--trans-show-->
     <span class="clone-val">
-      <!--<app-paragraph *ngFor="let paragraph of transcript.lstPhragraph" [paragraph]="paragraph">-->
+      <!--<app-paragraph *ngFor="let paragraph of transcript.lstPhragraph" [paragraph]="paragraph"> trans-show-->
       <!--</app-paragraph>-->
       <app-paragraph [paragraph]="paragraph">
       </app-paragraph>
     </span>
   </div>
-  <mat-form-field style="width: 100%" class="trans-none">
-    <!--trans-hidden-->
-    <textarea class="editable-content identical trans-hidden" matInput matTextareaAutosize ></textarea>
-    <!--value="{{transcript.rawTranscript}}"-->
-    <!--<textarea class="editable-content identical trans-hidden" matInput matTextareaAutosize>{{transcript.rawTranscript}}</textarea>-->
-  </mat-form-field>
+  <div class="editable-content identical" *ngIf="isEditingMode" [class.trans-show]="isEditingMode" [class.trans-hidden]="!isEditingMode">
+    <mat-form-field>
+      <!--trans-hidden-->
+      <textarea *ngIf="isEditingMode" class="identical" matInput matTextareaAutosize>{{paragraph.rawParagraph}}</textarea>
+      <!--value="{{transcript.rawTranscript}}"-->
+      <!--<textarea class="editable-content identical trans-hidden" matInput matTextareaAutosize>{{transcript.rawTranscript}}</textarea>-->
+    </mat-form-field>
+  </div>
 </div>

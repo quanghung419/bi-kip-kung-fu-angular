@@ -1,6 +1,11 @@
 export class CardModel {
-  public initPosition: number;
-  constructor(public order: number, public position: number) {
-    this.initPosition = position;
+
+  public position: number;
+  public currentHeight: number;
+  public isDraftCard: boolean;
+
+  constructor(public order: number, public initPosition: number) {
+    this.position = initPosition;
   }
+
 }

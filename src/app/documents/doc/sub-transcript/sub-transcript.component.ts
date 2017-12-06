@@ -9,6 +9,7 @@ import {ParagraphModel} from '../paragraph/paragraph.model';
 export class SubTranscriptComponent implements OnInit {
 
   @Input() paragraph: ParagraphModel;
+  @Input() isEditingMode: boolean;
 
   constructor() {
   }

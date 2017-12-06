@@ -1,9 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {TranscriptModel} from '../transcript.model';
-import {SentenceModel} from "../sentence/sentence.model";
-import {ParagraphModel} from "../paragraph/paragraph.model";
-// import {TranscriptModel} from '../transcript.model';
-// import {TranscriptService} from '../transcript.service';
+import {MatMenu, MatMenuTrigger, MenuPositionX} from '@angular/material';
 
 @Component({
   selector: 'app-main-transcript',
@@ -14,11 +11,21 @@ export class MainTranscriptComponent implements OnInit {
 
   @Input() transcript: TranscriptModel;
 
+  @Input() isEditingMode: boolean;
+
   constructor() {
   }
 
   ngOnInit() {
   }
+  //
+  // onBlurTextarea() {
+  //   if (this.isEditingMode === null) {
+  //
+  //     // alert('On Blur text area');
+  //     this.isEditingMode = false;
+  //   }
+  // }
 
 }
 

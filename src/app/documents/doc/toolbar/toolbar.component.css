@@ -1,0 +1,95 @@
+.toolbar-menu {
+  height: 400px;
+  width: 100%;
+  margin-top: 80px;
+  /* position: relative; */
+  /*position: fixed;*/
+  /*top: 0;*/
+  /*left: 0;*/
+  /*display: table-cell;*/
+  /*vertical-align: top;*/
+  /*background: orange;*/
+  /*z-index: 10;*/
+}
+
+.toolbar-item {
+  display: block;
+  cursor: pointer;
+  position: relative;
+  width: 100%;
+  height: 64px;
+}
+
+.toolbar-item:hover{
+  background-color: #202c3a;
+/*rgba(51, 72, 95, 0.5);*/
+
+}
+
+.toolbar-action {
+  /*background-repeat: no-repeat;*/
+  /*background-position: center center;*/
+  /*background-image: url(https://denali-static.grammarly.com/files/a6d69d979adae0d5288365a2e5aa29dc/home.png);*/
+  width: 100%;
+  height: 100%;
+  color: #fafafa;
+}
+
+.toolbar-menu-block.toolbar-nowrap, .toolbar-tool-item {
+  white-space: nowrap;
+}
+
+.toolbar-menu-block {
+  display: none;
+  z-index: 1;
+  margin-left: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  /*background-color: #242629;*/
+  background-color: #202c3a;
+  animation: fadein .2s;
+  will-change: transform;
+  transition: transform .2s;
+}
+
+.toolbar-tool-item {
+  -webkit-user-select: none;
+  -khtml-user-drag: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  display: inline-block;
+  color: #fafafa;
+  /*color: #d5d9e0;*/
+  /*margin: 5px 5px 5px 0;*/
+  height: 64px;
+  line-height: 64px;
+  padding: 0 20px;
+  text-align: center;
+  font-size: 15px;
+  text-decoration: none;
+}
+
+
+/*.toolbar-item.toolbar-hover .toolbar-menuBlock,*/
+/*.toolbar-item.toolbar-itemHover .toolbar-menu-block,*/
+.toolbar-item:hover .toolbar-menu-block {
+  display: block;
+}
+
+.toolbar-separator {
+  display: block;
+  width: 50px;
+  height: 1px;
+  margin: 10px auto;
+  box-shadow: 0 2px 0 #33485f, 0 1px 0 #415870;
+}
+/*ICON*/
+.icon.-size-24, .icon.-size-24 svg {
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  /*fill: #FFFFFF;*/
+}

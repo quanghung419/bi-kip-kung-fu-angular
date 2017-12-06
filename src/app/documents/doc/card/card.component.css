@@ -101,7 +101,7 @@
   /*padding: 0px 10px;*/
   margin-right: 15px;
   margin-top: 15px;
-  height: 40px;
+  height: 50px;
   /*text-align: right;*/
   -webkit-user-select: none;
   -khtml-user-drag: none;
@@ -543,4 +543,25 @@
 
 .card-expanded .card-body {
   display: block;
+}
+
+.card-draft {
+  /*display: block;*/
+  /*background-color: burlywood;*/
+  background-color: rgba(255, 248, 218, 1);
+}
+
+.card-draft .card-body {
+  /*display: block;*/
+}
+
+.card-draft .card-title{
+  /*visibility: hidden;*/
+}
+
+.visible {
+  visibility: visible;
+}
+.invisible {
+  visibility: hidden;
 }

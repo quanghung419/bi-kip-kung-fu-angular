@@ -5,6 +5,7 @@ import {ParagraphModel} from '../paragraph/paragraph.model';
 import {CardModel} from '../card/card.model';
 import {ParagraphService} from '../paragraph/paragraph.service';
 import {CardComponent} from '../card/card.component';
+import {CardsMap} from './map-card.model';
 
 @Component({
   selector: 'app-list-cards',
@@ -14,15 +15,15 @@ import {CardComponent} from '../card/card.component';
 export class ListCardsComponent implements OnInit {
 
   @Input() transcript: TranscriptModel;
-  @ViewChildren(CardComponent) cards: QueryList<CardComponent>;
+  // @ViewChildren(CardComponent) cards: QueryList<CardComponent>;
 
 
   lstPhragraph: Array<ParagraphModel>;
-  mapCards: object;
+  // mapCards: object;
   private currentParagraph: ParagraphModel;
 
-  constructor(private cardService: CardService, private paragraphService: ParagraphService) {
-    this.mapCards = {};
+  constructor(private cardService: CardService, private paragraphService: ParagraphService, private cardsMap: CardsMap) {
+    // this.mapCards = {};
   }
 
   ngOnInit() {
@@ -31,8 +32,9 @@ export class ListCardsComponent implements OnInit {
     for (const mainPraEle of this.paragraphService.listMainPragraphElement) {
       for (const paragraphModel of this.lstPhragraph) {
         if (paragraphModel.order === mainPraEle.order) {
-          this.mapCards[paragraphModel.order] = this.mapCards[paragraphModel.order] ||
-            new CardModel(paragraphModel.order, mainPraEle.offSetTop);
+          this.cardsMap.putCardIfNotExist(paragraphModel.order, new CardModel(paragraphModel.order, mainPraEle.offSetTop));
+          // this.cardsMap[paragraphModel.order] = this.cardsMap[paragraphModel.order] ||
+          //   new CardModel(paragraphModel.order, mainPraEle.offSetTop);
           break;
         }
       }
@@ -56,20 +58,28 @@ export class ListCardsComponent implements OnInit {
     // Change position of other card (Not selected card)
     this.cardService.expandedSubject.subscribe((selectdCard: any) => {
       this.lstPhragraph.forEach((paragraph) => {
-        const cardModel: CardModel = this.mapCards[paragraph.order];
+        // const cardModel: CardModel = this.cardsMap[paragraph.order];
+        const cardModel: CardModel = this.cardsMap.getCardById(paragraph.order);
         cardModel.position = cardModel.initPosition;
       });
 
       const startIndex = selectdCard.selectedCardId;
       for (let i = startIndex; i > 0; i--) {
-        const cardAbove: CardModel = this.mapCards[i - 1];
-        const cardBelow: CardModel = this.mapCards[i];
+        // const cardAbove: CardModel = this.cardsMap[i - 1];
+        const cardAbove: CardModel = this.cardsMap.getCardById(i - 1);
+        // const cardBelow: CardModel = this.cardsMap[i];
+        const cardBelow: CardModel = this.cardsMap.getCardById(i);
+
+        // const cardComponent: CardComponent = this.getCardComponentById(cardAbove.order);
+        // console.log('Card ABOVE height: ', cardComponent.currentHeight);
 
         const bottomCardAbove = cardAbove.initPosition + 44;
+        // const bottomCardAbove = cardAbove.initPosition + cardAbove.currentHeight;
         const gapValue = bottomCardAbove - cardBelow.initPosition + 44 + 30;
         if (gapValue > 0) {
           const abovePhragraph = this.lstPhragraph[i - 1];
-          const cardModel: CardModel = this.mapCards[abovePhragraph.order];
+          // const cardModel: CardModel = this.cardsMap[abovePhragraph.order];
+          const cardModel: CardModel = this.cardsMap.getCardById(abovePhragraph.order);
           cardModel.position = cardModel.initPosition;
           cardModel.position -= gapValue;
           console.log('Change position of ABOVE card: ', abovePhragraph.order, ' ,initPosition: ',
@@ -81,8 +91,10 @@ export class ListCardsComponent implements OnInit {
 
       const startIndexNext = selectdCard.selectedCardId;
       for (let i = startIndexNext; i < this.lstPhragraph.length - 1; i++) {
-        const cardAbove: CardModel = this.mapCards[i];
-        const cardBelow: CardModel = this.mapCards[i + 1];
+        // const cardAbove: CardModel = this.cardsMap[i];
+        const cardAbove: CardModel = this.cardsMap.getCardById(i);
+        // const cardBelow: CardModel = this.cardsMap[i + 1];
+        const cardBelow: CardModel = this.cardsMap.getCardById(i + 1);
 
         let bottomCardAbove: number;
         if (i === startIndexNext) {
@@ -94,7 +106,8 @@ export class ListCardsComponent implements OnInit {
         const gapValue = bottomCardAbove - cardBelow.initPosition - 44 + 30;
         if (gapValue > 0) {
           const belowPhragraph = this.lstPhragraph[i + 1];
-          const cardModel: CardModel = this.mapCards[belowPhragraph.order];
+          // const cardModel: CardModel = this.cardsMap[belowPhragraph.order];
+          const cardModel: CardModel = this.cardsMap.getCardById(belowPhragraph.order);
           cardModel.position = cardModel.initPosition;
           cardModel.position += gapValue;
           console.log('Change position of BELOW card: ', belowPhragraph.order, ' ,initPosition: ',
@@ -119,10 +132,10 @@ export class ListCardsComponent implements OnInit {
 
   getCardModel(paragraph) {
     // console.log('getCardModel: ', paragraph.order);
-    if (!paragraph) {
-      return null;
-    }
-    return this.mapCards[paragraph.order];
+    // if (!paragraph) {
+    //   return null;
+    // }
+    return this.cardsMap.getCardById(paragraph.order);
   }
 
   // ngAfterViewInit() {
@@ -133,4 +146,14 @@ export class ListCardsComponent implements OnInit {
   //     console.log('@Child: card change: ', card);
   //   });
   // }
+
+  // getCardComponentById(cardId: number): CardComponent {
+  //   for (let i = 0; i < this.cards.length; i++) {
+  //     const cardComponent: CardComponent = this.cards._results[i];
+  //     if (cardComponent.cardId === cardId) {
+  //       return cardComponent;
+  //     }
+  //   }
+  // }
+
 }

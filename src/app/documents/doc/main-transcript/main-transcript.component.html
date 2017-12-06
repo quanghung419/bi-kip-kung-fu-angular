@@ -4,17 +4,17 @@
   <!--<div class="ghost-content identical"></div>-->
   <!--<div class="editable-content identical trans-show">-->
   <!--<div class="editable-content identical trans-show">-->
-  <div class="ghost-content identical trans-show">
+  <div class="ghost-content identical" [class.trans-show]="!isEditingMode" [class.trans-hidden]="isEditingMode">
     <!--trans-show-->
     <span class="clone-val">
       <app-paragraph *ngFor="let paragraph of transcript.lstPhragraph" [paragraph]="paragraph" [isMultipleParagraph]="true">
       </app-paragraph>
     </span>
   </div>
-  <div class="editable-content identical trans-hidden">
+  <div class="editable-content identical" [class.trans-show]="isEditingMode" [class.trans-hidden]="!isEditingMode">
     <mat-form-field style="width: 100%">
       <!--trans-hidden-->
-      <textarea matInput matTextareaAutosize value="{{transcript.rawTranscript}}"></textarea>
+      <textarea matInput matTextareaAutosize class="identical" value="{{transcript.rawTranscript}}"></textarea>
       <!--<textarea class="editable-content identical trans-hidden" matInput matTextareaAutosize>{{transcript.rawTranscript}}</textarea>-->
     </mat-form-field>
   </div>

@@ -96,3 +96,55 @@ body {
 /*.card-expanded .card {*/
   /*background-color: #FFFFFF;*/
 /*}*/
+
+.card-footer .mat-icon-button {
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.doc-context-menu .context-menu {
+  /*cursor: pointer;*/
+  /*position: absolute;*/
+  /*border-radius: 2px;*/
+  /*width: 150px;*/
+  /*height: 200px;*/
+  /*background-color: rgba(255, 255, 255, 0.9);*/
+  /*background-color: rgba(52, 152, 219, 0.1);*/
+  /*box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05) inset, 0px 0px 4px #555;*/
+  box-shadow: 0 3px 1px -2px rgba(0,0,0,.3), 0 2px 2px 0 rgba(0,0,0,.24), 0 1px 5px 0 rgba(0,0,0,.22);
+  /*animation-duration: 2s !important;*/
+  /*animation-iteration-count: 1;*/
+  /*transition: 2s !important;*/
+}
+
+.context-menu .mat-menu-content {
+  /*background-color: rgba(52, 152, 219, 0.1) !important;*/
+}
+
+.context-menu .mat-menu-item-highlighted:not([disabled]), .mat-menu-item:hover:not([disabled]) {
+  /*background: #3498DB;*/
+  background-color: rgba(52, 152, 219, 0.3) !important;
+}
+
+.context-menu .mat-menu-item:focus:not([disabled]) {
+  background-color: #FFFFFF;
+}
+
+
+.editable-content .mat-form-field-infix {
+  padding: 0 !important;
+  border: 0 !important;
+}
+
+.editable-content .mat-input-container {
+  width: 100% !important;
+}
+
+.editable-content .mat-input-wrapper {
+  padding: 0 !important;
+}

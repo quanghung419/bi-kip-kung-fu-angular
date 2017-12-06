@@ -8,6 +8,8 @@ import {SentenceModel} from '../sentence/sentence.model';
 import {SentenceService} from '../sentence/sentence.service';
 import {ParagraphService} from './paragraph.service';
 import {MainPragraphElementModel} from './main-pragraph-element.model';
+import {CardService} from '../card/card.service';
+import {DocService} from '../doc.service';
 
 @Component({
   selector: 'app-paragraph',
@@ -15,20 +17,18 @@ import {MainPragraphElementModel} from './main-pragraph-element.model';
   styleUrls: ['./paragraph.component.css']
 })
 export class ParagraphComponent implements OnInit, AfterContentInit, AfterContentChecked, AfterViewChecked, AfterViewInit, OnChanges {
-
-
+  @Input() paragraph: ParagraphModel;
   // get onSentenceSelected(): EventEmitter<SentenceModel> {
   //   return this._onSentenceSelected;
   // }
 
-  @Input() paragraph: ParagraphModel;
-  // @Output() private _onSentenceSelected: EventEmitter<SentenceModel>;
-  @Input() isMultipleParagraph: boolean;
 
+  @Input() isMultipleParagraph: boolean;
   private currentSentence: SentenceModel;
 
-  constructor(private paragraphService: ParagraphService, private sentenceService: SentenceService, private elRef: ElementRef) {
-    // this._onSentenceSelected = new EventEmitter();
+  constructor(private paragraphService: ParagraphService, private sentenceService: SentenceService,
+              private elRef: ElementRef, private cardService: CardService, private docService: DocService) {
+    // this.onSentenceSelected = new EventEmitter();
     sentenceService.subject.subscribe((info: any) => {
       let isMatch = false;
       this.paragraph.lstSentences.forEach((sentence) => {
@@ -42,6 +42,20 @@ export class ParagraphComponent implements OnInit, AfterContentInit, AfterConten
         this.currentSentence = null;
       }
     });
+  }
+
+  // private _onRightClickSentence: EventEmitter<any> = new EventEmitter();
+
+  // @Output()
+  // get onRightClickSentence(): EventEmitter<any> {
+  //   return this._onRightClickSentence;
+  // }
+
+  private _onSentenceSelected: EventEmitter<SentenceModel> = new EventEmitter();
+
+  @Output()
+  get onSentenceSelected(): EventEmitter<SentenceModel> {
+    return this._onSentenceSelected;
   }
 
   ngOnInit() {
@@ -106,14 +120,29 @@ export class ParagraphComponent implements OnInit, AfterContentInit, AfterConten
     this.currentSentence = sentence;
     // this.onSentenceSelected.emit(sentence);
     this.sentenceService.changeSentence(this.paragraph.order, sentence.order);
+
+    // Expand corresponding card (matching with main paragraph)
+    if (this.isMultipleParagraph) {
+      this.cardService.changeSelectedCard(this.paragraph.order);
+    }
+
   }
 
   isSelected(sentence: SentenceModel): boolean {
     if (!sentence || !this.currentSentence) {
       return false;
     }
+    this._onSentenceSelected.emit();
+
     return sentence.value === this.currentSentence.value;
   }
 
+  onRightClick($event) {
+    if ($event.which === 3) {
+      // TODO
+      // this._onRightClickSentence.emit($event);
+      this.docService.onRightClickSentence($event, this.isMultipleParagraph, this.paragraph.order);
+    }
+  }
 
 }

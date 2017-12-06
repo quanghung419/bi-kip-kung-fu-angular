@@ -1,4 +1,4 @@
-<div class="card" [class.card-expanded]="isSelectedCard" (click)="clicked()" [style.transform]="'translateY('+cardModel.position+'px)'">
+<div class="card" [class.card-expanded]="isSelectedCard" [class.card-draft]="isDraftCard()" [style.transform]="'translateY('+cardModel.position+'px)'">
   <div class="card-inner">
     <div class="card-header" fxLayout="row">
       <div class="card-title">
@@ -6,7 +6,8 @@
       </div>
       <div class="card-actions" fxLayout="row" fxLayoutAlign="end center">
         <button matTooltip="Edit card content" matTooltipPosition="above"
-                mat-icon-button class="card-header-button">
+                mat-icon-button class="card-header-button" (click)="changeToEditingMode()"
+                disabled="{{isEditingMode}}">
           <fa name="pencil-square-o" size="1x"></fa>
         </button>
         <button matTooltip="Expand this card" matTooltipPosition="above"
@@ -25,22 +26,22 @@
     </div>
     <div class="card-body">
       <div class="card-content">
-        <app-sub-transcript [paragraph]="paragraph"></app-sub-transcript>
+        <app-sub-transcript [paragraph]="paragraph" [isEditingMode]="isEditingMode"></app-sub-transcript>
       </div>
-      <div class="card-footer" fxLayout="row">
-        <div class="card-content-actions" fxLayout="row" fxLayoutAlign="start center">
-          <span class="btn-content-action" role="button">Add</span>
-          <span class="btn-content-action" role="button">Save</span>
+      <div class="card-footer" fxLayout="row" fxLayoutAlign=" center">
+        <div class="card-content-actions" fxLayout="row" fxLayoutAlign="start center" [class.visible]="isEditingMode" [class.invisible]="!isEditingMode">
+          <span class="btn-content-action" role="button" [class.hidden]="this.oldContent?.length > 0">Add</span>
+          <span class="btn-content-action" role="button" (click)="saveChange()">Save</span>
           <span class="seperate-dot">&nbsp;•&nbsp;</span>
-          <span class="btn-content-action btn-latest" role="button">Cacel</span>
+          <span class="btn-content-action btn-latest" role="button" (click)="discardChange()">Cacel</span>
         </div>
         <div class="card-position-actions" fxLayout="row" fxLayoutAlign="end center">
-          <button mat-button matTooltip="Move up this card" matTooltipPosition="below"
+          <button mat-icon-button matTooltip="Move up this card" matTooltipPosition="below"
                   fxLayout="row" fxLayoutAlign="center center">
             <fa name="level-up"></fa>
           </button>
-          <button mat-button matTooltip="Insert card below" matTooltipPosition="below"
-                  mat-button fxLayout="row" fxLayoutAlign="center center">
+          <button mat-icon-button matTooltip="Insert card below" matTooltipPosition="below"
+                  fxLayout="row" fxLayoutAlign="center center">
             <fa name="plus-square-o"></fa>
           </button>
 
@@ -49,6 +50,7 @@
     </div>
   </div>
 </div>
+
 
 
 <!--<div>-->

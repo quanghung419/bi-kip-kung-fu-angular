@@ -1,20 +1,27 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {SentenceModel} from './sentence.model';
 
 @Component({
-  selector: 'g',
+  selector: 'app-sen',
   templateUrl: './sentence.component.html',
   styleUrls: ['./sentence.component.css']
 })
 export class SentenceComponent implements OnInit {
 
-
   @Input() sentence: SentenceModel;
+
+
   color = 'red';
-  // selected = '';
 
   constructor() {
+    // this._onRightClickSentence = new EventEmitter();
   }
+
+  // selected = '';
+
+  // get onRightClickSentence(): EventEmitter<SentenceModel> {
+  //   return this._onRightClickSentence;
+  // }
 
   ngOnInit() {
     // console.log('sentence: ', this.sentence);
@@ -27,5 +34,6 @@ export class SentenceComponent implements OnInit {
   // markSelected($event): void {
   //   this.selected = 'selected';
   // }
+
 
 }

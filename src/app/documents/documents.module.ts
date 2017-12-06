@@ -11,6 +11,7 @@ import {NewDocModalComponent} from './docs/new-doc-dialog/new-doc-dialog.compone
 
 import {
   MatDialogModule, MatButtonModule, MatSlideToggleModule, MatInputModule, MatIconModule, MatTooltipModule,
+  MatMenuModule,
 } from '@angular/material';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {NewDocDialogService} from './docs/new-doc-dialog/new-doc-dialog.service';
@@ -22,9 +23,13 @@ import {TranscriptService} from './doc/transcript.service';
 import {SentenceService} from './doc/sentence/sentence.service';
 import {CardComponent} from './doc/card/card.component';
 import {AngularFontAwesomeModule} from 'angular-font-awesome';
-import { ListCardsComponent } from './doc/list-cards/list-cards.component';
-import { CardService } from './doc/card/card.service';
-import { ParagraphService } from './doc/paragraph/paragraph.service';
+import {ListCardsComponent} from './doc/list-cards/list-cards.component';
+import {CardService} from './doc/card/card.service';
+import {ParagraphService} from './doc/paragraph/paragraph.service';
+import {DocService} from './doc/doc.service';
+import {ToolbarComponent} from './doc/toolbar/toolbar.component';
+import {ListCardsService} from './doc/list-cards/list-cards.service';
+import {CardsMap} from './doc/list-cards/map-card.model';
 
 
 @NgModule({
@@ -39,7 +44,8 @@ import { ParagraphService } from './doc/paragraph/paragraph.service';
     MatInputModule,
     MatIconModule,
     MatTooltipModule,
-    AngularFontAwesomeModule
+    AngularFontAwesomeModule,
+    MatMenuModule
   ],
   declarations: [
     DocComponent,
@@ -52,14 +58,18 @@ import { ParagraphService } from './doc/paragraph/paragraph.service';
     SentenceComponent,
     ParagraphComponent,
     CardComponent,
-    ListCardsComponent
+    ListCardsComponent,
+    ToolbarComponent
   ],
   providers: [
     NewDocDialogService,
     TranscriptService,
     SentenceService,
     CardService,
-    ParagraphService
+    ParagraphService,
+    DocService,
+    ListCardsService,
+    CardsMap
   ],
   entryComponents: [
     NewDocModalComponent
