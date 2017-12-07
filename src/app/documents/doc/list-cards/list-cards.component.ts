@@ -22,8 +22,12 @@ export class ListCardsComponent implements OnInit {
   // mapCards: object;
   private currentParagraph: ParagraphModel;
 
+  private isFoldUpCard: boolean;
+
   constructor(private cardService: CardService, private paragraphService: ParagraphService, private cardsMap: CardsMap) {
     // this.mapCards = {};
+    // this.currentParagraph = ;
+    // this.currentParagraph = undefined;
   }
 
   ngOnInit() {
@@ -41,17 +45,31 @@ export class ListCardsComponent implements OnInit {
     }
 
     this.cardService.subject.subscribe((cardId: number) => {
+      // if (cardId === -1) {
+      //   this.isFoldUpCard = true;
+      //   return;
+      // }
+
+      if (this.isFoldUpCard) {
+        this.currentParagraph = null;
+        this.isFoldUpCard = false;
+        return;
+      }
+
       let isMatch = false;
       this.lstPhragraph.forEach((paragraph) => {
         if (paragraph.order === cardId) {
           this.currentParagraph = paragraph;
           console.log('Set current card.');
           isMatch = true;
+          this.isFoldUpCard = false;
         }
       });
       if (!isMatch) {
         this.currentParagraph = null;
       }
+
+      console.log('Selected card: ', this.currentParagraph);
     });
 
 
@@ -62,6 +80,11 @@ export class ListCardsComponent implements OnInit {
         const cardModel: CardModel = this.cardsMap.getCardById(paragraph.order);
         cardModel.position = cardModel.initPosition;
       });
+
+      // In case fold up a card
+      if (selectdCard.selectedCardId === -1) {
+        return;
+      }
 
       const startIndex = selectdCard.selectedCardId;
       for (let i = startIndex; i > 0; i--) {
@@ -120,10 +143,17 @@ export class ListCardsComponent implements OnInit {
   }
 
   clicked(paragraph: ParagraphModel) {
-    this.cardService.changeSelectedCard(paragraph.order);
+    if (this.isFoldUpCard) {
+      this.cardService.changeSelectedCard(-1);
+    } else {
+      this.cardService.changeSelectedCard(paragraph.order);
+    }
   }
 
   isSelectedCard(paragraph: ParagraphModel) {
+    if (this.isFoldUpCard) {
+      return false;
+    }
     if (!paragraph || !this.currentParagraph) {
       return false;
     }
@@ -155,5 +185,24 @@ export class ListCardsComponent implements OnInit {
   //     }
   //   }
   // }
+
+  foldUpCard($event) {
+    // let isMatch = false;
+    // this.lstPhragraph.forEach((paragraph) => {
+    //   if (paragraph.order === $event) {
+    //     this.currentParagraph = paragraph;
+    //     console.log('Set current card.');
+    //     isMatch = true;
+    //     this.isFoldUpCard = false;
+    //   }
+    // });
+    // if (!isMatch) {
+    // this.currentParagraph = null;
+    // }
+    this.isFoldUpCard = true;
+
+    // console.log('Selected card: ', this.currentParagraph);
+    console.log('Fold Up card: ', $event);
+  }
 
 }

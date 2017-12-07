@@ -4,6 +4,7 @@ import {TranscriptModel} from './transcript.model';
 import {TranscriptService} from './transcript.service';
 import {MatMenu, MatMenuTrigger} from "@angular/material";
 import {DocService} from "./doc.service";
+import {MainTranscriptService} from "./main-transcript/main-transcript.service";
 
 @Component({
   selector: 'app-doc',
@@ -24,7 +25,7 @@ export class DocComponent implements OnInit {
   private triggerOldHandleClick: any;
 
   constructor(private route: ActivatedRoute, private transcriptService: TranscriptService,
-              private docService: DocService) {
+              private docService: DocService, private mainTranscriptService: MainTranscriptService) {
     route.params.subscribe(params => {
       this.docId = params['docId'];
     });
@@ -117,6 +118,9 @@ export class DocComponent implements OnInit {
 
   saveModeMainTrascript() {
     this.mainTranscriptEditingMode = false;
+    const transcriptModel = this.mainTranscriptService.getTranscriptData();
+    console.log('transcript: ', transcriptModel);
+    this.enTranscript = transcriptModel;
   }
 
 }

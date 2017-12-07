@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ParagraphModel} from '../paragraph/paragraph.model';
 
 @Component({
@@ -14,7 +14,18 @@ export class SubTranscriptComponent implements OnInit {
   constructor() {
   }
 
+  private _onChangeContent: EventEmitter<string> = new EventEmitter();
+
+  @Output()
+  get onChangeContent(): EventEmitter<string> {
+    return this._onChangeContent;
+  }
+
   ngOnInit() {
+  }
+
+  changeContent($event) {
+    this._onChangeContent.emit($event.target.value);
   }
 
 }

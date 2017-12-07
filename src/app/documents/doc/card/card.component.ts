@@ -1,12 +1,11 @@
 import {
-  AfterViewChecked,
-  Component, ElementRef, Input, OnChanges, OnInit, SimpleChange,
+  Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange,
   SimpleChanges
 } from '@angular/core';
 import {ParagraphModel} from '../paragraph/paragraph.model';
 import {CardService} from './card.service';
 import {CardModel} from './card.model';
-import {CardsMap} from "../list-cards/map-card.model";
+import {ContentAnalysisService} from '../content-analysis.service';
 
 @Component({
   selector: 'app-card',
@@ -15,26 +14,40 @@ import {CardsMap} from "../list-cards/map-card.model";
 })
 export class CardComponent implements OnChanges, OnInit {
 
-
   @Input() paragraph: ParagraphModel;
-
   @Input() isSelectedCard: boolean;
-
   @Input() cardModel: CardModel;
-
-  // cardId: number;
   oldContent: string;
-
   isEditingMode: boolean;
+
+  private rawContent: string;
+
+  private isFoldUpCard: boolean;
+
+  constructor(private elRef: ElementRef, private cardService: CardService, private contentAnalysisService: ContentAnalysisService) {
+    this.isEditingMode = false;
+    this.isFoldUpCard = false;
+  }
+
+  private _onFoldUpCard: EventEmitter<any> = new EventEmitter();
+
+  @Output()
+  get onFoldUpCard(): EventEmitter<any> {
+    return this._onFoldUpCard;
+  }
 
   // currentHeight: number;
 
   // isDraftCard: boolean;
-  function
+  // function
 
-  constructor(private elRef: ElementRef, private cardService: CardService, private cardsMap: CardsMap) {
-    this.isEditingMode = false;
-  }
+  // @Output() onFoldUpCard: EventEmitter<number> = new EventEmitter();
+
+
+  // @Output()
+  // get onFoldUpCard(): EventEmitter<number> {
+  //   return this._onFoldUpCard;
+  // }
 
   ngOnChanges(changes: SimpleChanges) {
     const flagIsSelectedCard: SimpleChange = changes.isSelectedCard;
@@ -43,11 +56,22 @@ export class CardComponent implements OnChanges, OnInit {
       setTimeout(function () {
         self.cardService.expandedSelectedCard(self.paragraph.order, self.elRef.nativeElement.children[0].clientHeight);
       }, 1);
+    } else if (!this.isDraftCard()) {
+      // If current card is not draft => change to edited mode
+      this.isEditingMode = false;
+    }
+
+    if (this.isFoldUpCard) {
+      this.isFoldUpCard = false;
+      const self = this;
+      setTimeout(function () {
+        self.cardService.expandedSelectedCard(-1, -1);
+      }, 1);
     }
   }
 
   ngOnInit(): void {
-    this.updateCurrentHeightOfCardInMap();
+    // this.updateCurrentHeightOfCardInMap();
     // if (this.paragraph) {
     //   this.cardId = this.paragraph.order;
     // }
@@ -62,8 +86,9 @@ export class CardComponent implements OnChanges, OnInit {
   }
 
   isDraftCard(): boolean {
-    if (this.oldContent) {
+    if (this.oldContent && this.rawContent && this.oldContent !== this.rawContent) {
       return this.oldContent.length > 0;
+      // return true;
     }
     return false;
   }
@@ -71,22 +96,25 @@ export class CardComponent implements OnChanges, OnInit {
   saveChange() {
     this.isEditingMode = false;
     this.oldContent = null;
-    this.updateCurrentHeightOfCardInMap();
+    if (this.rawContent) {
+      const paragraphModel = this.contentAnalysisService.getParagraphData(this.paragraph.order, this.rawContent);
+      console.log('Convert paragraph: ', paragraphModel);
+      this.paragraph = paragraphModel;
+    }
   }
 
   discardChange() {
     this.isEditingMode = false;
     this.oldContent = null;
-    this.updateCurrentHeightOfCardInMap();
   }
 
-  updateCurrentHeightOfCardInMap() {
-    // setTimeout(function (this) {
-    const currentHeight = this.elRef.nativeElement.children[0].offsetHeight;
-    this.cardsMap.updateCurrentHeightOfCard(this.paragraph.order, currentHeight);
-    // this.getCurrHeight(this);
-    // }, 100);
-  }
+  // updateCurrentHeightOfCardInMap() {
+  // setTimeout(function (this) {
+  // const currentHeight = this.elRef.nativeElement.children[0].offsetHeight;
+  // this.cardsMap.updateCurrentHeightOfCard(this.paragraph.order, currentHeight);
+  // this.getCurrHeight(this);
+  // }, 100);
+  // }
 
   // getCurrHeight(seft) {
   //   const currentHeight = seft.elRef.nativeElement.children[0].offsetHeight;
@@ -97,5 +125,21 @@ export class CardComponent implements OnChanges, OnInit {
   //   console.log('ngAfterViewChecked - Current Height: ', this.paragraph.order, this.elRef.nativeElement.children[0].offsetHeight);
   //   this.updateCurrentHeightOfCardInMap();
   // }
+
+  toggleCard() {
+    if (this.isSelectedCard) {
+      // this.isSelectedCard = false;
+      // this.cardService.changeSelectedCard(-1);
+      this._onFoldUpCard.emit(this.paragraph.order);
+      this.isFoldUpCard = true;
+    }
+    // this.isFoldUpCard = !this.isFoldUpCard;
+    // this.cardService.changeSelectedCard(-1);
+  }
+
+  onChangeContent(content) {
+    console.log('New content of card\'s transcript: ', content);
+    this.rawContent = content;
+  }
 
 }

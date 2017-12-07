@@ -12,7 +12,7 @@
   <div class="editable-content identical" *ngIf="isEditingMode" [class.trans-show]="isEditingMode" [class.trans-hidden]="!isEditingMode">
     <mat-form-field>
       <!--trans-hidden-->
-      <textarea *ngIf="isEditingMode" class="identical" matInput matTextareaAutosize>{{paragraph.rawParagraph}}</textarea>
+      <textarea *ngIf="isEditingMode" class="identical" matInput matTextareaAutosize (input)="changeContent($event)">{{paragraph.rawParagraph}}</textarea>
       <!--value="{{transcript.rawTranscript}}"-->
       <!--<textarea class="editable-content identical trans-hidden" matInput matTextareaAutosize>{{transcript.rawTranscript}}</textarea>-->
     </mat-form-field>

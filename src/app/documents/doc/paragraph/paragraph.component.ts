@@ -134,7 +134,7 @@ export class ParagraphComponent implements OnInit, AfterContentInit, AfterConten
     }
     this._onSentenceSelected.emit();
 
-    return sentence.value === this.currentSentence.value;
+    return sentence.order === this.currentSentence.order;
   }
 
   onRightClick($event) {
