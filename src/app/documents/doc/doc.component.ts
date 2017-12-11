@@ -5,6 +5,7 @@ import {TranscriptService} from './transcript.service';
 import {MatMenu, MatMenuTrigger} from "@angular/material";
 import {DocService} from "./doc.service";
 import {MainTranscriptService} from "./main-transcript/main-transcript.service";
+import {WritingPracticeDialogService} from "./writing-practice-dialog/writing-practice-dialog.service";
 
 @Component({
   selector: 'app-doc',
@@ -25,7 +26,8 @@ export class DocComponent implements OnInit {
   private triggerOldHandleClick: any;
 
   constructor(private route: ActivatedRoute, private transcriptService: TranscriptService,
-              private docService: DocService, private mainTranscriptService: MainTranscriptService) {
+              private docService: DocService, private mainTranscriptService: MainTranscriptService,
+              private writingPracticeDialogService: WritingPracticeDialogService) {
     route.params.subscribe(params => {
       this.docId = params['docId'];
     });
@@ -120,7 +122,16 @@ export class DocComponent implements OnInit {
     this.mainTranscriptEditingMode = false;
     const transcriptModel = this.mainTranscriptService.getTranscriptData();
     console.log('transcript: ', transcriptModel);
-    this.enTranscript = transcriptModel;
+    if (transcriptModel) {
+      this.enTranscript = transcriptModel;
+    }
+  }
+
+
+  showDialogWritingPractice(config) {
+    // alert('Show dialog Writing Practice');
+    this.writingPracticeDialogService.showDialog();
+    console.log('Show dialog WRITING PRACTICE: ', config);
   }
 
 }

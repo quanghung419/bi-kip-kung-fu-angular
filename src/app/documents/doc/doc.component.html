@@ -18,7 +18,7 @@
       </a>
     </div>
     <div>
-      <app-toolbar [isMainInEditingMode]="mainTranscriptEditingMode" (onEditMainTranscript)="editModeMainTrascript()" (onSaveMainTranscript)="saveModeMainTrascript()"></app-toolbar>
+      <app-toolbar [isMainInEditingMode]="mainTranscriptEditingMode" (onEditMainTranscript)="editModeMainTrascript()" (onSaveMainTranscript)="saveModeMainTrascript()" (onStartWritingPractice)="showDialogWritingPractice($event)"></app-toolbar>
     </div>
   </div>
   <div class="doc-editor">

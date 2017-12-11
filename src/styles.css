@@ -148,3 +148,22 @@ body {
 .editable-content .mat-input-wrapper {
   padding: 0 !important;
 }
+
+
+.unable-select {
+  -webkit-user-select: none;
+  -khtml-user-drag: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+
+.writing-dialog mat-dialog-container {
+  background-color: transparent;
+}
+
+.backdrop-writing-practice {
+  background-color: #000000;
+}

@@ -32,6 +32,8 @@ import {ListCardsService} from './doc/list-cards/list-cards.service';
 import {CardsMap} from './doc/list-cards/map-card.model';
 import { MainTranscriptService } from './doc/main-transcript/main-transcript.service';
 import { ContentAnalysisService } from './doc/content-analysis.service';
+import { WritingPracticeDialogComponent } from './doc/writing-practice-dialog/writing-practice-dialog.component';
+import { WritingPracticeDialogService } from './doc/writing-practice-dialog/writing-practice-dialog.service';
 
 
 @NgModule({
@@ -61,7 +63,8 @@ import { ContentAnalysisService } from './doc/content-analysis.service';
     ParagraphComponent,
     CardComponent,
     ListCardsComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    WritingPracticeDialogComponent
   ],
   providers: [
     NewDocDialogService,
@@ -73,10 +76,12 @@ import { ContentAnalysisService } from './doc/content-analysis.service';
     ListCardsService,
     CardsMap,
     MainTranscriptService,
-    ContentAnalysisService
+    ContentAnalysisService,
+    WritingPracticeDialogService
   ],
   entryComponents: [
-    NewDocModalComponent
+    NewDocModalComponent,
+    WritingPracticeDialogComponent
   ],
   exports: []
 })
