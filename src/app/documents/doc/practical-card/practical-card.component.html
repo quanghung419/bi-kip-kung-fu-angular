@@ -1,0 +1,39 @@
+<div class="practical-card flippable" [class.flipped]="flipped" [class.expanded]="isExpanded" (keydown)="slideActionDetect($event)">
+  <div class="front card-side">
+    <header>
+      <button mat-icon-button (click)="expandCard()">
+        <fa name="exchange"></fa>
+      </button>
+      <button mat-icon-button (click)="flipCard()">
+        <fa name="circle-o-notch"></fa>
+      </button>
+      <button mat-icon-button>
+        <fa name="window-close-o"></fa>
+      </button>
+    </header>
+    <div class="card-content">
+      <span class="clone-val">
+        <app-paragraph [paragraph]="frontParagraph"></app-paragraph>
+      </span>
+    </div>
+  </div>
+  <div class="gap"></div>
+  <div class="back card-side" [class.rotateX180]="isRorateBackSide">
+    <header>
+      <button mat-icon-button (click)="expandCard()">
+        <fa name="exchange"></fa>
+      </button>
+      <button mat-icon-button (click)="flipCard()">
+        <fa name="circle-o-notch"></fa>
+      </button>
+      <button mat-icon-button>
+        <fa name="window-close-o"></fa>
+      </button>
+    </header>
+    <div class="card-content">
+      <span class="clone-val">
+        <app-paragraph [paragraph]="backParagraph"></app-paragraph>
+      </span>
+    </div>
+  </div>
+</div>

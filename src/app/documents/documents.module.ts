@@ -34,6 +34,7 @@ import { MainTranscriptService } from './doc/main-transcript/main-transcript.ser
 import { ContentAnalysisService } from './doc/content-analysis.service';
 import { WritingPracticeDialogComponent } from './doc/writing-practice-dialog/writing-practice-dialog.component';
 import { WritingPracticeDialogService } from './doc/writing-practice-dialog/writing-practice-dialog.service';
+import { PracticalCardComponent } from './doc/practical-card/practical-card.component';
 
 
 @NgModule({
@@ -64,7 +65,8 @@ import { WritingPracticeDialogService } from './doc/writing-practice-dialog/writ
     CardComponent,
     ListCardsComponent,
     ToolbarComponent,
-    WritingPracticeDialogComponent
+    WritingPracticeDialogComponent,
+    PracticalCardComponent
   ],
   providers: [
     NewDocDialogService,

@@ -130,7 +130,7 @@ export class DocComponent implements OnInit {
 
   showDialogWritingPractice(config) {
     // alert('Show dialog Writing Practice');
-    this.writingPracticeDialogService.showDialog();
+    this.writingPracticeDialogService.showDialog(this.enTranscript, this.vnTranscript);
     console.log('Show dialog WRITING PRACTICE: ', config);
   }
 

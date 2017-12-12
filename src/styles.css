@@ -162,8 +162,25 @@ body {
 
 .writing-dialog mat-dialog-container {
   background-color: transparent;
+  /*transform: none;*/
+  /*opacity: 1;*/
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  justify-items: center;
+  align-items: center;
 }
 
 .backdrop-writing-practice {
   background-color: #000000;
+  opacity: .55 !important;
+  /*-webkit-filter: blur(2px);*/
+  /*-moz-filter: blur(2px);*/
+  /*-o-filter: blur(2px);*/
+  /*-ms-filter: blur(2px);*/
+  /*filter: blur(2px);*/
+}
+
+app-writing-practice-dialog {
+  width: 100%;
 }
