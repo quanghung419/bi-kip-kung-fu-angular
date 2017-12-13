@@ -6,6 +6,7 @@ import {ParagraphModel} from '../paragraph/paragraph.model';
 import {CardService} from './card.service';
 import {CardModel} from './card.model';
 import {ContentAnalysisService} from '../content-analysis.service';
+import {WritingPracticeDialogService} from "../writing-practice-dialog/writing-practice-dialog.service";
 
 @Component({
   selector: 'app-card',
@@ -24,7 +25,8 @@ export class CardComponent implements OnChanges, OnInit {
 
   private isFoldUpCard: boolean;
 
-  constructor(private elRef: ElementRef, private cardService: CardService, private contentAnalysisService: ContentAnalysisService) {
+  constructor(private elRef: ElementRef, private cardService: CardService,
+              private contentAnalysisService: ContentAnalysisService, private writingPracticeDialogService: WritingPracticeDialogService) {
     this.isEditingMode = false;
     this.isFoldUpCard = false;
   }
@@ -140,6 +142,10 @@ export class CardComponent implements OnChanges, OnInit {
   onChangeContent(content) {
     console.log('New content of card\'s transcript: ', content);
     this.rawContent = content;
+  }
+
+  slideShowThisCard() {
+    this.writingPracticeDialogService.practiceCard(this.paragraph.order);
   }
 
 }

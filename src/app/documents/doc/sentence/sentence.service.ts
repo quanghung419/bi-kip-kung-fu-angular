@@ -3,10 +3,13 @@ import {Subject} from 'rxjs/Subject';
 
 @Injectable()
 export class SentenceService {
-  public subject: Subject<object> = new Subject();
+  private subject: Subject<object> = new Subject();
 
-  changeSentence(parOrder, order) {
-    this.subject.next({parOrder, order});
-    console.log('service');
+  changeSentence(parOrder, order, typeOfSentence) {
+    this.subject.next({parOrder, order, typeOfSentence});
+  }
+
+  public matchingSentence(callbackFn: any) {
+    this.subject.subscribe(callbackFn);
   }
 }

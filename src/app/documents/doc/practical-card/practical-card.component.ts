@@ -1,6 +1,7 @@
-import {Component, HostListener, Input, OnInit} from '@angular/core';
-import {ParagraphModel} from '../paragraph/paragraph.model';
-import {KEY_CODE} from '../writing-practice-dialog/writing-practice-dialog.component';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {PracticalCardModel} from './practical-card.model';
+import {CARD_EFFECT} from '../writing-practice-dialog/writing-practice-dialog-config.model';
+import {KEY_CODE} from '../../../_shared/constants/key-code.enum';
 
 
 @Component({
@@ -8,81 +9,84 @@ import {KEY_CODE} from '../writing-practice-dialog/writing-practice-dialog.compo
   templateUrl: './practical-card.component.html',
   styleUrls: ['./practical-card.component.css']
 })
-export class PracticalCardComponent implements OnInit {
+export class PracticalCardComponent implements OnInit, OnChanges {
 
-  @Input() frontParagraph: ParagraphModel;
-  @Input() backParagraph: ParagraphModel;
+  @Input() sliderNum: number;
+  @Input() practicalCardModel: PracticalCardModel;
+  @Input() keyEventInfo: any;
+  @Input() dialogConfig: any;
+  @Output() onCloseCard: EventEmitter<any> = new EventEmitter();
 
-  flipped: boolean;
+  cardEffectEnum: typeof CARD_EFFECT = CARD_EFFECT;
+  isFlipped: boolean;
   isRorateBackSide: boolean;
-
   isExpanded: boolean;
-  frontPosition: number;
-  backPosition: number;
-
-  isOpen: boolean;
+  // isOpen: boolean;
 
   constructor() {
-    this.flipped = false;
+    this.isFlipped = false;
     this.isExpanded = false;
-    // this.isRorateBackSide = true;
-    this.isOpen = false;
+    // this.isOpen = false;
   }
 
   ngOnInit() {
   }
 
-  // @HostListener('window:keyup', ['$event'])
-  // keyEvent(event: KeyboardEvent) {
-  //   console.log(event.keyCode);
-  //
-  //   switch (event.keyCode) {
-  //     // case KEY_CODE.RIGHT_ARROW:
-  //     //   this.nextCard();
-  //     //   break;
-  //     // case KEY_CODE.LEFT_ARROW:
-  //     //   this.prevCard();
-  //     //   break;
-  //     // case KEY_CODE.UP_ARROW:
-  //     //   break;
-  //     // case KEY_CODE.DOWN_ARROW:
-  //     //   break;
-  //     case KEY_CODE.ALT:
-  //       event.stopPropagation();
-  //       this.flipCard();
-  //       break;
-  //     case KEY_CODE.ENTER:
-  //       event.stopPropagation();
-  //       this.expandCard();
-  //       break;
-  //     default:
-  //       break;
-  //
-  //   }
-  // }
+  ngOnChanges(changes: SimpleChanges): void {
+    const changePracticalCardModel = changes['practicalCardModel'];
+    if (changePracticalCardModel) {
+      this.resetStatus();
+    }
+
+    const changeKeyEventInfo = changes['keyEventInfo'];
+    if (changeKeyEventInfo) {
+      this.onShortcutEvent();
+    }
+
+  }
+
+  onShortcutEvent() {
+    if (this.keyEventInfo && this.keyEventInfo.currNum === this.sliderNum) {
+      switch (this.keyEventInfo.keyCode) {
+        case KEY_CODE.SPACE:
+        case KEY_CODE.ENTER:
+          this.decideCardAction();
+      }
+    }
+  }
+
+  decideCardAction() {
+    if (!this.dialogConfig) {
+      this.flipCard();
+      return;
+    }
+    if (this.dialogConfig.cardEffect === CARD_EFFECT.FLIP) {
+      this.flipCard();
+    } else {
+      this.expandCard();
+    }
+  }
+
+  resetStatus() {
+    this.isExpanded = false;
+    this.isFlipped = false;
+    this.isRorateBackSide = false;
+  }
 
   flipCard() {
-    this.flipped = !this.flipped;
+    this.isExpanded = false;
+    this.isFlipped = !this.isFlipped;
     this.isRorateBackSide = true;
   }
 
   expandCard() {
-    console.log('Click on button: EXPAND');
-
-    // this.flipped = false;
-    // this.isRorateBackSide = false;
-    //
-    // const maxLengthToMove = this.isExpanded ? 52 : 0;
-    // this.frontPosition = -52 + maxLengthToMove;
-    // this.backPosition = 52 - maxLengthToMove;
-    //
-    // // console.log('frontPosition: ', this.frontPosition, 'backPosition: ', this.backPosition);
-    //
+    this.isFlipped = false;
+    this.isRorateBackSide = false;
     this.isExpanded = !this.isExpanded;
   }
 
-  // slideActionDetect($event) {
-  //   console.log('Key Press: ', $event);
-  // }
+  closeCard() {
+    this.onCloseCard.emit();
+  }
 
 }

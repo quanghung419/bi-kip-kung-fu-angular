@@ -7,7 +7,7 @@
   <div class="ghost-content identical" [class.trans-show]="!isEditingMode" [class.trans-hidden]="isEditingMode">
     <!--trans-show-->
     <span class="clone-val">
-      <app-paragraph *ngFor="let paragraph of transcript.lstPhragraph" [paragraph]="paragraph" [isMultipleParagraph]="true">
+      <app-paragraph *ngFor="let paragraph of transcript.lstPhragraph" [paragraph]="paragraph" [isMultipleParagraph]="true" [isBelongToPracticalCard]="false">
       </app-paragraph>
     </span>
   </div>

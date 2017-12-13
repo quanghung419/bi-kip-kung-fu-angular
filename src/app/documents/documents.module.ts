@@ -30,16 +30,20 @@ import {DocService} from './doc/doc.service';
 import {ToolbarComponent} from './doc/toolbar/toolbar.component';
 import {ListCardsService} from './doc/list-cards/list-cards.service';
 import {CardsMap} from './doc/list-cards/map-card.model';
-import { MainTranscriptService } from './doc/main-transcript/main-transcript.service';
-import { ContentAnalysisService } from './doc/content-analysis.service';
-import { WritingPracticeDialogComponent } from './doc/writing-practice-dialog/writing-practice-dialog.component';
-import { WritingPracticeDialogService } from './doc/writing-practice-dialog/writing-practice-dialog.service';
-import { PracticalCardComponent } from './doc/practical-card/practical-card.component';
+import {MainTranscriptService} from './doc/main-transcript/main-transcript.service';
+import {ContentAnalysisService} from './doc/content-analysis.service';
+import {WritingPracticeDialogComponent} from './doc/writing-practice-dialog/writing-practice-dialog.component';
+import {WritingPracticeDialogService} from './doc/writing-practice-dialog/writing-practice-dialog.service';
+import {PracticalCardComponent} from './doc/practical-card/practical-card.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { ToolbarService } from './doc/toolbar/toolbar.service';
 
 
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     FlexLayoutModule,
     DocumentsRoutingModule,
     NoopAnimationsModule,
@@ -79,7 +83,8 @@ import { PracticalCardComponent } from './doc/practical-card/practical-card.comp
     CardsMap,
     MainTranscriptService,
     ContentAnalysisService,
-    WritingPracticeDialogService
+    WritingPracticeDialogService,
+    ToolbarService
   ],
   entryComponents: [
     NewDocModalComponent,

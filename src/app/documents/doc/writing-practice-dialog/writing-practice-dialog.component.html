@@ -1,33 +1,40 @@
 <div class="slider-wrapper">
   <div class="wrap">
-    <button mat-button style="width: 20px; height: 120px;" fxLayout="row" fxLayoutAlign="center center" (click)="prevCard()" class="slider-btn">
-    <fa name="angle-left" size="5x" fxLayout="row" fxLayoutAlign="center center"></fa>
+    <button mat-button style="width: 20px; height: 120px;" fxLayout="row" fxLayoutAlign="center center"
+            (click)="prevCard()" class="slider-btn">
+      <fa name="angle-left" size="5x" fxLayout="row" fxLayoutAlign="center center"></fa>
     </button>
     <div class="slider">
       <input id="slide-1-trigger" type="radio" name="slides" [checked]="isChecked(1)" style="display: none;">
       <section class="slide slide-one">
         <div class="card-wrapper" [class.prev]="isPrev(1)" [class.next]="isNext(1)">
-          <app-practical-card [frontParagraph]="currFrontParagraph" [backParagraph]="currBackParagraph"></app-practical-card>
+          <app-practical-card [dialogConfig]="dialogConfig" [practicalCardModel]="firstPracticalCardData"
+                              [keyEventInfo]="keyEventInfo"
+                              [sliderNum]="1" (onCloseCard)="closeDialog()"></app-practical-card>
         </div>
       </section>
       <input id="slide-2-trigger" type="radio" name="slides" [checked]="isChecked(2)" style="display: none;">
       <section class="slide slide-two">
         <div class="card-wrapper" [class.prev]="isPrev(2)" [class.next]="isNext(2)">
-          <app-practical-card [frontParagraph]="currFrontParagraph" [backParagraph]="currBackParagraph"></app-practical-card>
+          <app-practical-card [dialogConfig]="dialogConfig" [practicalCardModel]="secondPracticalCardData"
+                              [keyEventInfo]="keyEventInfo"
+                              [sliderNum]="2" (onCloseCard)="closeDialog()"></app-practical-card>
         </div>
       </section>
       <input id="slide-3-trigger" type="radio" name="slides" [checked]="isChecked(3)" style="display: none;">
       <section class="slide slide-three">
         <div class="card-wrapper" [class.prev]="isPrev(3)" [class.next]="isNext(3)">
-          <app-practical-card [frontParagraph]="currFrontParagraph" [backParagraph]="currBackParagraph"></app-practical-card>
+          <app-practical-card [dialogConfig]="dialogConfig" [practicalCardModel]="thirdPracticalCardData"
+                              [keyEventInfo]="keyEventInfo"
+                              [sliderNum]="3" (onCloseCard)="closeDialog()"></app-practical-card>
         </div>
       </section>
     </div>
-    <button mat-button style="width: 20px; height: 120px;" fxLayout="row" fxLayoutAlign="center center" (click)="nextCard()" class="slider-btn">
-    <fa name="angle-right" size="5x" fxLayout="row" fxLayoutAlign="center center"></fa>
+    <button mat-button style="width: 20px; height: 120px;" fxLayout="row" fxLayoutAlign="center center"
+            (click)="nextCard()" class="slider-btn">
+      <fa name="angle-right" size="5x" fxLayout="row" fxLayoutAlign="center center"></fa>
     </button>
   </div>
-
 
 
   <!--<button mat-icon-button style="background-color: orange" fxLayout="row" fxLayoutAlign="center center">-->

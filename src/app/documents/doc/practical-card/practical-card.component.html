@@ -1,38 +1,38 @@
-<div class="practical-card flippable" [class.flipped]="flipped" [class.expanded]="isExpanded" (keydown)="slideActionDetect($event)">
-  <div class="front card-side">
+<div class="practical-card flippable" [class.flipped]="isFlipped" [class.expanded]="isExpanded">
+  <div class="front card-side" [class.expandable]="dialogConfig.cardEffect === cardEffectEnum.EXPAND">
     <header>
-      <button mat-icon-button (click)="expandCard()">
+      <button mat-icon-button (click)="expandCard()" *ngIf="dialogConfig.cardEffect === cardEffectEnum.EXPAND">
         <fa name="exchange"></fa>
       </button>
-      <button mat-icon-button (click)="flipCard()">
+      <button mat-icon-button (click)="flipCard()" *ngIf="dialogConfig.cardEffect === cardEffectEnum.FLIP">
         <fa name="circle-o-notch"></fa>
       </button>
-      <button mat-icon-button>
+      <button mat-icon-button (click)="closeCard()">
         <fa name="window-close-o"></fa>
       </button>
     </header>
     <div class="card-content">
       <span class="clone-val">
-        <app-paragraph [paragraph]="frontParagraph"></app-paragraph>
+        <app-paragraph [paragraph]="practicalCardModel.frontParagraph" [isBelongToPracticalCard]="true"></app-paragraph>
       </span>
     </div>
   </div>
   <div class="gap"></div>
-  <div class="back card-side" [class.rotateX180]="isRorateBackSide">
+  <div class="back card-side" [class.rotateX180]="isRorateBackSide" [class.expandable]="dialogConfig.cardEffect === cardEffectEnum.EXPAND">
     <header>
-      <button mat-icon-button (click)="expandCard()">
+      <button mat-icon-button (click)="expandCard()" *ngIf="dialogConfig.cardEffect === cardEffectEnum.EXPAND">
         <fa name="exchange"></fa>
       </button>
-      <button mat-icon-button (click)="flipCard()">
+      <button mat-icon-button (click)="flipCard()" *ngIf="dialogConfig.cardEffect === cardEffectEnum.FLIP">
         <fa name="circle-o-notch"></fa>
       </button>
-      <button mat-icon-button>
+      <button mat-icon-button (click)="closeCard()">
         <fa name="window-close-o"></fa>
       </button>
     </header>
     <div class="card-content">
       <span class="clone-val">
-        <app-paragraph [paragraph]="backParagraph"></app-paragraph>
+        <app-paragraph [paragraph]="practicalCardModel.backParagraph" [isBelongToPracticalCard]="true"></app-paragraph>
       </span>
     </div>
   </div>

@@ -6,14 +6,18 @@
           <g>
             <g>
               <g>
-                <path d="M30.276,1.722C29.168,0.611,27.69,0,26.121,0s-3.045,0.61-4.154,1.72L4.294,19.291c-0.105,0.104-0.185,0.229-0.235,0.367     l-4,11c-0.129,0.355-0.046,0.756,0.215,1.031C0.466,31.891,0.729,32,1,32c0.098,0,0.196-0.014,0.293-0.044l9.949-3.052     c0.156-0.047,0.298-0.133,0.414-0.248l18.621-18.621C31.389,8.926,32,7.448,32,5.878C31.999,4.309,31.389,2.832,30.276,1.722z      M10.092,27.165l-3.724,1.144c-0.217-0.637-0.555-1.201-1.016-1.662c-0.401-0.399-0.866-0.709-1.356-0.961L5.7,21H8v2     c0,0.553,0.447,1,1,1h1.765L10.092,27.165z M24.812,12.671L12.628,24.855l0.35-1.647c0.062-0.296-0.012-0.603-0.202-0.837     C12.586,22.136,12.301,22,12,22h-2v-2c0-0.552-0.448-1-1-1H7.422L19.315,7.175l0.012,0.011c0.732-0.733,1.707-1.136,2.742-1.136     s2.011,0.403,2.742,1.136s1.138,1.707,1.138,2.743C25.949,10.965,25.546,11.938,24.812,12.671z M28.862,8.621L27.93,9.554     c-0.09-1.429-0.683-2.761-1.703-3.782c-1.021-1.022-2.354-1.614-3.787-1.703l0.938-0.931l0.002-0.002     C24.11,2.403,25.085,2,26.121,2s2.01,0.403,2.741,1.136C29.596,3.869,30,4.843,30,5.878C30,6.915,29.598,7.889,28.862,8.621z      M22.293,8.293l-10,10c-0.391,0.391-0.391,1.023,0,1.414C12.487,19.902,12.744,20,13,20s0.511-0.098,0.707-0.293l10-10     c0.391-0.391,0.391-1.023,0-1.414C23.315,7.902,22.684,7.902,22.293,8.293z" fill="#d5d9e0"/>
+                <path
+                  d="M30.276,1.722C29.168,0.611,27.69,0,26.121,0s-3.045,0.61-4.154,1.72L4.294,19.291c-0.105,0.104-0.185,0.229-0.235,0.367     l-4,11c-0.129,0.355-0.046,0.756,0.215,1.031C0.466,31.891,0.729,32,1,32c0.098,0,0.196-0.014,0.293-0.044l9.949-3.052     c0.156-0.047,0.298-0.133,0.414-0.248l18.621-18.621C31.389,8.926,32,7.448,32,5.878C31.999,4.309,31.389,2.832,30.276,1.722z      M10.092,27.165l-3.724,1.144c-0.217-0.637-0.555-1.201-1.016-1.662c-0.401-0.399-0.866-0.709-1.356-0.961L5.7,21H8v2     c0,0.553,0.447,1,1,1h1.765L10.092,27.165z M24.812,12.671L12.628,24.855l0.35-1.647c0.062-0.296-0.012-0.603-0.202-0.837     C12.586,22.136,12.301,22,12,22h-2v-2c0-0.552-0.448-1-1-1H7.422L19.315,7.175l0.012,0.011c0.732-0.733,1.707-1.136,2.742-1.136     s2.011,0.403,2.742,1.136s1.138,1.707,1.138,2.743C25.949,10.965,25.546,11.938,24.812,12.671z M28.862,8.621L27.93,9.554     c-0.09-1.429-0.683-2.761-1.703-3.782c-1.021-1.022-2.354-1.614-3.787-1.703l0.938-0.931l0.002-0.002     C24.11,2.403,25.085,2,26.121,2s2.01,0.403,2.741,1.136C29.596,3.869,30,4.843,30,5.878C30,6.915,29.598,7.889,28.862,8.621z      M22.293,8.293l-10,10c-0.391,0.391-0.391,1.023,0,1.414C12.487,19.902,12.744,20,13,20s0.511-0.098,0.707-0.293l10-10     c0.391-0.391,0.391-1.023,0-1.414C23.315,7.902,22.684,7.902,22.293,8.293z"
+                  fill="#d5d9e0"/>
               </g>
             </g>
           </g>
         </svg>
       </div>
     </div>
-    <div class="toolbar-menu-block toolbar-nowrap"><div class="toolbar-tool-item">Edit main transcript</div></div>
+    <div class="toolbar-menu-block toolbar-nowrap">
+      <div class="toolbar-tool-item">Edit main transcript</div>
+    </div>
   </div>
   <div class="toolbar-item" *ngIf="isMainInEditingMode" (click)="saveMainTrascript()">
     <div class="toolbar-action" fxLayout="row" fxLayoutAlign="center center">
@@ -22,14 +26,18 @@
           <g>
             <g>
               <g>
-                <path d="M363.375,191.25c10.557,0,19.125-8.568,19.125-19.125v-76.5c0-10.557-8.568-19.125-19.125-19.125     s-19.125,8.568-19.125,19.125v76.5C344.25,182.682,352.818,191.25,363.375,191.25z M535.5,0h-459C34.253,0,0,34.253,0,76.5v459     C0,577.747,34.253,612,76.5,612h459c42.247,0,76.5-34.253,76.5-76.5v-459C612,34.253,577.747,0,535.5,0z M153,38.25h306v172.125     c0,10.557-8.568,19.125-19.125,19.125h-267.75c-10.557,0-19.125-8.568-19.125-19.125V38.25z M573.75,535.5     c0,21.133-17.117,38.25-38.25,38.25h-459c-21.133,0-38.25-17.117-38.25-38.25v-459c0-21.133,17.117-38.25,38.25-38.25h38.25     V229.5c0,21.114,17.117,38.25,38.25,38.25h306c21.133,0,38.25-17.136,38.25-38.25V38.25h38.25c21.133,0,38.25,17.136,38.25,38.25     V535.5z" fill="#d5d9e0"/>
+                <path
+                  d="M363.375,191.25c10.557,0,19.125-8.568,19.125-19.125v-76.5c0-10.557-8.568-19.125-19.125-19.125     s-19.125,8.568-19.125,19.125v76.5C344.25,182.682,352.818,191.25,363.375,191.25z M535.5,0h-459C34.253,0,0,34.253,0,76.5v459     C0,577.747,34.253,612,76.5,612h459c42.247,0,76.5-34.253,76.5-76.5v-459C612,34.253,577.747,0,535.5,0z M153,38.25h306v172.125     c0,10.557-8.568,19.125-19.125,19.125h-267.75c-10.557,0-19.125-8.568-19.125-19.125V38.25z M573.75,535.5     c0,21.133-17.117,38.25-38.25,38.25h-459c-21.133,0-38.25-17.117-38.25-38.25v-459c0-21.133,17.117-38.25,38.25-38.25h38.25     V229.5c0,21.114,17.117,38.25,38.25,38.25h306c21.133,0,38.25-17.136,38.25-38.25V38.25h38.25c21.133,0,38.25,17.136,38.25,38.25     V535.5z"
+                  fill="#d5d9e0"/>
               </g>
             </g>
           </g>
-          </svg>
+        </svg>
       </div>
     </div>
-    <div class="toolbar-menu-block toolbar-nowrap"><div class="toolbar-tool-item">Save main transcript</div></div>
+    <div class="toolbar-menu-block toolbar-nowrap">
+      <div class="toolbar-tool-item">Save main transcript</div>
+    </div>
   </div>
   <div class="toolbar-separator"></div>
   <div class="toolbar-item">
@@ -37,41 +45,54 @@
       <div class="icon -size-24">
         <svg x="0px" y="0px" viewBox="0 0 57.101 57.101" width="512px" height="512px">
           <g>
-            <path d="M57.101,11.946L45.154,0l-5.266,5.267L37.782,3.16l-5.266,5.266l16.16,16.16l5.266-5.266l-2.107-2.106L57.101,11.946z" fill="#d5d9e0"/>
-            <path d="M29.702,32.305c1.352-1.353,1.352-3.553,0-4.905c-0.655-0.655-1.526-1.016-2.453-1.016s-1.797,0.36-2.453,1.016   c-1.352,1.353-1.352,3.553,0,4.905C26.107,33.615,28.391,33.615,29.702,32.305z" fill="#d5d9e0"/>
-            <path d="M40.843,36.172c0-2.421,0.943-4.696,2.654-6.408L47.261,26L31.102,9.84l-3.763,3.763c-1.712,1.712-3.988,2.654-6.408,2.654   c-2.421,0-4.697-0.942-6.409-2.654L9.797,8.879L0,55.687l22.745-22.745c-0.623-0.904-0.964-1.97-0.964-3.09   c0-1.461,0.569-2.834,1.602-3.867c1.033-1.033,2.406-1.602,3.867-1.602s2.834,0.568,3.867,1.602   c1.033,1.033,1.602,2.406,1.602,3.867c0,1.46-0.569,2.833-1.602,3.866c-1.033,1.033-2.406,1.602-3.867,1.602   c-1.121,0-2.187-0.341-3.091-0.964L1.414,57.101l46.808-9.798l-4.724-4.724C41.786,40.868,40.843,38.593,40.843,36.172z" fill="#d5d9e0"/>
+            <path
+              d="M57.101,11.946L45.154,0l-5.266,5.267L37.782,3.16l-5.266,5.266l16.16,16.16l5.266-5.266l-2.107-2.106L57.101,11.946z"
+              fill="#d5d9e0"/>
+            <path
+              d="M29.702,32.305c1.352-1.353,1.352-3.553,0-4.905c-0.655-0.655-1.526-1.016-2.453-1.016s-1.797,0.36-2.453,1.016   c-1.352,1.353-1.352,3.553,0,4.905C26.107,33.615,28.391,33.615,29.702,32.305z"
+              fill="#d5d9e0"/>
+            <path
+              d="M40.843,36.172c0-2.421,0.943-4.696,2.654-6.408L47.261,26L31.102,9.84l-3.763,3.763c-1.712,1.712-3.988,2.654-6.408,2.654   c-2.421,0-4.697-0.942-6.409-2.654L9.797,8.879L0,55.687l22.745-22.745c-0.623-0.904-0.964-1.97-0.964-3.09   c0-1.461,0.569-2.834,1.602-3.867c1.033-1.033,2.406-1.602,3.867-1.602s2.834,0.568,3.867,1.602   c1.033,1.033,1.602,2.406,1.602,3.867c0,1.46-0.569,2.833-1.602,3.866c-1.033,1.033-2.406,1.602-3.867,1.602   c-1.121,0-2.187-0.341-3.091-0.964L1.414,57.101l46.808-9.798l-4.724-4.724C41.786,40.868,40.843,38.593,40.843,36.172z"
+              fill="#d5d9e0"/>
           </g>
-          </svg>
+        </svg>
       </div>
     </div>
     <div class="toolbar-menu-block toolbar-nowrap">
       <div class="toolbar-title" (click)="showDialogWritingPractice()">Start Writing Practice</div>
       <div class="menu-block-separator"></div>
       <div class="inner-menu">
-        <div class="menu-genre-item">
-          <div class="title">Card's front side</div>
-          <div class="switch-wrapper">
-            <div class="switch switch-blue">
-              <input type="radio" class="switch-input frontLang" name="frontLang" value="EN" id="frontLangEn" checked="true">
-              <label for="frontLangEn" class="switch-label switch-label-off">EN</label>
-              <input type="radio" class="switch-input frontLang" name="frontLang" value="VN" id="frontLangVn">
-              <label for="frontLangVn" class="switch-label switch-label-on">VN</label>
-              <span class="switch-selection"></span>
+        <form #configForm="ngForm">
+          <div class="menu-genre-item">
+            <div class="title">Card's front side</div>
+            <div class="switch-wrapper">
+              <div class="switch switch-blue">
+                <input type="radio" class="switch-input frontLang" name="frontLang" value="EN" id="frontLangEn"
+                       [(ngModel)]="toolbarService.writingPracticeConfig.frontSide"
+                       checked="true">
+                <label for="frontLangEn" class="switch-label switch-label-off">EN</label>
+                <input type="radio" class="switch-input frontLang" name="frontLang" value="VI" id="frontLangVn"
+                       [(ngModel)]="toolbarService.writingPracticeConfig.frontSide">
+                <label for="frontLangVn" class="switch-label switch-label-on">VI</label>
+                <span class="switch-selection"></span>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="menu-genre-item">
-          <div class="title">Card's action</div>
-          <div class="switch-wrapper">
-            <div class="switch switch-blue">
-              <input type="radio" class="switch-input cardAction" name="cardAction" value="FLIP" id="action-flip" checked="true">
-              <label for="action-flip" class="switch-label switch-label-off">Flip</label>
-              <input type="radio" class="switch-input cardAction" name="cardAction" value="EXPAND" id="action-expand">
-              <label for="action-expand" class="switch-label switch-label-on">Expand</label>
-              <span class="switch-selection"></span>
+          <div class="menu-genre-item">
+            <div class="title">Card's action</div>
+            <div class="switch-wrapper">
+              <div class="switch switch-blue">
+                <input type="radio" class="switch-input cardAction" name="cardEffect" value="FLIP" id="action-flip"
+                       checked="true" [(ngModel)]="toolbarService.writingPracticeConfig.cardEffect">
+                <label for="action-flip" class="switch-label switch-label-off">Flip</label>
+                <input type="radio" class="switch-input cardAction" name="cardEffect" value="EXPAND" id="action-expand"
+                       [(ngModel)]="toolbarService.writingPracticeConfig.cardEffect">
+                <label for="action-expand" class="switch-label switch-label-on">Expand</label>
+                <span class="switch-selection"></span>
+              </div>
             </div>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   </div>

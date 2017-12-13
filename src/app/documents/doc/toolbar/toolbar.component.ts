@@ -1,14 +1,21 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {
+  CARD_EFFECT, CARD_SIDE,
+  WritingPracticeDialogConfigModel
+} from '../writing-practice-dialog/writing-practice-dialog-config.model';
+import {ToolbarService} from "./toolbar.service";
 
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.css']
 })
-export class ToolbarComponent implements OnInit {
+export class ToolbarComponent implements OnInit, OnChanges {
   @Input() isMainInEditingMode: boolean;
+  // writingPracticeConfig: WritingPracticeDialogConfigModel;
 
-  constructor() {
+  constructor(public toolbarService: ToolbarService) {
+    this.toolbarService.writingPracticeConfig = new WritingPracticeDialogConfigModel(CARD_SIDE.ENGLISH, CARD_EFFECT.FLIP);
   }
 
   private _onStartWritingPractice: EventEmitter<any> = new EventEmitter();
@@ -32,6 +39,19 @@ export class ToolbarComponent implements OnInit {
     return this._onSaveMainTranscript;
   }
 
+  get diagnostic() {
+    return JSON.stringify(this.toolbarService.writingPracticeConfig);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    for (const propName in changes) {
+      const chng = changes[propName];
+      const cur = JSON.stringify(chng.currentValue);
+      const prev = JSON.stringify(chng.previousValue);
+      console.log(`${propName}: currentValue = ${cur}, previousValue = ${prev}`);
+    }
+  }
+
   ngOnInit() {
   }
 
@@ -44,10 +64,6 @@ export class ToolbarComponent implements OnInit {
   }
 
   showDialogWritingPractice() {
-    const config = {
-      'defaultSide': 'front',
-      'effect': 'flip'
-    };
-    this._onStartWritingPractice.emit(config);
+    this._onStartWritingPractice.emit(this.toolbarService.writingPracticeConfig);
   }
 }

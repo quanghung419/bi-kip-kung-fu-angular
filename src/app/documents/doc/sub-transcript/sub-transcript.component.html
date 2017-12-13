@@ -5,11 +5,11 @@
     <span class="clone-val">
       <!--<app-paragraph *ngFor="let paragraph of transcript.lstPhragraph" [paragraph]="paragraph"> trans-show-->
       <!--</app-paragraph>-->
-      <app-paragraph [paragraph]="paragraph">
-      </app-paragraph>
+      <app-paragraph [paragraph]="paragraph" [isBelongToPracticalCard]="false"></app-paragraph>
     </span>
   </div>
-  <div class="editable-content identical" *ngIf="isEditingMode" [class.trans-show]="isEditingMode" [class.trans-hidden]="!isEditingMode">
+  <div class="editable-content identical" *ngIf="isEditingMode" [class.trans-show]="isEditingMode"
+       [class.trans-hidden]="!isEditingMode">
     <mat-form-field>
       <!--trans-hidden-->
       <textarea *ngIf="isEditingMode" class="identical" matInput matTextareaAutosize (input)="changeContent($event)">{{paragraph.rawParagraph}}</textarea>

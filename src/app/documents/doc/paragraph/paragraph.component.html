@@ -1,9 +1,9 @@
-<div>
+<div class="paragraph-wrapper">
   <p [attr.index]="paragraph.order">
     <!--<span>-->
     <app-sen *ngFor="let sentence of paragraph.lstSentences" [sentence]="sentence" [attr.index]="sentence.order"
        (click)='clicked(sentence)'
-       [class.selected]="isSelected(sentence)" (mouseup)="onRightClick($event)"></app-sen>
+       [class.selected]="isSelected(sentence)" (mouseup)="onRightClick($event)" [isBelongToPracticalCard]="isBelongToPracticalCard"></app-sen>
     <!--paragraph-->
 
     <!--</span>-->
