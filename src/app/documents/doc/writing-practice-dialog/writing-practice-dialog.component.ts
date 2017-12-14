@@ -14,21 +14,22 @@ import {SentenceService} from '../sentence/sentence.service';
 })
 export class WritingPracticeDialogComponent implements OnInit {
 
-  frontTranscript: TranscriptModel;
-  backTranscript: TranscriptModel;
+  private frontTranscript: TranscriptModel;
+  private backTranscript: TranscriptModel;
 
-  firstPracticalCardData: PracticalCardModel;
-  secondPracticalCardData: PracticalCardModel;
-  thirdPracticalCardData: PracticalCardModel;
+  private firstPracticalCardData: PracticalCardModel;
+  private secondPracticalCardData: PracticalCardModel;
+  private thirdPracticalCardData: PracticalCardModel;
 
-  dialogConfig: any;
+  private keyEventInfo: any;
+  private dialogConfig: any;
 
-  keyEventInfo: any;
-  currParagraphId: number;
-  currSentenceId: number;
+  private maxParagraph: number;
+  private currParagraphId: number;
 
-  maxSentence: number;
-  maxParagraph: number;
+  private maxSentence: number;
+  private currSentenceId: number;
+
   private currentSlideIndex: number;
 
   constructor(public dialogRef: MatDialogRef<WritingPracticeDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
@@ -63,7 +64,28 @@ export class WritingPracticeDialogComponent implements OnInit {
       this.firstPracticalCardData.frontParagraph.lstSentences.length : this.firstPracticalCardData.backParagraph.lstSentences.length;
   }
 
+  isTheEndCard(cardId: number): boolean {
+    return cardId === -1 || cardId === this.maxParagraph;
+  }
+
   setCurrData() {
+    if (this.isTheEndCard(this.currParagraphId)) {
+      this.resetSelectedSentence();
+      this.currSentenceId = -1;
+      switch (this.currentSlideIndex) {
+        case 1:
+          this.firstPracticalCardData = null;
+          break;
+        case 2:
+          this.secondPracticalCardData = null;
+          break;
+        case 3:
+          this.thirdPracticalCardData = null;
+          break;
+      }
+      return;
+    }
+
     const tempData = this.createDataOfPracticalCard(this.currParagraphId);
     this.maxSentence = tempData.backParagraph.lstSentences.length < tempData.frontParagraph.lstSentences.length ?
       tempData.frontParagraph.lstSentences.length : tempData.backParagraph.lstSentences.length;
@@ -106,7 +128,6 @@ export class WritingPracticeDialogComponent implements OnInit {
     }
     return null;
   }
-
 
   ngOnInit() {
     this.keyEventInfo = null;
@@ -181,9 +202,9 @@ export class WritingPracticeDialogComponent implements OnInit {
       this.currentSlideIndex = 3;
     }
     // Re-Index Paragraph
-    if (this.currParagraphId > 1) {
+    if (this.currParagraphId >= 0) {
       this.currParagraphId--;
-    } else {
+    } else if (this.currParagraphId === -1) {
       this.currParagraphId = this.maxParagraph - 1;
     }
     this.setCurrData();
@@ -197,10 +218,10 @@ export class WritingPracticeDialogComponent implements OnInit {
       this.currentSlideIndex = 1;
     }
     // Re-Index Paragraph
-    if (this.currParagraphId < this.maxParagraph - 1) {
+    if (this.currParagraphId < this.maxParagraph) {
       this.currParagraphId++;
-    } else {
-      this.currParagraphId = 1;
+    } else if (this.currParagraphId === this.maxParagraph) {
+      this.currParagraphId = 0;
     }
     this.setCurrData();
   }

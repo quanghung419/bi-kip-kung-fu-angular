@@ -1,7 +1,8 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {PracticalCardModel} from './practical-card.model';
 import {CARD_EFFECT} from '../writing-practice-dialog/writing-practice-dialog-config.model';
 import {KEY_CODE} from '../../../_shared/constants/key-code.enum';
+import {TrianglifyService} from '../../../_shared/service/trianglify.service';
 
 
 @Component({
@@ -21,12 +22,11 @@ export class PracticalCardComponent implements OnInit, OnChanges {
   isFlipped: boolean;
   isRorateBackSide: boolean;
   isExpanded: boolean;
-  // isOpen: boolean;
+  trianglifyBackground: any;
 
-  constructor() {
+  constructor(private elementRef: ElementRef, private trianglifyService: TrianglifyService) {
     this.isFlipped = false;
     this.isExpanded = false;
-    // this.isOpen = false;
   }
 
   ngOnInit() {
@@ -35,6 +35,9 @@ export class PracticalCardComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     const changePracticalCardModel = changes['practicalCardModel'];
     if (changePracticalCardModel) {
+      if (changePracticalCardModel.currentValue === null) {
+        this.trianglifyBackground = this.generateTrianglifyBackground();
+      }
       this.resetStatus();
     }
 
@@ -87,6 +90,12 @@ export class PracticalCardComponent implements OnInit, OnChanges {
 
   closeCard() {
     this.onCloseCard.emit();
+  }
+
+  generateTrianglifyBackground() {
+    const width = this.elementRef.nativeElement.children[0].offsetWidth;
+    const height = this.elementRef.nativeElement.children[0].offsetHeight;
+    return this.trianglifyService.generateTrianglifyBackgroundURL(width, height);
   }
 
 }

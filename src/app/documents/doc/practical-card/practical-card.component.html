@@ -1,4 +1,5 @@
-<div class="practical-card flippable" [class.flipped]="isFlipped" [class.expanded]="isExpanded">
+<div *ngIf="practicalCardModel" class="practical-card flippable" [class.flipped]="isFlipped"
+     [class.expanded]="isExpanded">
   <div class="front card-side" [class.expandable]="dialogConfig.cardEffect === cardEffectEnum.EXPAND">
     <header>
       <button mat-icon-button (click)="expandCard()" *ngIf="dialogConfig.cardEffect === cardEffectEnum.EXPAND">
@@ -18,7 +19,8 @@
     </div>
   </div>
   <div class="gap"></div>
-  <div class="back card-side" [class.rotateX180]="isRorateBackSide" [class.expandable]="dialogConfig.cardEffect === cardEffectEnum.EXPAND">
+  <div class="back card-side" [class.rotateX180]="isRorateBackSide"
+       [class.expandable]="dialogConfig.cardEffect === cardEffectEnum.EXPAND">
     <header>
       <button mat-icon-button (click)="expandCard()" *ngIf="dialogConfig.cardEffect === cardEffectEnum.EXPAND">
         <fa name="exchange"></fa>
@@ -37,3 +39,18 @@
     </div>
   </div>
 </div>
+
+<div *ngIf="!practicalCardModel" class="practical-card ending-card">
+  <div class="front card-side" [style.background-image]="trianglifyBackground">
+    <header>
+      <button mat-icon-button (click)="closeCard()">
+        <fa name="window-close-o"></fa>
+      </button>
+    </header>
+    <div class="card-content" fxLayout="row" fxLayoutAlign="center center">
+      <p class="ending-title">THE END.</p>
+    </div>
+  </div>
+</div>
+
+

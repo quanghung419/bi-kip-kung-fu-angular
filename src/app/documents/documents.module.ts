@@ -37,6 +37,7 @@ import {WritingPracticeDialogService} from './doc/writing-practice-dialog/writin
 import {PracticalCardComponent} from './doc/practical-card/practical-card.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ToolbarService } from './doc/toolbar/toolbar.service';
+import { TrianglifyService } from '../_shared/service/trianglify.service';
 
 
 @NgModule({
@@ -84,7 +85,8 @@ import { ToolbarService } from './doc/toolbar/toolbar.service';
     MainTranscriptService,
     ContentAnalysisService,
     WritingPracticeDialogService,
-    ToolbarService
+    ToolbarService,
+    TrianglifyService
   ],
   entryComponents: [
     NewDocModalComponent,
