@@ -8,6 +8,7 @@ import {ParagraphService} from './paragraph.service';
 import {MainPragraphElementModel} from './main-pragraph-element.model';
 import {CardService} from '../card/card.service';
 import {DocService} from '../doc.service';
+import {CardsMap} from "../list-cards/map-card.model";
 
 @Component({
   selector: 'app-paragraph',
@@ -20,10 +21,14 @@ export class ParagraphComponent implements OnInit {
   @Input() isBelongToPracticalCard: boolean;
 
   private currentSentence: SentenceModel;
+  private isMatchingWithCard: boolean;
+  private isShowButtonAddCard: boolean;
 
   constructor(private paragraphService: ParagraphService, private sentenceService: SentenceService,
-              private elRef: ElementRef, private cardService: CardService, private docService: DocService) {
+              private elRef: ElementRef, private cardService: CardService, private docService: DocService,
+              private cardsMap: CardsMap) {
     this.matchingSentence();
+    this.matchingMainParagraphByHoverCardTitle();
   }
 
   private _onSentenceSelected: EventEmitter<SentenceModel> = new EventEmitter();
@@ -63,6 +68,33 @@ export class ParagraphComponent implements OnInit {
   onRightClick($event) {
     if ($event.which === 3) {
       this.docService.onRightClickSentence($event, this.isMultipleParagraph, this.paragraph.order);
+    }
+  }
+
+  matchingMainParagraphByHoverCardTitle() {
+    this.cardService.onHoverCardTitle((cardId) => {
+      if (this.paragraph.order === cardId) {
+        this.isMatchingWithCard = true;
+      } else {
+        this.isMatchingWithCard = false;
+      }
+    });
+  }
+
+  showButtonAddCard($event) {
+    if (this.isMultipleParagraph && !this.cardsMap.getCardById(this.paragraph.order)) {
+      console.log('Show button add card', $event, this.elRef);
+      console.log('Relative position: ', $event.offsetX / this.elRef.nativeElement.children[0].offsetWidth);
+      if ($event.offsetX / this.elRef.nativeElement.children[0].offsetWidth >= 0.75) {
+        this.isShowButtonAddCard = true;
+      }
+    }
+  }
+
+  hiddenButtonAddCard($event) {
+    if (this.isMultipleParagraph) {
+      console.log('Hide button add card');
+      this.isShowButtonAddCard = false;
     }
   }
 

@@ -3,7 +3,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {TranscriptModel} from '../transcript.model';
 import {ParagraphModel} from '../paragraph/paragraph.model';
 import {PracticalCardModel} from '../practical-card/practical-card.model';
-import {CARD_SIDE} from './writing-practice-dialog-config.model';
+import {CARD_LANGUAGE} from './writing-practice-dialog-config.model';
 import {KEY_CODE} from '../../../_shared/constants/key-code.enum';
 import {SentenceService} from '../sentence/sentence.service';
 
@@ -42,7 +42,7 @@ export class WritingPracticeDialogComponent implements OnInit {
     this.currParagraphId = data.initParagraphId;
     this.dialogConfig = data.dialogConfig;
     this.currSentenceId = -1;
-    if (this.dialogConfig && this.dialogConfig.frontSide === CARD_SIDE.VIETNAMESE) {
+    if (this.dialogConfig && this.dialogConfig.frontSide === CARD_LANGUAGE.VIETNAMESE) {
       this.frontTranscript = data.subTranscript;
       this.backTranscript = data.mainTranscript;
     } else {

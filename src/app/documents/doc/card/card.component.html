@@ -1,9 +1,11 @@
-<div class="card" [class.card-expanded]="isSelectedCard" [class.card-draft]="isDraftCard()" [style.transform]="'translateY('+cardModel.position+'px)'">
+<div class="card" [class.card-expanded]="isSelectedCard" [class.card-draft]="isDraftCard()"
+     [style.transform]="'translateY('+cardModel.position+'px)'">
   <div class="card-inner">
     <div class="card-header unable-select" fxLayout="row">
       <div class="draft-icon"></div>
       <div class="card-title">
-        <p class="truncate">{{ paragraph.rawParagraph }}</p>
+        <p class="truncate" (mouseover)="mappingMainParagraph($event)"
+           (mouseout)="mappingMainParagraph($event)">{{paragraph.rawParagraph}}</p>
       </div>
       <div class="card-actions" fxLayout="row" fxLayoutAlign="end center">
         <button matTooltip="Edit card content" matTooltipPosition="above"
@@ -20,17 +22,19 @@
           <fa name="chevron-down" size="1x"></fa>
         </button>
         <button matTooltip="Delete this card" matTooltipPosition="above"
-                mat-icon-button class="card-header-button">
+                mat-icon-button class="card-header-button" (click)="deleteCard()">
           <fa name="times" size="1x"></fa>
         </button>
       </div>
     </div>
     <div class="card-body">
       <div class="card-content">
-        <app-sub-transcript [paragraph]="paragraph" [isEditingMode]="isEditingMode" (onChangeContent)="onChangeContent($event)"></app-sub-transcript>
+        <app-sub-transcript [paragraph]="paragraph" [isEditingMode]="isEditingMode"
+                            (onChangeContent)="onChangeContent($event)"></app-sub-transcript>
       </div>
       <div class="card-footer unable-select" fxLayout="row" fxLayoutAlign=" center">
-        <div class="card-content-actions" fxLayout="row" fxLayoutAlign="start center" [class.visible]="isEditingMode" [class.invisible]="!isEditingMode">
+        <div class="card-content-actions" fxLayout="row" fxLayoutAlign="start center" [class.visible]="isEditingMode"
+             [class.invisible]="!isEditingMode">
           <span class="btn-content-action" role="button" [class.hidden]="this.oldContent?.length > 0">Add</span>
           <span class="btn-content-action" role="button" (click)="saveChange()">Save</span>
           <span class="seperate-dot">&nbsp;•&nbsp;</span>
@@ -51,7 +55,6 @@
     </div>
   </div>
 </div>
-
 
 
 <!--<div>-->

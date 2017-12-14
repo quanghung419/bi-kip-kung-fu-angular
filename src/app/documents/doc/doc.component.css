@@ -117,7 +117,9 @@
 .editor-wrapper {
   /* min-width: 283px; */
   /* max-width: 950px; */
-  width: 57%;
+  /*width: 57%;*/
+  width: 60%;
+  /*padding-right: 3%;*/
   height: 100vh;
    /*background-color: pink;*/
   /* width: 700px; */

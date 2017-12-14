@@ -1,4 +1,4 @@
-export enum CARD_SIDE {
+export enum CARD_LANGUAGE {
   ENGLISH = 'EN',
   VIETNAMESE = 'VI'
 }
@@ -9,6 +9,6 @@ export enum CARD_EFFECT {
 }
 
 export class WritingPracticeDialogConfigModel {
-  constructor(public frontSide: CARD_SIDE, public cardEffect: CARD_EFFECT) {
+  constructor(public frontSide: CARD_LANGUAGE, public cardEffect: CARD_EFFECT) {
   }
 }

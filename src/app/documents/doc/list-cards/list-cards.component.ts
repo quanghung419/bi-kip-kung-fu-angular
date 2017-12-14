@@ -17,8 +17,10 @@ export class ListCardsComponent implements OnInit {
   @Input() transcript: TranscriptModel;
   // @ViewChildren(CardComponent) cards: QueryList<CardComponent>;
 
-
   lstPhragraph: Array<ParagraphModel>;
+
+  currSelectdCard: any;
+
   // mapCards: object;
   private currentParagraph: ParagraphModel;
 
@@ -75,71 +77,147 @@ export class ListCardsComponent implements OnInit {
 
     // Change position of other card (Not selected card)
     this.cardService.expandedSubject.subscribe((selectdCard: any) => {
-      this.lstPhragraph.forEach((paragraph) => {
-        // const cardModel: CardModel = this.cardsMap[paragraph.order];
-        const cardModel: CardModel = this.cardsMap.getCardById(paragraph.order);
+      this.currSelectdCard = selectdCard;
+      this.rearrangeCard(selectdCard);
+      // this.lstPhragraph.forEach((paragraph) => {
+      //   // const cardModel: CardModel = this.cardsMap[paragraph.order];
+      //   const cardModel: CardModel = this.cardsMap.getCardById(paragraph.order);
+      //   cardModel.position = cardModel.initPosition;
+      // });
+      // this.rearrangeCardToInitPosition();
+      //
+      // // In case fold up a card
+      // if (selectdCard.selectedCardId === -1) {
+      //   return;
+      // }
+      //
+      // const startIndex = selectdCard.selectedCardId;
+      // for (let i = startIndex; i > 0; i--) {
+      //   // const cardAbove: CardModel = this.cardsMap[i - 1];
+      //   const cardAbove: CardModel = this.cardsMap.getCardById(i - 1);
+      //   // const cardBelow: CardModel = this.cardsMap[i];
+      //   const cardBelow: CardModel = this.cardsMap.getCardById(i);
+      //
+      //   // const cardComponent: CardComponent = this.getCardComponentById(cardAbove.order);
+      //   // console.log('Card ABOVE height: ', cardComponent.currentHeight);
+      //
+      //   const bottomCardAbove = cardAbove.initPosition + 44;
+      //   // const bottomCardAbove = cardAbove.initPosition + cardAbove.currentHeight;
+      //   const gapValue = bottomCardAbove - cardBelow.initPosition + 44 + 30;
+      //   if (gapValue > 0) {
+      //     const abovePhragraph = this.lstPhragraph[i - 1];
+      //     // const cardModel: CardModel = this.cardsMap[abovePhragraph.order];
+      //     const cardModel: CardModel = this.cardsMap.getCardById(abovePhragraph.order);
+      //     cardModel.position = cardModel.initPosition;
+      //     cardModel.position -= gapValue;
+      //     console.log('Change position of ABOVE card: ', abovePhragraph.order, ' ,initPosition: ',
+      //       cardModel.initPosition, ' ,newPosition: ', cardModel.position);
+      //   } else {
+      //     break;
+      //   }
+      // }
+      //
+      // const startIndexNext = selectdCard.selectedCardId;
+      // for (let i = startIndexNext; i < this.lstPhragraph.length - 1; i++) {
+      //   // const cardAbove: CardModel = this.cardsMap[i];
+      //   const cardAbove: CardModel = this.cardsMap.getCardById(i);
+      //   // const cardBelow: CardModel = this.cardsMap[i + 1];
+      //   const cardBelow: CardModel = this.cardsMap.getCardById(i + 1);
+      //
+      //   let bottomCardAbove: number;
+      //   if (i === startIndexNext) {
+      //     bottomCardAbove = cardAbove.initPosition + selectdCard.expandedHeight;
+      //   } else {
+      //     bottomCardAbove = cardAbove.initPosition + 44;
+      //   }
+      //
+      //   const gapValue = bottomCardAbove - cardBelow.initPosition - 44 + 30;
+      //   if (gapValue > 0) {
+      //     const belowPhragraph = this.lstPhragraph[i + 1];
+      //     // const cardModel: CardModel = this.cardsMap[belowPhragraph.order];
+      //     const cardModel: CardModel = this.cardsMap.getCardById(belowPhragraph.order);
+      //     cardModel.position = cardModel.initPosition;
+      //     cardModel.position += gapValue;
+      //     console.log('Change position of BELOW card: ', belowPhragraph.order, ' ,initPosition: ',
+      //       cardModel.initPosition, ' ,newPosition: ', cardModel.position);
+      //   } else {
+      //     break;
+      //   }
+      // }
+    });
+  }
+
+  rearrangeCardToInitPosition() {
+    this.lstPhragraph.forEach((paragraph) => {
+      // const cardModel: CardModel = this.cardsMap[paragraph.order];
+      const cardModel: CardModel = this.cardsMap.getCardById(paragraph.order);
+      if (cardModel) {
         cardModel.position = cardModel.initPosition;
-      });
-
-      // In case fold up a card
-      if (selectdCard.selectedCardId === -1) {
-        return;
-      }
-
-      const startIndex = selectdCard.selectedCardId;
-      for (let i = startIndex; i > 0; i--) {
-        // const cardAbove: CardModel = this.cardsMap[i - 1];
-        const cardAbove: CardModel = this.cardsMap.getCardById(i - 1);
-        // const cardBelow: CardModel = this.cardsMap[i];
-        const cardBelow: CardModel = this.cardsMap.getCardById(i);
-
-        // const cardComponent: CardComponent = this.getCardComponentById(cardAbove.order);
-        // console.log('Card ABOVE height: ', cardComponent.currentHeight);
-
-        const bottomCardAbove = cardAbove.initPosition + 44;
-        // const bottomCardAbove = cardAbove.initPosition + cardAbove.currentHeight;
-        const gapValue = bottomCardAbove - cardBelow.initPosition + 44 + 30;
-        if (gapValue > 0) {
-          const abovePhragraph = this.lstPhragraph[i - 1];
-          // const cardModel: CardModel = this.cardsMap[abovePhragraph.order];
-          const cardModel: CardModel = this.cardsMap.getCardById(abovePhragraph.order);
-          cardModel.position = cardModel.initPosition;
-          cardModel.position -= gapValue;
-          console.log('Change position of ABOVE card: ', abovePhragraph.order, ' ,initPosition: ',
-            cardModel.initPosition, ' ,newPosition: ', cardModel.position);
-        } else {
-          break;
-        }
-      }
-
-      const startIndexNext = selectdCard.selectedCardId;
-      for (let i = startIndexNext; i < this.lstPhragraph.length - 1; i++) {
-        // const cardAbove: CardModel = this.cardsMap[i];
-        const cardAbove: CardModel = this.cardsMap.getCardById(i);
-        // const cardBelow: CardModel = this.cardsMap[i + 1];
-        const cardBelow: CardModel = this.cardsMap.getCardById(i + 1);
-
-        let bottomCardAbove: number;
-        if (i === startIndexNext) {
-          bottomCardAbove = cardAbove.initPosition + selectdCard.expandedHeight;
-        } else {
-          bottomCardAbove = cardAbove.initPosition + 44;
-        }
-
-        const gapValue = bottomCardAbove - cardBelow.initPosition - 44 + 30;
-        if (gapValue > 0) {
-          const belowPhragraph = this.lstPhragraph[i + 1];
-          // const cardModel: CardModel = this.cardsMap[belowPhragraph.order];
-          const cardModel: CardModel = this.cardsMap.getCardById(belowPhragraph.order);
-          cardModel.position = cardModel.initPosition;
-          cardModel.position += gapValue;
-          console.log('Change position of BELOW card: ', belowPhragraph.order, ' ,initPosition: ',
-            cardModel.initPosition, ' ,newPosition: ', cardModel.position);
-        } else {
-          break;
-        }
       }
     });
+  }
+
+  rearrangeCard(selectdCard) {
+    this.rearrangeCardToInitPosition();
+
+    // In case fold up a card
+    if (selectdCard.selectedCardId === -1) {
+      return;
+    }
+
+    const startIndex = selectdCard.selectedCardId;
+    for (let i = startIndex; i > 0; i--) {
+      // const cardAbove: CardModel = this.cardsMap[i - 1];
+      const cardAbove: CardModel = this.cardsMap.getCardById(i - 1);
+      // const cardBelow: CardModel = this.cardsMap[i];
+      const cardBelow: CardModel = this.cardsMap.getCardById(i);
+
+      // const cardComponent: CardComponent = this.getCardComponentById(cardAbove.order);
+      // console.log('Card ABOVE height: ', cardComponent.currentHeight);
+
+      const bottomCardAbove = cardAbove.initPosition + 44;
+      // const bottomCardAbove = cardAbove.initPosition + cardAbove.currentHeight;
+      const gapValue = bottomCardAbove - cardBelow.initPosition + 44 + 30;
+      if (gapValue > 0) {
+        const abovePhragraph = this.lstPhragraph[i - 1];
+        // const cardModel: CardModel = this.cardsMap[abovePhragraph.order];
+        const cardModel: CardModel = this.cardsMap.getCardById(abovePhragraph.order);
+        cardModel.position = cardModel.initPosition;
+        cardModel.position -= gapValue;
+        console.log('Change position of ABOVE card: ', abovePhragraph.order, ' ,initPosition: ',
+          cardModel.initPosition, ' ,newPosition: ', cardModel.position);
+      } else {
+        break;
+      }
+    }
+
+    const startIndexNext = selectdCard.selectedCardId;
+    for (let i = startIndexNext; i < this.lstPhragraph.length - 1; i++) {
+      // const cardAbove: CardModel = this.cardsMap[i];
+      const cardAbove: CardModel = this.cardsMap.getCardById(i);
+      // const cardBelow: CardModel = this.cardsMap[i + 1];
+      const cardBelow: CardModel = this.cardsMap.getCardById(i + 1);
+
+      let bottomCardAbove: number;
+      if (i === startIndexNext) {
+        bottomCardAbove = cardAbove.initPosition + selectdCard.expandedHeight;
+      } else {
+        bottomCardAbove = cardAbove.initPosition + 44;
+      }
+
+      const gapValue = bottomCardAbove - cardBelow.initPosition - 44 + 30;
+      if (gapValue > 0) {
+        const belowPhragraph = this.lstPhragraph[i + 1];
+        // const cardModel: CardModel = this.cardsMap[belowPhragraph.order];
+        const cardModel: CardModel = this.cardsMap.getCardById(belowPhragraph.order);
+        cardModel.position = cardModel.initPosition;
+        cardModel.position += gapValue;
+        console.log('Change position of BELOW card: ', belowPhragraph.order, ' ,initPosition: ',
+          cardModel.initPosition, ' ,newPosition: ', cardModel.position);
+      } else {
+        break;
+      }
+    }
   }
 
   clicked(paragraph: ParagraphModel) {
@@ -203,6 +281,28 @@ export class ListCardsComponent implements OnInit {
 
     // console.log('Selected card: ', this.currentParagraph);
     console.log('Fold Up card: ', $event);
+  }
+
+  deleteCard(cardId) {
+    let lstParagraph: Array<ParagraphModel> = this.transcript.lstPhragraph;
+
+    console.log('Before delete: ', lstParagraph.length);
+
+    this.cardsMap.removeCardByKey(cardId);
+    lstParagraph = lstParagraph.filter((paragraph) => {
+      if (paragraph.order !== cardId) {
+        return paragraph;
+      }
+    });
+
+    console.log('After delete: ', lstParagraph.length);
+    this.transcript.lstPhragraph = lstParagraph;
+    // this.rearrangeCardToInitPosition();
+    if (!this.currSelectdCard || this.currSelectdCard.selectedCardId === cardId) {
+      this.rearrangeCardToInitPosition();
+    } else {
+      this.rearrangeCard(this.currSelectdCard);
+    }
   }
 
 }

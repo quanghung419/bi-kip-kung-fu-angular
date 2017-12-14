@@ -2,11 +2,13 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {TranscriptModel} from './transcript.model';
 import {TranscriptService} from './transcript.service';
-import {MatMenu, MatMenuTrigger} from "@angular/material";
-import {DocService} from "./doc.service";
-import {MainTranscriptService} from "./main-transcript/main-transcript.service";
-import {WritingPracticeDialogService} from "./writing-practice-dialog/writing-practice-dialog.service";
-import {ToolbarService} from "./toolbar/toolbar.service";
+import {MatMenu, MatMenuTrigger} from '@angular/material';
+import {DocService} from './doc.service';
+import {MainTranscriptService} from './main-transcript/main-transcript.service';
+import {WritingPracticeDialogService} from './writing-practice-dialog/writing-practice-dialog.service';
+import {ToolbarService} from './toolbar/toolbar.service';
+import {CardService} from './card/card.service';
+import {ParagraphModel} from "./paragraph/paragraph.model";
 
 @Component({
   selector: 'app-doc',
@@ -28,7 +30,8 @@ export class DocComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private transcriptService: TranscriptService,
               private docService: DocService, private mainTranscriptService: MainTranscriptService,
-              private writingPracticeDialogService: WritingPracticeDialogService, private toolbarService: ToolbarService) {
+              private writingPracticeDialogService: WritingPracticeDialogService, private toolbarService: ToolbarService,
+              private cardService: CardService) {
     route.params.subscribe(params => {
       this.docId = params['docId'];
     });
@@ -70,6 +73,8 @@ export class DocComponent implements OnInit {
       console.log('On Practice Specific Card: ' + cardId);
       this.writingPracticeDialogService.showDialog(this.enTranscript, this.vnTranscript, cardId, this.toolbarService.writingPracticeConfig);
     });
+
+    this.onDeleteCard();
   }
 
   getTranscript(): void {
@@ -137,6 +142,31 @@ export class DocComponent implements OnInit {
     // alert('Show dialog Writing Practice');
     this.writingPracticeDialogService.showDialog(this.enTranscript, this.vnTranscript, 0, config);
     // console.log('Show dialog WRITING PRACTICE: ', config);
+  }
+
+  onDeleteCard() {
+    this.cardService.onDeteleCard((cardId) => {
+      let lstParagraph: Array<ParagraphModel> = this.vnTranscript.lstPhragraph;
+
+      console.log('Before delete: ', lstParagraph.length);
+
+      lstParagraph = lstParagraph.filter((paragraph) => {
+        if (paragraph.order !== cardId) {
+          return paragraph;
+        }
+      });
+
+      console.log('After delete: ', lstParagraph.length);
+
+      this.vnTranscript.lstPhragraph = lstParagraph;
+      //
+      // for (const paragraph of ) {
+      //   if (paragraph && paragraph.order === cardId) {
+      //
+      //   }
+      // }
+
+    });
   }
 
 }

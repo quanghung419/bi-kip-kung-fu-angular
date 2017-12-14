@@ -15,26 +15,13 @@ export class SentenceComponent implements OnInit {
   color = 'red';
 
   constructor() {
-    // this._onRightClickSentence = new EventEmitter();
   }
 
-  // selected = '';
-
-  // get onRightClickSentence(): EventEmitter<SentenceModel> {
-  //   return this._onRightClickSentence;
-  // }
-
   ngOnInit() {
-    // console.log('sentence: ', this.sentence);
   }
 
   changeStyle($event): void {
     this.color = $event.type === 'mouseover' ? 'hover' : '';
   }
-
-  // markSelected($event): void {
-  //   this.selected = 'selected';
-  // }
-
 
 }

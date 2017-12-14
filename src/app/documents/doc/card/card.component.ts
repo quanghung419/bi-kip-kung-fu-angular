@@ -6,7 +6,11 @@ import {ParagraphModel} from '../paragraph/paragraph.model';
 import {CardService} from './card.service';
 import {CardModel} from './card.model';
 import {ContentAnalysisService} from '../content-analysis.service';
-import {WritingPracticeDialogService} from "../writing-practice-dialog/writing-practice-dialog.service";
+import {WritingPracticeDialogService} from '../writing-practice-dialog/writing-practice-dialog.service';
+
+export enum MOUSE_EVENT {
+  MOUSE_OVER = 'mouseover'
+}
 
 @Component({
   selector: 'app-card',
@@ -20,6 +24,9 @@ export class CardComponent implements OnChanges, OnInit {
   @Input() cardModel: CardModel;
   oldContent: string;
   isEditingMode: boolean;
+
+  @Output()
+  onDeleteCard: EventEmitter<number> = new EventEmitter();
 
   private rawContent: string;
 
@@ -146,6 +153,22 @@ export class CardComponent implements OnChanges, OnInit {
 
   slideShowThisCard() {
     this.writingPracticeDialogService.practiceCard(this.paragraph.order);
+  }
+
+  deleteCard() {
+    const result = confirm('Are you sure to delete this card?');
+    if (result) {
+      // this.cardService.deleteCard(this.paragraph.order);
+      this.onDeleteCard.emit(this.paragraph.order);
+    }
+  }
+
+  mappingMainParagraph(event) {
+    if (event.type === 'mouseover') {
+      this.cardService.hoverCardTitle(this.paragraph.order);
+    } else if (event.type === 'mouseout') {
+      this.cardService.hoverCardTitle(-1);
+    }
   }
 
 }

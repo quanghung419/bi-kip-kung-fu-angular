@@ -16,6 +16,10 @@ export class CardsMap {
     }
   }
 
+  public removeCardByKey(cardId: number) {
+    delete this.cardsMap[cardId];
+  }
+
   public getCardById(cardId: number): CardModel {
     return this.cardsMap[cardId];
   }

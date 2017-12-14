@@ -1,3 +1,4 @@
-<app-card *ngFor="let paragraph of transcript.lstPhragraph" [paragraph]="paragraph"
-          (click)='clicked(paragraph)'
-          [isSelectedCard]="isSelectedCard(paragraph)" [cardModel]="getCardModel(paragraph)" (onFoldUpCard)="foldUpCard($event)"></app-card>
+<app-card *ngFor="let paragraph of transcript.lstPhragraph"
+          [paragraph]="paragraph" (click)='clicked(paragraph)'
+          [isSelectedCard]="isSelectedCard(paragraph)" [cardModel]="getCardModel(paragraph)"
+          (onFoldUpCard)="foldUpCard($event)" (onDeleteCard)="deleteCard($event)"></app-card>

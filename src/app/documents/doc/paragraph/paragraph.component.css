@@ -1,3 +1,28 @@
 .paragraph-wrapper {
   text-align: left;
 }
+
+.paragraph-wrapper p {
+  position: relative;
+}
+
+.matching-card {
+  background-color: rgb(255, 233, 168);
+}
+
+.main-paragraph {
+  padding-right: 5%;
+  /*border-right: 5% solid #3498DB;*/
+}
+
+.btn-add-card {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30px;
+  height: 30px;
+  animation: fadein .5s;
+  color: #637282;
+}
+
+/*.btn-add-card*/

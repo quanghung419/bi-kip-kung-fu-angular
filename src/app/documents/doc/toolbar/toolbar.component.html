@@ -69,10 +69,11 @@
               <div class="switch switch-blue">
                 <input type="radio" class="switch-input frontLang" name="frontLang" value="EN" id="frontLangEn"
                        [(ngModel)]="toolbarService.writingPracticeConfig.frontSide"
-                       checked="true">
+                       [attr.checked]="toolbarService.writingPracticeConfig.frontSide === cardLangEnum.ENGLISH">
                 <label for="frontLangEn" class="switch-label switch-label-off">EN</label>
                 <input type="radio" class="switch-input frontLang" name="frontLang" value="VI" id="frontLangVn"
-                       [(ngModel)]="toolbarService.writingPracticeConfig.frontSide">
+                       [(ngModel)]="toolbarService.writingPracticeConfig.frontSide"
+                       [attr.checked]="toolbarService.writingPracticeConfig.frontSide === cardLangEnum.VIETNAMESE">
                 <label for="frontLangVn" class="switch-label switch-label-on">VI</label>
                 <span class="switch-selection"></span>
               </div>
@@ -83,10 +84,12 @@
             <div class="switch-wrapper">
               <div class="switch switch-blue">
                 <input type="radio" class="switch-input cardAction" name="cardEffect" value="FLIP" id="action-flip"
-                       checked="true" [(ngModel)]="toolbarService.writingPracticeConfig.cardEffect">
+                       [(ngModel)]="toolbarService.writingPracticeConfig.cardEffect"
+                       [attr.checked]="toolbarService.writingPracticeConfig.cardEffect === cardEffectEnum.FLIP">
                 <label for="action-flip" class="switch-label switch-label-off">Flip</label>
                 <input type="radio" class="switch-input cardAction" name="cardEffect" value="EXPAND" id="action-expand"
-                       [(ngModel)]="toolbarService.writingPracticeConfig.cardEffect">
+                       [(ngModel)]="toolbarService.writingPracticeConfig.cardEffect"
+                       [attr.checked]="toolbarService.writingPracticeConfig.cardEffect === cardEffectEnum.EXPAND">
                 <label for="action-expand" class="switch-label switch-label-on">Expand</label>
                 <span class="switch-selection"></span>
               </div>
