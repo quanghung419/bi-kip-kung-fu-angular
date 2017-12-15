@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
-
-const Trianglify = require('trianglify');
+import Trianglify from 'trianglify';
 
 @Injectable()
 export class TrianglifyService {

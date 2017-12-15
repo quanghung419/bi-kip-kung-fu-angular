@@ -4,18 +4,20 @@ import {Subject} from 'rxjs/Subject';
 @Injectable()
 export class CardService {
 
-  public subject: Subject<number> = new Subject();
+  private subject: Subject<number> = new Subject();
   public expandedSubject: Subject<object> = new Subject();
   private deleteSubject: Subject<number> = new Subject();
-
-  private hoverCardTitleSubject: Subject<number> = new Subject();
+  private newCardSubject: Subject<number> = new Subject();
 
   constructor() {
   }
 
-  changeSelectedCard(cardId) {
+  public changeSelectedCard(cardId) {
     this.subject.next(cardId);
-    console.log('card service');
+  }
+
+  public onChangeSelectedCard(callbackFn: any) {
+    this.subject.subscribe(callbackFn);
   }
 
   expandedSelectedCard(selectedCardId, expandedHeight) {
@@ -30,11 +32,12 @@ export class CardService {
     this.deleteSubject.subscribe(callbackFn);
   }
 
-  hoverCardTitle(cardId: number) {
-    this.hoverCardTitleSubject.next(cardId);
+  public newCard(paragraphId: number) {
+    this.newCardSubject.next(paragraphId);
   }
 
-  onHoverCardTitle(callbackFn: any) {
-    this.hoverCardTitleSubject.subscribe(callbackFn);
+  public onNewCard(callbackFn: any) {
+    this.newCardSubject.subscribe(callbackFn);
   }
+
 }

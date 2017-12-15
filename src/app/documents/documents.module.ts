@@ -38,6 +38,7 @@ import {PracticalCardComponent} from './doc/practical-card/practical-card.compon
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ToolbarService } from './doc/toolbar/toolbar.service';
 import { TrianglifyService } from '../_shared/service/trianglify.service';
+import {MainParagraphElementMap} from './doc/paragraph/main-paragraph-element-map.model';
 
 
 @NgModule({
@@ -82,6 +83,7 @@ import { TrianglifyService } from '../_shared/service/trianglify.service';
     DocService,
     ListCardsService,
     CardsMap,
+    MainParagraphElementMap,
     MainTranscriptService,
     ContentAnalysisService,
     WritingPracticeDialogService,

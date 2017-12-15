@@ -1,56 +1,58 @@
-import {AfterViewInit, Component, Input, OnInit, QueryList, ViewChildren} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {TranscriptModel} from '../transcript.model';
 import {CardService} from '../card/card.service';
 import {ParagraphModel} from '../paragraph/paragraph.model';
 import {CardModel} from '../card/card.model';
-import {ParagraphService} from '../paragraph/paragraph.service';
-import {CardComponent} from '../card/card.component';
 import {CardsMap} from './map-card.model';
+import {MainParagraphElementMap} from '../paragraph/main-paragraph-element-map.model';
 
 @Component({
   selector: 'app-list-cards',
   templateUrl: './list-cards.component.html',
   styleUrls: ['./list-cards.component.css']
 })
-export class ListCardsComponent implements OnInit {
+export class ListCardsComponent implements OnInit, OnChanges {
+
 
   @Input() transcript: TranscriptModel;
-  // @ViewChildren(CardComponent) cards: QueryList<CardComponent>;
-
-  lstPhragraph: Array<ParagraphModel>;
-
-  currSelectdCard: any;
-
-  // mapCards: object;
+  private lstPhragraph: Array<ParagraphModel>;
+  private currSelectdCard: any;
   private currentParagraph: ParagraphModel;
-
   private isFoldUpCard: boolean;
 
-  constructor(private cardService: CardService, private paragraphService: ParagraphService, private cardsMap: CardsMap) {
-    // this.mapCards = {};
-    // this.currentParagraph = ;
-    // this.currentParagraph = undefined;
+  constructor(private cardService: CardService, private cardsMap: CardsMap, private mainParagraphElementMap: MainParagraphElementMap) {
+    this.onNewCardInit();
+  }
+
+
+  createCardInfoData(lstPhragraph: Array<ParagraphModel>) {
+    for (const paragraphModel of lstPhragraph) {
+      const paragraphIndex = paragraphModel.order;
+      const mainPraEle = this.mainParagraphElementMap.getElementById(paragraphIndex);
+
+      if (mainPraEle) {
+        const cardModel = new CardModel(paragraphModel.order, mainPraEle.offSetTop);
+        this.cardsMap.putCardIfNotExist(paragraphIndex, cardModel);
+      }
+    }
+  }
+
+
+  ngOnChanges(changes: SimpleChanges): void {
+    const changeLstPhragraph = changes['lstPhragraph'];
+    if (changeLstPhragraph) {
+      console.log('Change lstPhragraph: ', changeLstPhragraph);
+    }
   }
 
   ngOnInit() {
     this.lstPhragraph = this.transcript.lstPhragraph;
 
-    for (const mainPraEle of this.paragraphService.listMainPragraphElement) {
-      for (const paragraphModel of this.lstPhragraph) {
-        if (paragraphModel.order === mainPraEle.order) {
-          this.cardsMap.putCardIfNotExist(paragraphModel.order, new CardModel(paragraphModel.order, mainPraEle.offSetTop));
-          // this.cardsMap[paragraphModel.order] = this.cardsMap[paragraphModel.order] ||
-          //   new CardModel(paragraphModel.order, mainPraEle.offSetTop);
-          break;
-        }
-      }
-    }
+    this.createCardInfoData(this.lstPhragraph);
 
-    this.cardService.subject.subscribe((cardId: number) => {
-      // if (cardId === -1) {
-      //   this.isFoldUpCard = true;
-      //   return;
-      // }
+    this.cardService.onChangeSelectedCard((cardId: number) => {
+
+      // this.cardService.subject.subscribe((cardId: number) => {
 
       if (this.isFoldUpCard) {
         this.currentParagraph = null;
@@ -79,71 +81,6 @@ export class ListCardsComponent implements OnInit {
     this.cardService.expandedSubject.subscribe((selectdCard: any) => {
       this.currSelectdCard = selectdCard;
       this.rearrangeCard(selectdCard);
-      // this.lstPhragraph.forEach((paragraph) => {
-      //   // const cardModel: CardModel = this.cardsMap[paragraph.order];
-      //   const cardModel: CardModel = this.cardsMap.getCardById(paragraph.order);
-      //   cardModel.position = cardModel.initPosition;
-      // });
-      // this.rearrangeCardToInitPosition();
-      //
-      // // In case fold up a card
-      // if (selectdCard.selectedCardId === -1) {
-      //   return;
-      // }
-      //
-      // const startIndex = selectdCard.selectedCardId;
-      // for (let i = startIndex; i > 0; i--) {
-      //   // const cardAbove: CardModel = this.cardsMap[i - 1];
-      //   const cardAbove: CardModel = this.cardsMap.getCardById(i - 1);
-      //   // const cardBelow: CardModel = this.cardsMap[i];
-      //   const cardBelow: CardModel = this.cardsMap.getCardById(i);
-      //
-      //   // const cardComponent: CardComponent = this.getCardComponentById(cardAbove.order);
-      //   // console.log('Card ABOVE height: ', cardComponent.currentHeight);
-      //
-      //   const bottomCardAbove = cardAbove.initPosition + 44;
-      //   // const bottomCardAbove = cardAbove.initPosition + cardAbove.currentHeight;
-      //   const gapValue = bottomCardAbove - cardBelow.initPosition + 44 + 30;
-      //   if (gapValue > 0) {
-      //     const abovePhragraph = this.lstPhragraph[i - 1];
-      //     // const cardModel: CardModel = this.cardsMap[abovePhragraph.order];
-      //     const cardModel: CardModel = this.cardsMap.getCardById(abovePhragraph.order);
-      //     cardModel.position = cardModel.initPosition;
-      //     cardModel.position -= gapValue;
-      //     console.log('Change position of ABOVE card: ', abovePhragraph.order, ' ,initPosition: ',
-      //       cardModel.initPosition, ' ,newPosition: ', cardModel.position);
-      //   } else {
-      //     break;
-      //   }
-      // }
-      //
-      // const startIndexNext = selectdCard.selectedCardId;
-      // for (let i = startIndexNext; i < this.lstPhragraph.length - 1; i++) {
-      //   // const cardAbove: CardModel = this.cardsMap[i];
-      //   const cardAbove: CardModel = this.cardsMap.getCardById(i);
-      //   // const cardBelow: CardModel = this.cardsMap[i + 1];
-      //   const cardBelow: CardModel = this.cardsMap.getCardById(i + 1);
-      //
-      //   let bottomCardAbove: number;
-      //   if (i === startIndexNext) {
-      //     bottomCardAbove = cardAbove.initPosition + selectdCard.expandedHeight;
-      //   } else {
-      //     bottomCardAbove = cardAbove.initPosition + 44;
-      //   }
-      //
-      //   const gapValue = bottomCardAbove - cardBelow.initPosition - 44 + 30;
-      //   if (gapValue > 0) {
-      //     const belowPhragraph = this.lstPhragraph[i + 1];
-      //     // const cardModel: CardModel = this.cardsMap[belowPhragraph.order];
-      //     const cardModel: CardModel = this.cardsMap.getCardById(belowPhragraph.order);
-      //     cardModel.position = cardModel.initPosition;
-      //     cardModel.position += gapValue;
-      //     console.log('Change position of BELOW card: ', belowPhragraph.order, ' ,initPosition: ',
-      //       cardModel.initPosition, ' ,newPosition: ', cardModel.position);
-      //   } else {
-      //     break;
-      //   }
-      // }
     });
   }
 
@@ -157,63 +94,76 @@ export class ListCardsComponent implements OnInit {
     });
   }
 
+  isManualFoldUpCard(selectdCard): boolean {
+    return selectdCard.selectedCardId === -1;
+  }
+
   rearrangeCard(selectdCard) {
     this.rearrangeCardToInitPosition();
 
-    // In case fold up a card
-    if (selectdCard.selectedCardId === -1) {
+    if (this.isManualFoldUpCard(selectdCard)) {
       return;
     }
 
-    const startIndex = selectdCard.selectedCardId;
-    for (let i = startIndex; i > 0; i--) {
-      // const cardAbove: CardModel = this.cardsMap[i - 1];
-      const cardAbove: CardModel = this.cardsMap.getCardById(i - 1);
-      // const cardBelow: CardModel = this.cardsMap[i];
-      const cardBelow: CardModel = this.cardsMap.getCardById(i);
+    const startIndexToPrev = selectdCard.selectedCardId;
+    this.arrangeUpperPart(startIndexToPrev);
 
-      // const cardComponent: CardComponent = this.getCardComponentById(cardAbove.order);
-      // console.log('Card ABOVE height: ', cardComponent.currentHeight);
+    const startIndexToNext = selectdCard.selectedCardId;
+    this.arrangeTheBelowPart(startIndexToNext, selectdCard.expandedHeight);
+  }
+
+  arrangeUpperPart(startIndex: number) {
+    for (let i = startIndex; i > 0; i--) {
+      const aboveIndex = i - 1;
+      const belowIndex = i;
+      const cardAbove: CardModel = this.cardsMap.getCardById(aboveIndex);
+      const cardBelow: CardModel = this.cardsMap.getCardById(belowIndex);
+
+      if (!cardAbove || !cardBelow) {
+        continue;
+      }
 
       const bottomCardAbove = cardAbove.initPosition + 44;
-      // const bottomCardAbove = cardAbove.initPosition + cardAbove.currentHeight;
       const gapValue = bottomCardAbove - cardBelow.initPosition + 44 + 30;
       if (gapValue > 0) {
-        const abovePhragraph = this.lstPhragraph[i - 1];
-        // const cardModel: CardModel = this.cardsMap[abovePhragraph.order];
+        const abovePhragraph = this.lstPhragraph[aboveIndex];
         const cardModel: CardModel = this.cardsMap.getCardById(abovePhragraph.order);
         cardModel.position = cardModel.initPosition;
         cardModel.position -= gapValue;
-        console.log('Change position of ABOVE card: ', abovePhragraph.order, ' ,initPosition: ',
-          cardModel.initPosition, ' ,newPosition: ', cardModel.position);
+        // console.log('Change position of ABOVE card: ', abovePhragraph.order, ' ,initPosition: ',
+        //   cardModel.initPosition, ' ,newPosition: ', cardModel.position);
       } else {
         break;
       }
     }
+  }
 
-    const startIndexNext = selectdCard.selectedCardId;
-    for (let i = startIndexNext; i < this.lstPhragraph.length - 1; i++) {
-      // const cardAbove: CardModel = this.cardsMap[i];
-      const cardAbove: CardModel = this.cardsMap.getCardById(i);
-      // const cardBelow: CardModel = this.cardsMap[i + 1];
-      const cardBelow: CardModel = this.cardsMap.getCardById(i + 1);
+  arrangeTheBelowPart(startIndex: number, expandedHeight: number) {
+    for (let i = startIndex; i < this.lstPhragraph.length - 1; i++) {
+      const aboveIndex = i;
+      const belowIndex = i + 1;
+      const cardAbove: CardModel = this.cardsMap.getCardById(aboveIndex);
+      const cardBelow: CardModel = this.cardsMap.getCardById(belowIndex);
+
+      if (!cardAbove || !cardBelow) {
+        continue;
+      }
 
       let bottomCardAbove: number;
-      if (i === startIndexNext) {
-        bottomCardAbove = cardAbove.initPosition + selectdCard.expandedHeight;
+      if (aboveIndex === startIndex) {
+        bottomCardAbove = cardAbove.initPosition + expandedHeight;
       } else {
         bottomCardAbove = cardAbove.initPosition + 44;
       }
 
       const gapValue = bottomCardAbove - cardBelow.initPosition - 44 + 30;
       if (gapValue > 0) {
-        const belowPhragraph = this.lstPhragraph[i + 1];
-        // const cardModel: CardModel = this.cardsMap[belowPhragraph.order];
+        const belowPhragraph = this.lstPhragraph[belowIndex];
         const cardModel: CardModel = this.cardsMap.getCardById(belowPhragraph.order);
         cardModel.position = cardModel.initPosition;
         cardModel.position += gapValue;
-        console.log('Change position of BELOW card: ', belowPhragraph.order, ' ,initPosition: ',
-          cardModel.initPosition, ' ,newPosition: ', cardModel.position);
+        // console.log('Change position of BELOW card: ', belowPhragraph.order, ' ,initPosition: ',
+        //   cardModel.initPosition, ' ,newPosition: ', cardModel.position);
       } else {
         break;
       }
@@ -239,48 +189,11 @@ export class ListCardsComponent implements OnInit {
   }
 
   getCardModel(paragraph) {
-    // console.log('getCardModel: ', paragraph.order);
-    // if (!paragraph) {
-    //   return null;
-    // }
     return this.cardsMap.getCardById(paragraph.order);
   }
 
-  // ngAfterViewInit() {
-  //   this.cards.forEach((cardInstance) => {
-  //     console.log(cardInstance);
-  //   });
-  //   this.cards.changes.subscribe((card) => {
-  //     console.log('@Child: card change: ', card);
-  //   });
-  // }
-
-  // getCardComponentById(cardId: number): CardComponent {
-  //   for (let i = 0; i < this.cards.length; i++) {
-  //     const cardComponent: CardComponent = this.cards._results[i];
-  //     if (cardComponent.cardId === cardId) {
-  //       return cardComponent;
-  //     }
-  //   }
-  // }
-
   foldUpCard($event) {
-    // let isMatch = false;
-    // this.lstPhragraph.forEach((paragraph) => {
-    //   if (paragraph.order === $event) {
-    //     this.currentParagraph = paragraph;
-    //     console.log('Set current card.');
-    //     isMatch = true;
-    //     this.isFoldUpCard = false;
-    //   }
-    // });
-    // if (!isMatch) {
-    // this.currentParagraph = null;
-    // }
     this.isFoldUpCard = true;
-
-    // console.log('Selected card: ', this.currentParagraph);
-    console.log('Fold Up card: ', $event);
   }
 
   deleteCard(cardId) {
@@ -297,12 +210,37 @@ export class ListCardsComponent implements OnInit {
 
     console.log('After delete: ', lstParagraph.length);
     this.transcript.lstPhragraph = lstParagraph;
-    // this.rearrangeCardToInitPosition();
     if (!this.currSelectdCard || this.currSelectdCard.selectedCardId === cardId) {
       this.rearrangeCardToInitPosition();
     } else {
       this.rearrangeCard(this.currSelectdCard);
     }
+  }
+
+  onNewCardInit() {
+    this.cardService.onNewCard((paragraphId) => {
+      const paragraphModel: ParagraphModel = new ParagraphModel();
+      paragraphModel.order = paragraphId;
+      paragraphModel.rawParagraph = '';
+      paragraphModel.lstSentences = [];
+      paragraphModel.isNewCard = true;
+
+      const mainPraEle = this.mainParagraphElementMap.getElementById(paragraphId);
+      const cardModel: CardModel = new CardModel(paragraphId, mainPraEle.offSetTop);
+
+      // if (mainPraEle) {
+      //   const cardModel = new CardModel(paragraphModel.order, mainPraEle.offSetTop);
+      //   this.cardsMap.putCardIfNotExist(paragraphIndex, cardModel);
+      // }
+
+      this.cardsMap.putCardIfNotExist(paragraphId, cardModel);
+      this.transcript.lstPhragraph.push(paragraphModel);
+      // this.transcript.lstPhragraph = this.lstPhragraph;
+
+      // fold all card
+      // this.currSelectdCard = null;
+      alert('Add new card for main paragraph: ' + paragraphId);
+    });
   }
 
 }

@@ -193,3 +193,7 @@ body {
 app-writing-practice-dialog {
   width: 100%;
 }
+
+.matching-card span.sentence{
+  background-color: rgb(254, 236, 173);
+}

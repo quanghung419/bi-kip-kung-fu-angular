@@ -7,10 +7,7 @@ import {CardService} from './card.service';
 import {CardModel} from './card.model';
 import {ContentAnalysisService} from '../content-analysis.service';
 import {WritingPracticeDialogService} from '../writing-practice-dialog/writing-practice-dialog.service';
-
-export enum MOUSE_EVENT {
-  MOUSE_OVER = 'mouseover'
-}
+import {ParagraphService} from "../paragraph/paragraph.service";
 
 @Component({
   selector: 'app-card',
@@ -33,7 +30,9 @@ export class CardComponent implements OnChanges, OnInit {
   private isFoldUpCard: boolean;
 
   constructor(private elRef: ElementRef, private cardService: CardService,
-              private contentAnalysisService: ContentAnalysisService, private writingPracticeDialogService: WritingPracticeDialogService) {
+              private contentAnalysisService: ContentAnalysisService,
+              private writingPracticeDialogService: WritingPracticeDialogService,
+              private paragraphService: ParagraphService) {
     this.isEditingMode = false;
     this.isFoldUpCard = false;
   }
@@ -44,19 +43,6 @@ export class CardComponent implements OnChanges, OnInit {
   get onFoldUpCard(): EventEmitter<any> {
     return this._onFoldUpCard;
   }
-
-  // currentHeight: number;
-
-  // isDraftCard: boolean;
-  // function
-
-  // @Output() onFoldUpCard: EventEmitter<number> = new EventEmitter();
-
-
-  // @Output()
-  // get onFoldUpCard(): EventEmitter<number> {
-  //   return this._onFoldUpCard;
-  // }
 
   ngOnChanges(changes: SimpleChanges) {
     const flagIsSelectedCard: SimpleChange = changes.isSelectedCard;
@@ -77,27 +63,31 @@ export class CardComponent implements OnChanges, OnInit {
         self.cardService.expandedSelectedCard(-1, -1);
       }, 1);
     }
+
+    // Trigger to rearrange card
+    if (this.paragraph.isNewCard) {
+      this.isSelectedCard = true;
+      this.isEditingMode = true;
+      this.paragraph.isNewCard = false;
+      const self = this;
+      setTimeout(function () {
+        self.cardService.expandedSelectedCard(self.paragraph.order, self.elRef.nativeElement.children[0].clientHeight);
+      }, 1);
+    }
   }
 
   ngOnInit(): void {
-    // this.updateCurrentHeightOfCardInMap();
-    // if (this.paragraph) {
-    //   this.cardId = this.paragraph.order;
-    // }
   }
 
   changeToEditingMode() {
     this.isEditingMode = true;
     this.oldContent = this.paragraph.rawParagraph;
-    // this.currentHeight = ;
     console.log('Current Height: ', this.elRef.nativeElement.children[0].offsetHeight);
-    // this.updateCurrentHeightOfCardInMap();
   }
 
   isDraftCard(): boolean {
     if (this.oldContent && this.rawContent && this.oldContent !== this.rawContent) {
       return this.oldContent.length > 0;
-      // return true;
     }
     return false;
   }
@@ -117,33 +107,11 @@ export class CardComponent implements OnChanges, OnInit {
     this.oldContent = null;
   }
 
-  // updateCurrentHeightOfCardInMap() {
-  // setTimeout(function (this) {
-  // const currentHeight = this.elRef.nativeElement.children[0].offsetHeight;
-  // this.cardsMap.updateCurrentHeightOfCard(this.paragraph.order, currentHeight);
-  // this.getCurrHeight(this);
-  // }, 100);
-  // }
-
-  // getCurrHeight(seft) {
-  //   const currentHeight = seft.elRef.nativeElement.children[0].offsetHeight;
-  //   seft.cardsMap.updateCurrentHeightOfCard(this.paragraph.order, currentHeight);
-  // }
-
-  // ngAfterViewChecked(): void {
-  //   console.log('ngAfterViewChecked - Current Height: ', this.paragraph.order, this.elRef.nativeElement.children[0].offsetHeight);
-  //   this.updateCurrentHeightOfCardInMap();
-  // }
-
   toggleCard() {
     if (this.isSelectedCard) {
-      // this.isSelectedCard = false;
-      // this.cardService.changeSelectedCard(-1);
       this._onFoldUpCard.emit(this.paragraph.order);
       this.isFoldUpCard = true;
     }
-    // this.isFoldUpCard = !this.isFoldUpCard;
-    // this.cardService.changeSelectedCard(-1);
   }
 
   onChangeContent(content) {
@@ -165,9 +133,9 @@ export class CardComponent implements OnChanges, OnInit {
 
   mappingMainParagraph(event) {
     if (event.type === 'mouseover') {
-      this.cardService.hoverCardTitle(this.paragraph.order);
+      this.paragraphService.matchingWithParagraph(this.paragraph.order);
     } else if (event.type === 'mouseout') {
-      this.cardService.hoverCardTitle(-1);
+      this.paragraphService.matchingWithParagraph(-1);
     }
   }
 

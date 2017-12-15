@@ -10,6 +10,7 @@ export class SubTranscriptComponent implements OnInit {
 
   @Input() paragraph: ParagraphModel;
   @Input() isEditingMode: boolean;
+  @Input() isNewCard: boolean;
 
   constructor() {
   }

@@ -30,13 +30,13 @@
     <div class="card-body">
       <div class="card-content">
         <app-sub-transcript [paragraph]="paragraph" [isEditingMode]="isEditingMode"
-                            (onChangeContent)="onChangeContent($event)"></app-sub-transcript>
+                            (onChangeContent)="onChangeContent($event)" [isNewCard]="!oldContent"></app-sub-transcript>
       </div>
       <div class="card-footer unable-select" fxLayout="row" fxLayoutAlign=" center">
         <div class="card-content-actions" fxLayout="row" fxLayoutAlign="start center" [class.visible]="isEditingMode"
              [class.invisible]="!isEditingMode">
           <span class="btn-content-action" role="button" [class.hidden]="this.oldContent?.length > 0">Add</span>
-          <span class="btn-content-action" role="button" (click)="saveChange()">Save</span>
+          <span class="btn-content-action" role="button" (click)="saveChange()" [class.hidden]="!oldContent">Save</span>
           <span class="seperate-dot">&nbsp;•&nbsp;</span>
           <span class="btn-content-action btn-latest" role="button" (click)="discardChange()">Cacel</span>
         </div>

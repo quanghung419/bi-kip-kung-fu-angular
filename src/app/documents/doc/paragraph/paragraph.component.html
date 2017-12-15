@@ -1,5 +1,5 @@
 <div class="paragraph-wrapper">
-  <p [attr.index]="paragraph.order" [class.matching-card]="isMatchingWithCard" [class.main-paragraph]="isMultipleParagraph"
+  <p [attr.index]="paragraph.order" [class.matching-card]="isMatchedParagraph" [class.main-paragraph]="isMultipleParagraph"
      (mousemove)="showButtonAddCard($event)"
      (mouseleave)="hiddenButtonAddCard($event)">
     <!--<span>-->
@@ -10,7 +10,8 @@
 
     <!--</span>-->
     <!--It's worked {{paragraph.order}}-->
-    <button mat-icon-button class="btn-add-card" *ngIf="isShowButtonAddCard">
+    <button mat-icon-button class="btn-add-card" *ngIf="isShowButtonAddCard" (mouseenter)="markSentence(paragraph.order)"
+            (mouseleave)="markSentence(-1)" (click)="addNewCard(paragraph.order)">
       <i class="material-icons">&#xE0B7;</i>
     </button>
   </p>
