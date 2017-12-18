@@ -11,7 +11,6 @@ export class SentenceComponent implements OnInit {
   @Input() isBelongToPracticalCard: boolean;
   @Input() sentence: SentenceModel;
 
-
   color = 'red';
 
   constructor() {

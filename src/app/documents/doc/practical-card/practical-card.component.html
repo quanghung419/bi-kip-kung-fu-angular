@@ -14,7 +14,7 @@
     </header>
     <div class="card-content">
       <span class="clone-val">
-        <app-paragraph [paragraph]="practicalCardModel.frontParagraph" [isBelongToPracticalCard]="true"></app-paragraph>
+        <app-paragraph *ngIf="practicalCardModel.frontParagraph" [paragraph]="practicalCardModel.frontParagraph" [isBelongToPracticalCard]="true"></app-paragraph>
       </span>
     </div>
   </div>
@@ -34,7 +34,7 @@
     </header>
     <div class="card-content">
       <span class="clone-val">
-        <app-paragraph [paragraph]="practicalCardModel.backParagraph" [isBelongToPracticalCard]="true"></app-paragraph>
+        <app-paragraph *ngIf="practicalCardModel.backParagraph" [paragraph]="practicalCardModel.backParagraph" [isBelongToPracticalCard]="true"></app-paragraph>
       </span>
     </div>
   </div>

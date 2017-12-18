@@ -6,7 +6,6 @@ export class CardService {
 
   private subject: Subject<number> = new Subject();
   public expandedSubject: Subject<object> = new Subject();
-  private deleteSubject: Subject<number> = new Subject();
   private newCardSubject: Subject<number> = new Subject();
 
   constructor() {
@@ -22,14 +21,6 @@ export class CardService {
 
   expandedSelectedCard(selectedCardId, expandedHeight) {
     this.expandedSubject.next({selectedCardId, expandedHeight});
-  }
-
-  public deleteCard(cardId: number) {
-    this.deleteSubject.next(cardId);
-  }
-
-  public onDeteleCard(callbackFn: any) {
-    this.deleteSubject.subscribe(callbackFn);
   }
 
   public newCard(paragraphId: number) {

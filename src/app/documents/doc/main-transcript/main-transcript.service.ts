@@ -14,7 +14,6 @@ export class MainTranscriptService {
     this.rawContent = value;
   }
 
-
   getTranscriptData(): TranscriptModel {
     if (!this.rawContent) {
       return;
@@ -22,6 +21,5 @@ export class MainTranscriptService {
 
     return this.contentAnalysisService.getTranscriptData(this.rawContent);
   }
-
 
 }

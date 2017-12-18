@@ -24,18 +24,4 @@ export class CardsMap {
     return this.cardsMap[cardId];
   }
 
-  public updateCurrentHeightOfCard(cardId: number, currHeight: number): boolean {
-    if (this.cardsMap[cardId]) {
-      const cardModel = this.cardsMap[cardId];
-      cardModel.currentHeight = currHeight;
-      console.log('Update current height of card: ', cardId, currHeight);
-      return true;
-    }
-    return false;
-  }
-
-  public hasDraftCard(): boolean {
-    return false;
-  }
-
 }

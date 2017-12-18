@@ -1,85 +1,40 @@
 .transcript-wrapper {
-  /*background-color: orange;*/
   width: 100%;
   height: 100%;
-  /*position: relative;*/
 }
 
 .identical {
-  /*white-space: pre-wrap;*/
   line-height: 1.5em;
-  /*max-width: 980px;*/
-  /* min-height: 400px; */
-  /* padding: 0 8% 0 8.5%; */
-  /*padding: 5px 10px;*/
   font-size: 16px;
-  /* display: block; */
-  /* position: relative; */
-  /* padding: 0; */
-  /* word-wrap: break-word; */
-  /* word-break: break-word; */
-  /* border: none; */
-  /* outline: none; */
-  /* resize: none; */
-  /* z-index: 0; */
   font-family: Diaria Light Pro, sans-serif;
   width: 100%;
-  /*height: 100%;*/
   height: auto;
 }
 
 .ghost-content {
   overflow: visible;
-
-  /*height: 0 !important;*/
-  /* height: 100vh; */
-  /* background-color: orange; */
-  /*position: absolute;*/
-  /*top: 0;*/
-  /*left: 0;*/
 }
 
 .editable-content {
   background-color: transparent;
   overflow: hidden;
-  /* min-height: 400px; */
-  /* max-height: 900px; */
-  /* min-height: 400px; */
-  /*min-height: 400px;*/
-  /*position: absolute;*/
-  /*top: 0;*/
-  /*left: 0;*/
   resize: none;
 }
 
 .editable-content textarea {
   resize: none;
-  /*min-height: 400px;*/
-  /*background-color: transparent;*/
   overflow: hidden;
-  /* min-height: 400px; */
-  /* max-height: 900px; */
-  /* min-height: 400px; */
-  /*min-height: 400px;*/
-  /*position: absolute;*/
-  /*top: 0;*/
-  /*left: 0;*/
-  /*font-size: 16px;*/
-  /*font-weight: 300;*/
   resize: none;
   background-color: rgba(255, 248, 218, 1);
-  /*#fbde5a;*/
 }
 
 .trans-show {
   z-index: 20;
-  /*visibility: visible;*/
   display: block;
 }
 
 .trans-hidden {
   z-index: 10;
-  /*visibility: hidden;*/
   display: none;
 }
 

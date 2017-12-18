@@ -24,4 +24,8 @@ export class MainParagraphElementMap {
     return this.mainParagraphElemMap[paragraphIndex];
   }
 
+  public getSize(): number {
+    return Object.keys(this.mainParagraphElemMap).length;
+  }
+
 }

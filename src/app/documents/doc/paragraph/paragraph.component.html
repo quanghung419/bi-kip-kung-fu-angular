@@ -2,30 +2,13 @@
   <p [attr.index]="paragraph.order" [class.matching-card]="isMatchedParagraph" [class.main-paragraph]="isMultipleParagraph"
      (mousemove)="showButtonAddCard($event)"
      (mouseleave)="hiddenButtonAddCard($event)">
-    <!--<span>-->
     <app-sen *ngFor="let sentence of paragraph.lstSentences" [sentence]="sentence" [attr.index]="sentence.order"
        (click)='clicked(sentence)'
        [class.selected]="isSelected(sentence)" (mouseup)="onRightClick($event)" [isBelongToPracticalCard]="isBelongToPracticalCard"></app-sen>
-    <!--paragraph-->
-
-    <!--</span>-->
-    <!--It's worked {{paragraph.order}}-->
     <button mat-icon-button class="btn-add-card" *ngIf="isShowButtonAddCard" (mouseenter)="markSentence(paragraph.order)"
             (mouseleave)="markSentence(-1)" (click)="addNewCard(paragraph.order)">
       <i class="material-icons">&#xE0B7;</i>
     </button>
   </p>
   <br *ngIf="isMultipleParagraph"/>
-
 </div>
-<!--<p index="0" >-->
-<!--<span>-->
-<!--<g index="0">Frenhofer was the best artist in the world. </g>-->
-<!--<g index="1">Everyone loved him. </g>-->
-<!--<g index="2" >The quality of his paintings was very high. </g>-->
-<!--<g index="3">He always used the best materials. </g><g index="4">He made a big profit from his paintings. </g>-->
-<!--<g index="5">He had delicious meals with his rich neighbors. </g>-->
-<!--<g index="6">He taught art classes. </g>-->
-<!--<g index="7">Life was good.</g>-->
-<!--</span>-->
-<!--</p>-->

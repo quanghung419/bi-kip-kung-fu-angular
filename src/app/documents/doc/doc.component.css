@@ -1,53 +1,27 @@
 .page-scroll-wrapper {
-  /*overflow-x: hidden;*/
-  /*overflow-y: scroll;*/
   height: calc(100vh - 35px);
-  /*height: 100vh;*/
 }
 
 .toolbar {
   height: 100vh;
   width: 64px;
   max-width: 64px;
-  /*padding-top: 30px;*/
-  /* position: relative; */
-  /*position: fixed;*/
-  /*top: 0;*/
-  /*left: 0;*/
-  /*display: table-cell;*/
-  /*vertical-align: top;*/
   background: rgba(51, 72, 95, 1);
-  /*z-index: 10;*/
 }
 
 .doc-editor {
-  /*position: relative;*/
   height: 100%;
   width: 100%;
-  /*background: url(https://denali-static.grammarly.com/files/3f2e79ec30380ea3ceb58e0446081d70/editor-gradient.png);*/
-  /*background-color: rgba(0, 0, 0, 0);*/
-  /*background-repeat: repeat;*/
-  /*background-color: #f5f6f5;*/
-  /*background-repeat: repeat-y;*/
-  /*background-color: #3498DB;*/
   color: #000;
-  /*vertical-align: top;*/
-  /*margin-left: 60px;*/
 }
 
 .sub-container {
   display: flex;
   flex-direction: column;
   height: 100%;
-  /*background-color: #a5d6a7;*/
 }
 
 .page-scroll-wrapper {
-  /*overflow-x: hidden;*/
-  /*overflow-y: scroll;*/
-  /* padding-top: 40px; */
-  /* height: 96vh; */
-  /*height: 100vh;*/
   border-bottom: 35px solid transparent;
   transition: padding-top .2s;
 }
@@ -60,9 +34,7 @@
   -ms-user-select: none;
   user-select: none;
   display: flex;
-  /* max-width: 1600px; */
   color: #acb0b8;
-  /* background: red; */
   background: -webkit-linear-gradient(right, #eeeeee 0%, #eeeeee 100%);
   background: linear-gradient(to right, #eeeeee 0%, #eeeeee 100%);
   font-size: 10px;
@@ -77,31 +49,23 @@
 .inner-scroll {
   width: 96%;
   padding-left: 4%;
-  /*background-color: lawngreen;*/
   height: 100%;
 }
 
 .page-editor-layout {
   position: relative;
   display: flex;
-  /* max-width: 1600px; */
   width: 100%;
 }
 
 .page-title-wrap {
-  /*margin: 12px 0 20px;*/
   margin: 64px 0 20px;
   width: 100%;
-  /*font-weight: 400;*/
-  /*font-size: 42px;*/
   height: 60px;
-  /*font-family: Diaria Bold Pro, sans-serif;*/
-  /*background-color: orange;*/
 }
 
 .editor-page-title {
   display: inline-block;
-  /* margin: 0 0 0 8.5%; */
   width: 92.5%;
   outline: none;
   border: none;
@@ -115,14 +79,8 @@
 }
 
 .editor-wrapper {
-  /* min-width: 283px; */
-  /* max-width: 950px; */
-  /*width: 57%;*/
   width: 60%;
-  /*padding-right: 3%;*/
   height: 100vh;
-   /*background-color: pink;*/
-  /* width: 700px; */
   will-change: transform;
   position: relative;
 }
@@ -132,14 +90,9 @@
   transition: -webkit-transform .4s;
   transition: transform .4s;
   transition: transform .4s, -webkit-transform .4s;
-  /* margin-right: 2%; */
-  /* min-width: 270px; */
-  /* max-width: 440px; */
   width: 3%;
   font-size: 14px;
-  /*background-color: palegreen;*/
   height: 100vh;
-  /* height: 100vh; */
 }
 
 .editor-cards {
@@ -148,11 +101,8 @@
   transition: transform .4s;
   transition: transform .4s, -webkit-transform .4s;
   margin-right: 2%;
-  /* min-width: 270px; */
-  /* max-width: 440px; */
   width: 40%;
   font-size: 14px;
-   /*background-color: #33485F;*/
    height: 100%;
   height: 100vh;
 }
@@ -170,10 +120,6 @@
   min-width: 32px;
   fill: #FFFFFF;
 }
-
-/*.nav-item-title .icon {*/
-/*vertical-align: middle;*/
-/*}*/
 
 .-layout-fr {
   display: flex;

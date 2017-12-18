@@ -1,11 +1,5 @@
-<!--{{transcript.lstPhragraph}}-->
-
 <div class="main-transcript-wrapper">
-  <!--<div class="ghost-content identical"></div>-->
-  <!--<div class="editable-content identical trans-show">-->
-  <!--<div class="editable-content identical trans-show">-->
   <div class="ghost-content identical" [class.trans-show]="!isEditingMode" [class.trans-hidden]="isEditingMode">
-    <!--trans-show-->
     <span class="clone-val">
       <app-paragraph *ngFor="let paragraph of transcript.lstPhragraph" [paragraph]="paragraph"
                      [isMultipleParagraph]="true" [isBelongToPracticalCard]="false">
@@ -14,10 +8,8 @@
   </div>
   <div class="editable-content identical" [class.trans-show]="isEditingMode" [class.trans-hidden]="!isEditingMode">
     <mat-form-field style="width: 100%">
-      <!--trans-hidden-->
       <textarea matInput matTextareaAutosize class="identical" value="{{transcript.rawTranscript}}" #mainTranscript
                 (input)="logContent($event)" style="width: 95%; padding-right: 5%"></textarea>
-      <!--<textarea class="editable-content identical trans-hidden" matInput matTextareaAutosize>{{transcript.rawTranscript}}</textarea>-->
     </mat-form-field>
   </div>
 </div>

@@ -1,5 +1,12 @@
 import {
-  Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChange,
   SimpleChanges
 } from '@angular/core';
 import {ParagraphModel} from '../paragraph/paragraph.model';
@@ -7,7 +14,7 @@ import {CardService} from './card.service';
 import {CardModel} from './card.model';
 import {ContentAnalysisService} from '../content-analysis.service';
 import {WritingPracticeDialogService} from '../writing-practice-dialog/writing-practice-dialog.service';
-import {ParagraphService} from "../paragraph/paragraph.service";
+import {ParagraphService} from '../paragraph/paragraph.service';
 
 @Component({
   selector: 'app-card',
@@ -23,7 +30,12 @@ export class CardComponent implements OnChanges, OnInit {
   isEditingMode: boolean;
 
   @Output()
-  onDeleteCard: EventEmitter<number> = new EventEmitter();
+  deleteCardEvent: EventEmitter<number> = new EventEmitter();
+
+  @Output()
+  changeParagraphContentEvent: EventEmitter<ParagraphModel> = new EventEmitter();
+
+  isNewCard: boolean;
 
   private rawContent: string;
 
@@ -35,6 +47,7 @@ export class CardComponent implements OnChanges, OnInit {
               private paragraphService: ParagraphService) {
     this.isEditingMode = false;
     this.isFoldUpCard = false;
+    this.isNewCard = false;
   }
 
   private _onFoldUpCard: EventEmitter<any> = new EventEmitter();
@@ -65,14 +78,10 @@ export class CardComponent implements OnChanges, OnInit {
     }
 
     // Trigger to rearrange card
-    if (this.paragraph.isNewCard) {
-      this.isSelectedCard = true;
+    if (this.cardModel.isNewCard) {
       this.isEditingMode = true;
-      this.paragraph.isNewCard = false;
-      const self = this;
-      setTimeout(function () {
-        self.cardService.expandedSelectedCard(self.paragraph.order, self.elRef.nativeElement.children[0].clientHeight);
-      }, 1);
+      this.cardModel.isNewCard = false;
+      this.isNewCard = true;
     }
   }
 
@@ -86,25 +95,48 @@ export class CardComponent implements OnChanges, OnInit {
   }
 
   isDraftCard(): boolean {
+    // Case: modified card => draft
     if (this.oldContent && this.rawContent && this.oldContent !== this.rawContent) {
       return this.oldContent.length > 0;
+    }
+    // Case: new card => draft
+    if (this.isNewCard && this.rawContent) {
+      console.log('New Card => Draft: ', this.paragraph);
+      this.paragraph.rawParagraph = this.rawContent;
+      return this.rawContent.length > 0;
     }
     return false;
   }
 
+  addNew() {
+    this.isNewCard = false;
+    this.reProduceParagraphContent();
+  }
+
   saveChange() {
+    this.reProduceParagraphContent();
+  }
+
+  reProduceParagraphContent() {
     this.isEditingMode = false;
     this.oldContent = null;
     if (this.rawContent) {
       const paragraphModel = this.contentAnalysisService.getParagraphData(this.paragraph.order, this.rawContent);
       console.log('Convert paragraph: ', paragraphModel);
       this.paragraph = paragraphModel;
+      this.changeParagraphContentEvent.emit(paragraphModel);
     }
   }
 
   discardChange() {
-    this.isEditingMode = false;
-    this.oldContent = null;
+    // Case: discard modified card
+    if (this.oldContent) {
+      this.isEditingMode = false;
+      this.oldContent = null;
+    } else {
+      // Case: discard new card
+      this.deleteCard();
+    }
   }
 
   toggleCard() {
@@ -126,8 +158,8 @@ export class CardComponent implements OnChanges, OnInit {
   deleteCard() {
     const result = confirm('Are you sure to delete this card?');
     if (result) {
-      // this.cardService.deleteCard(this.paragraph.order);
-      this.onDeleteCard.emit(this.paragraph.order);
+      this.deleteCardEvent.emit(this.paragraph.order);
+      console.log('On delete card: ', this.paragraph.order);
     }
   }
 

@@ -24,12 +24,14 @@ export class ParagraphComponent implements OnInit {
   private currentSentence: SentenceModel;
   private isMatchedParagraph: boolean;
   private isShowButtonAddCard: boolean;
+  private isClickBtnNewCard: boolean;
 
   constructor(private paragraphService: ParagraphService, private sentenceService: SentenceService,
               private elRef: ElementRef, private cardService: CardService, private docService: DocService,
               private cardsMap: CardsMap, private mainParagraphElementMap: MainParagraphElementMap) {
     this.matchingSentence();
     this.markMatchedParagraph();
+    this.isClickBtnNewCard = false;
   }
 
   private _onSentenceSelected: EventEmitter<SentenceModel> = new EventEmitter();
@@ -43,7 +45,6 @@ export class ParagraphComponent implements OnInit {
     if (this.isMultipleParagraph) {
       console.log('ngOnInit Paragraph: ' + this.paragraph.order, this.elRef.nativeElement.offsetTop);
       const mainPragraphElementModel = new MainPragraphElementModel(this.paragraph.order, this.elRef.nativeElement.offsetTop);
-      // this.paragraphService.pushMainPragraphElement(mainPragraphElementModel);
       this.mainParagraphElementMap.putElementIfNotExist(this.paragraph.order, mainPragraphElementModel);
     }
   }
@@ -86,17 +87,15 @@ export class ParagraphComponent implements OnInit {
 
   showButtonAddCard($event) {
     if (this.isMultipleParagraph && !this.cardsMap.getCardById(this.paragraph.order)) {
-      // console.log('Show button add card', $event, this.elRef);
-      // console.log('Relative position: ', $event.offsetX / this.elRef.nativeElement.children[0].offsetWidth);
       if ($event.offsetX / this.elRef.nativeElement.children[0].offsetWidth >= 0.75) {
         this.isShowButtonAddCard = true;
+        this.isClickBtnNewCard = false;
       }
     }
   }
 
   hiddenButtonAddCard($event) {
     if (this.isMultipleParagraph) {
-      // console.log('Hide button add card');
       this.isShowButtonAddCard = false;
     }
   }
@@ -106,7 +105,10 @@ export class ParagraphComponent implements OnInit {
   }
 
   addNewCard(paragraphId) {
-    this.cardService.newCard(paragraphId);
+    if (!this.isClickBtnNewCard) {
+      this.isClickBtnNewCard = true;
+      this.cardService.newCard(paragraphId);
+    }
   }
 
   private matchingSentence() {

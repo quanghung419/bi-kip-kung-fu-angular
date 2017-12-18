@@ -5,15 +5,9 @@ import {Subject} from 'rxjs/Subject';
 @Injectable()
 export class ParagraphService {
 
-  // listMainPragraphElement: MainPragraphElementModel[];
-
-  // private mainPragraphElementMap: object;
-
-
   private mappingMainParagraphSubject: Subject<number> = new Subject();
 
   constructor() {
-    // this.listMainPragraphElement = [];
   }
 
   matchingWithParagraph(paragraphIndex: number) {
@@ -23,9 +17,5 @@ export class ParagraphService {
   markMatchedParagraph(callbackFn: any) {
     this.mappingMainParagraphSubject.subscribe(callbackFn);
   }
-
-  // public pushMainPragraphElement(mainPragraphElement: MainPragraphElementModel) {
-  //   this.listMainPragraphElement.push(mainPragraphElement);
-  // }
 
 }

@@ -51,8 +51,7 @@ export class ListCardsComponent implements OnInit, OnChanges {
     this.createCardInfoData(this.lstPhragraph);
 
     this.cardService.onChangeSelectedCard((cardId: number) => {
-
-      // this.cardService.subject.subscribe((cardId: number) => {
+      this.lstPhragraph = this.transcript.lstPhragraph;
 
       if (this.isFoldUpCard) {
         this.currentParagraph = null;
@@ -62,11 +61,16 @@ export class ListCardsComponent implements OnInit, OnChanges {
 
       let isMatch = false;
       this.lstPhragraph.forEach((paragraph) => {
+        console.log('Check card on change selected card: ', paragraph);
+
         if (paragraph.order === cardId) {
           this.currentParagraph = paragraph;
           console.log('Set current card.');
           isMatch = true;
           this.isFoldUpCard = false;
+        } else if (paragraph.rawParagraph.trim().length === 0 && paragraph.lstSentences.length === 0) {
+          console.log('Delete new card when input nothing and change selected card ==>> ');
+          this.deleteCard(paragraph.order);
         }
       });
       if (!isMatch) {
@@ -79,6 +83,7 @@ export class ListCardsComponent implements OnInit, OnChanges {
 
     // Change position of other card (Not selected card)
     this.cardService.expandedSubject.subscribe((selectdCard: any) => {
+      this.lstPhragraph = this.transcript.lstPhragraph;
       this.currSelectdCard = selectdCard;
       this.rearrangeCard(selectdCard);
     });
@@ -86,7 +91,6 @@ export class ListCardsComponent implements OnInit, OnChanges {
 
   rearrangeCardToInitPosition() {
     this.lstPhragraph.forEach((paragraph) => {
-      // const cardModel: CardModel = this.cardsMap[paragraph.order];
       const cardModel: CardModel = this.cardsMap.getCardById(paragraph.order);
       if (cardModel) {
         cardModel.position = cardModel.initPosition;
@@ -99,6 +103,8 @@ export class ListCardsComponent implements OnInit, OnChanges {
   }
 
   rearrangeCard(selectdCard) {
+    this.sortData();
+    console.log('Data after sort: ', this.lstPhragraph);
     this.rearrangeCardToInitPosition();
 
     if (this.isManualFoldUpCard(selectdCard)) {
@@ -126,12 +132,11 @@ export class ListCardsComponent implements OnInit, OnChanges {
       const bottomCardAbove = cardAbove.initPosition + 44;
       const gapValue = bottomCardAbove - cardBelow.initPosition + 44 + 30;
       if (gapValue > 0) {
-        const abovePhragraph = this.lstPhragraph[aboveIndex];
-        const cardModel: CardModel = this.cardsMap.getCardById(abovePhragraph.order);
-        cardModel.position = cardModel.initPosition;
-        cardModel.position -= gapValue;
-        // console.log('Change position of ABOVE card: ', abovePhragraph.order, ' ,initPosition: ',
-        //   cardModel.initPosition, ' ,newPosition: ', cardModel.position);
+        const cardModel: CardModel = this.cardsMap.getCardById(aboveIndex);
+        if (cardModel) {
+          cardModel.position = cardModel.initPosition;
+          cardModel.position -= gapValue;
+        }
       } else {
         break;
       }
@@ -139,7 +144,10 @@ export class ListCardsComponent implements OnInit, OnChanges {
   }
 
   arrangeTheBelowPart(startIndex: number, expandedHeight: number) {
-    for (let i = startIndex; i < this.lstPhragraph.length - 1; i++) {
+    const maxIndex = this.mainParagraphElementMap.getSize() > this.lstPhragraph.length
+      ? this.mainParagraphElementMap.getSize() : this.lstPhragraph.length;
+
+    for (let i = startIndex; i < maxIndex - 1; i++) {
       const aboveIndex = i;
       const belowIndex = i + 1;
       const cardAbove: CardModel = this.cardsMap.getCardById(aboveIndex);
@@ -158,12 +166,11 @@ export class ListCardsComponent implements OnInit, OnChanges {
 
       const gapValue = bottomCardAbove - cardBelow.initPosition - 44 + 30;
       if (gapValue > 0) {
-        const belowPhragraph = this.lstPhragraph[belowIndex];
-        const cardModel: CardModel = this.cardsMap.getCardById(belowPhragraph.order);
-        cardModel.position = cardModel.initPosition;
-        cardModel.position += gapValue;
-        // console.log('Change position of BELOW card: ', belowPhragraph.order, ' ,initPosition: ',
-        //   cardModel.initPosition, ' ,newPosition: ', cardModel.position);
+        const cardModel: CardModel = this.cardsMap.getCardById(belowIndex);
+        if (cardModel) {
+          cardModel.position = cardModel.initPosition;
+          cardModel.position += gapValue;
+        }
       } else {
         break;
       }
@@ -192,7 +199,7 @@ export class ListCardsComponent implements OnInit, OnChanges {
     return this.cardsMap.getCardById(paragraph.order);
   }
 
-  foldUpCard($event) {
+  foldUpCard() {
     this.isFoldUpCard = true;
   }
 
@@ -223,24 +230,48 @@ export class ListCardsComponent implements OnInit, OnChanges {
       paragraphModel.order = paragraphId;
       paragraphModel.rawParagraph = '';
       paragraphModel.lstSentences = [];
-      paragraphModel.isNewCard = true;
+
 
       const mainPraEle = this.mainParagraphElementMap.getElementById(paragraphId);
       const cardModel: CardModel = new CardModel(paragraphId, mainPraEle.offSetTop);
-
-      // if (mainPraEle) {
-      //   const cardModel = new CardModel(paragraphModel.order, mainPraEle.offSetTop);
-      //   this.cardsMap.putCardIfNotExist(paragraphIndex, cardModel);
-      // }
+      cardModel.isNewCard = true;
 
       this.cardsMap.putCardIfNotExist(paragraphId, cardModel);
       this.transcript.lstPhragraph.push(paragraphModel);
-      // this.transcript.lstPhragraph = this.lstPhragraph;
-
-      // fold all card
-      // this.currSelectdCard = null;
-      alert('Add new card for main paragraph: ' + paragraphId);
+      // Mark new card is selected
+      this.cardService.changeSelectedCard(paragraphId);
     });
+  }
+
+  sortData() {
+    this.lstPhragraph.sort((pragraph1, pragraph2) => {
+      return pragraph1.order - pragraph2.order;
+    });
+  }
+
+  updateTranscript(newParagModel) {
+    if (newParagModel) {
+      const paragraphId = newParagModel.order;
+
+
+      let lstParagraph: Array<ParagraphModel> = this.transcript.lstPhragraph;
+
+      console.log('Before update: ', lstParagraph.length);
+
+      // this.cardsMap.removeCardByKey(cardId);
+      lstParagraph = lstParagraph.filter((paragraph) => {
+        if (paragraph.order !== paragraphId) {
+          return paragraph;
+        }
+      });
+
+      lstParagraph.push(newParagModel);
+
+      console.log('After update: ', lstParagraph.length);
+      this.transcript.lstPhragraph = lstParagraph;
+
+
+    }
   }
 
 }

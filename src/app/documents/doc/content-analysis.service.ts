@@ -52,9 +52,6 @@ export class ContentAnalysisService {
     while (match = regex.exec(rawParagraph)) {
       const range: StrRangeModel = new StrRangeModel(match.index, match.index + match[0].length);
       indexes.push(range);
-
-
-      // return null;
     }
 
     const length = indexes.length;
@@ -77,8 +74,6 @@ export class ContentAnalysisService {
     }
 
     const totalChar = rawParagraph.length;
-
-    // console.log('total: ' + totalChar + ' , latestIndex' + latestIndex);
 
     if (totalChar > latestIndex) {
       rawSentence = rawParagraph.substring(latestIndex, rawParagraph.length);

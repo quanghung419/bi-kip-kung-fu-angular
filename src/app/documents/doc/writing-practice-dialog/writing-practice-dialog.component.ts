@@ -87,8 +87,18 @@ export class WritingPracticeDialogComponent implements OnInit {
     }
 
     const tempData = this.createDataOfPracticalCard(this.currParagraphId);
-    this.maxSentence = tempData.backParagraph.lstSentences.length < tempData.frontParagraph.lstSentences.length ?
-      tempData.frontParagraph.lstSentences.length : tempData.backParagraph.lstSentences.length;
+
+    let maxSenOfFrontSide = 0;
+    let maxSenOfBackSide = 0;
+
+    if (tempData.backParagraph && tempData.backParagraph.lstSentences) {
+      maxSenOfBackSide = tempData.backParagraph.lstSentences.length;
+    }
+    if (tempData.frontParagraph && tempData.frontParagraph.lstSentences) {
+      maxSenOfFrontSide = tempData.frontParagraph.lstSentences.length;
+    }
+
+    this.maxSentence = maxSenOfBackSide < maxSenOfFrontSide ? maxSenOfBackSide : maxSenOfFrontSide;
     console.log('Max Sentence: ' + this.maxSentence + ' ,Current Paragraph Id: ' + this.currParagraphId);
     this.currSentenceId = -1;
     switch (this.currentSlideIndex) {
