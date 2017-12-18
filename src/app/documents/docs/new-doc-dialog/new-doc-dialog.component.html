@@ -7,10 +7,23 @@
 <div class="new-doc-zone">
   <div class="data-left">
     <div class="choose-lang">
-      <div class="slide-wrapper">
-        <mat-slide-toggle class="lang-left" [checked]="langLeft == 'Vietnamese'" (change)="onChangeLang($event)">
-          {{ langLeft }}
-        </mat-slide-toggle>
+      <!--<div class="slide-wrapper">-->
+        <!--&lt;!&ndash;<mat-slide-toggle class="lang-left" [checked]="langLeft == 'Vietnamese'" (change)="onChangeLang($event)">&ndash;&gt;-->
+          <!--&lt;!&ndash;{{ langLeft }}&ndash;&gt;-->
+        <!--&lt;!&ndash;</mat-slide-toggle>&ndash;&gt;-->
+      <!--</div>-->
+      <div class="switch-wrapper">
+        <div class="switch">
+          <input type="radio" class="switch-input frontLang" name="lang-left" value="EN" id="langEn-left"
+                 [(ngModel)]="langLeft"
+                 [attr.checked]="langLeft === cardLangEnum.ENGLISH" (change)="onChangeLangLeft(cardLangEnum.ENGLISH)">
+          <label for="langEn-left" class="switch-label switch-label-off">EN</label>
+          <input type="radio" class="switch-input frontLang" name="lang-left" value="VI" id="langVn-left"
+                 [(ngModel)]="langLeft"
+                 [attr.checked]="langLeft === cardLangEnum.VIETNAMESE" (change)="onChangeLangLeft(cardLangEnum.VIETNAMESE)">
+          <label for="langVn-left" class="switch-label switch-label-on">VI</label>
+          <span class="switch-selection"></span>
+        </div>
       </div>
     </div>
     <div class="txt-input-wrapper">
@@ -19,10 +32,23 @@
   </div>
   <div class="data-right">
     <div class="choose-lang">
-      <div class="slide-wrapper">
-        <mat-slide-toggle class="lang-right" color="warn" [checked]="langRight == 'Vietnamese'"
-                          (change)="onChangeLang($event)">{{ langRight }}
-        </mat-slide-toggle>
+      <!--<div class="slide-wrapper">-->
+        <!--<mat-slide-toggle class="lang-right" color="warn" [checked]="langRight == 'Vietnamese'"-->
+                          <!--(change)="onChangeLang($event)">{{ langRight }}-->
+        <!--</mat-slide-toggle>-->
+      <!--</div>-->
+      <div class="switch-wrapper">
+        <div class="switch switch-red">
+          <input type="radio" class="switch-input frontLang" name="lang-right" value="EN" id="langEn-right"
+                 [(ngModel)]="langRight"
+                 [attr.checked]="langRight === cardLangEnum.ENGLISH" (change)="onChangeLangRight(cardLangEnum.ENGLISH)">
+          <label for="langEn-right" class="switch-label switch-label-off">EN</label>
+          <input type="radio" class="switch-input frontLang" name="lang-right" value="VI" id="langVn-right"
+                 [(ngModel)]="langRight"
+                 [attr.checked]="langRight === cardLangEnum.VIETNAMESE" (change)="onChangeLangRight(cardLangEnum.VIETNAMESE)">
+          <label for="langVn-right" class="switch-label switch-label-on">VI</label>
+          <span class="switch-selection"></span>
+        </div>
       </div>
     </div>
     <div class="txt-input-wrapper">
